@@ -1128,103 +1128,434 @@ h3 {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-/ *   - - -   S u p e r c h a r g e d   P r e l o a d e r   - - -   * /     . s y s t e m - g r i d    {
-                 p o s i t i o n :    a b s o l u t e ;
-                 t o p :    0 ;
-                 l e f t :    0 ;
-                 w i d t h :    1 0 0 % ;
-                 h e i g h t :    1 0 0 % ;
-                 b a c k g r o u n d - i m a g e :                      l i n e a r - g r a d i e n t ( r g b a ( 2 0 4 ,    2 5 5 ,    0 ,    0 . 0 3 )   1 p x ,    t r a n s p a r e n t   1 p x ) ,                      l i n e a r - g r a d i e n t ( 9 0 d e g ,    r g b a ( 2 0 4 ,    2 5 5 ,    0 ,    0 . 0 3 )   1 p x ,    t r a n s p a r e n t   1 p x ) ;
-                 b a c k g r o u n d - s i z e :    5 0 p x   5 0 p x ;
-                 z - i n d e x :    - 1 ;
-                 p o i n t e r - e v e n t s :    n o n e ;
-         
+/* --- Infinite Gallery --- */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    /* Create a fade effect on edges */
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
-         . r a d a r - c o n t a i n e r    {
-                 p o s i t i o n :    r e l a t i v e ;
-                 w i d t h :    3 0 0 p x ;
-                 h e i g h t :    3 0 0 p x ;
-                 m a r g i n :    0   a u t o   2 r e m ;
-                 d i s p l a y :    f l e x ;
-                 j u s t i f y - c o n t e n t :    c e n t e r ;
-                 a l i g n - i t e m s :    c e n t e r ;
-                 b o r d e r - r a d i u s :    5 0 % ;
-                 b o r d e r :    1 p x   s o l i d   r g b a ( 2 0 4 ,    2 5 5 ,    0 ,    0 . 2 ) ;
-                 b o x - s h a d o w :    0   0   5 0 p x   r g b a ( 2 0 4 ,    2 5 5 ,    0 ,    0 . 0 5 ) ;
-         
+.gallery-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    will-change: transform;
+    /* Transformation is handled by JS for infinite loop */
 }
 
-         . r a d a r - c i r c l e    {
-                 p o s i t i o n :    a b s o l u t e ;
-                 w i d t h :    1 0 0 % ;
-                 h e i g h t :    1 0 0 % ;
-                 b o r d e r - r a d i u s :    5 0 % ;
-                 b o r d e r :    1 p x   d a s h e d   r g b a ( 2 0 4 ,    2 5 5 ,    0 ,    0 . 3 ) ;
-                 a n i m a t i o n :    r o t a t e   1 0 s   l i n e a r   i n f i n i t e ;
-         
+.gallery-card {
+    min-width: 300px;
+    height: 200px;
+    background: #111;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: 0.3s;
+    flex-shrink: 0;
 }
 
-         . r a d a r - s w e e p    {
-                 p o s i t i o n :    a b s o l u t e ;
-                 t o p :    0 ;
-                 l e f t :    0 ;
-                 w i d t h :    1 0 0 % ;
-                 h e i g h t :    1 0 0 % ;
-                 b o r d e r - r a d i u s :    5 0 % ;
-                 b a c k g r o u n d :    c o n i c - g r a d i e n t ( f r o m   0 d e g ,    t r a n s p a r e n t   0 d e g ,    r g b a ( 2 0 4 ,    2 5 5 ,    0 ,    0 . 1 )   6 0 d e g ,    r g b a ( 2 0 4 ,    2 5 5 ,    0 ,    0 . 5 )   9 0 d e g ,    t r a n s p a r e n t   9 1 d e g ) ;
-                 a n i m a t i o n :    r a d a r - s p i n   4 s   l i n e a r   i n f i n i t e ;
-                 z - i n d e x :    0 ;
-         
+.gallery-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.2);
+    transform: translateY(-5px);
 }
 
-         . t r a f f i c - l i g h t - l o a d e r    {
-                 z - i n d e x :    2 ;
-                 / *   B r i n g   a b o v e   r a d a r   s w e e p   * /             p o s i t i o n :    r e l a t i v e ;
-                 m a r g i n - b o t t o m :    0 ;
-                 / *   R e s e t   m a r g i n   s i n c e   i t   i s   i n s i d e   c o n t a i n e r   * /     
+.gallery-img {
+    height: 60%;
+    background: #222;
+    /* Placeholder pattern or image */
+    background-image: radial-gradient(#333 1px, transparent 1px);
+    background-size: 10px 10px;
 }
 
-         @ k e y f r a m e s   r a d a r - s p i n    {
-                 f r o m    {
-                             t r a n s f o r m :    r o t a t e ( 0 d e g ) ;
-                     
+/* Specific placeholders colors/images could be added here */
+.placeholder-drill {
+    background-color: #1a2a3a;
+}
+
+.placeholder-safety {
+    background-color: #2a1a1a;
+}
+
+.placeholder-morning {
+    background-color: #222;
+}
+
+.placeholder-parade {
+    background-color: #331a1a;
+}
+
+.placeholder-checkpoint {
+    background-color: #1a331a;
+}
+
+.placeholder-briefing {
+    background-color: #33331a;
+}
+
+.placeholder-gear {
+    background-color: #1a3333;
+}
+
+.placeholder-awards {
+    background-color: #331a33;
+}
+
+
+.gallery-overlay {
+    padding: 1rem;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.gallery-overlay span {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    font-family: 'Courier New', monospace;
+}
+
+.gallery-overlay h3 {
+    margin: 0.2rem 0;
+    font-size: 1.1rem;
+}
+
+.gallery-overlay p {
+    font-size: 0.85rem;
+    color: var(--text-grey);
+}
+
+/* Manual Controls - Neon Arrows */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-arrow:hover {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.nav-arrow.prev {
+    left: 20px;
+}
+
+.nav-arrow.next {
+    right: 20px;
+}
+
+/* --- Supercharged Preloader Styles (Restored) --- */
+.system-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(204, 255, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.radar-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(204, 255, 0, 0.2);
+    box-shadow: 0 0 50px rgba(204, 255, 0, 0.05);
+}
+
+.radar-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px dashed rgba(204, 255, 0, 0.3);
+    animation: rotate 10s linear infinite;
+}
+
+.radar-sweep {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(204, 255, 0, 0.1) 60deg, rgba(204, 255, 0, 0.5) 90deg, transparent 91deg);
+    animation: radar-spin 4s linear infinite;
+    z-index: 0;
+}
+
+.traffic-light-loader {
+    z-index: 2;
+    position: relative;
+    margin-bottom: 0;
+}
+
+@keyframes radar-spin {
+    from {
+        transform: rotate(0deg);
     }
 
-                     t o    {
-                             t r a n s f o r m :    r o t a t e ( 3 6 0 d e g ) ;
-                     
+    to {
+        transform: rotate(360deg);
     }
-
-         
 }
 
-         @ k e y f r a m e s   r o t a t e    {
-                 f r o m    {
-                             t r a n s f o r m :    r o t a t e ( 0 d e g ) ;
-                     
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
     }
 
-                     t o    {
-                             t r a n s f o r m :    r o t a t e ( 3 6 0 d e g ) ;
-                     
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.system-footer {
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4rem;
+    color: var(--text-grey);
+    font-size: 0.7rem;
+    font-family: monospace;
+    letter-spacing: 2px;
+}
+
+/* --- Infinite Gallery --- */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.gallery-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    will-change: transform;
+}
+
+.gallery-card {
+    min-width: 300px;
+    height: 200px;
+    background: #111;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: 0.3s;
+    flex-shrink: 0;
+}
+
+.gallery-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.gallery-img {
+    height: 60%;
+    background: #222;
+    background-image: radial-gradient(#333 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+.placeholder-drill {
+    background-color: #1a2a3a;
+}
+
+.placeholder-safety {
+    background-color: #2a1a1a;
+}
+
+.placeholder-morning {
+    background-color: #222;
+}
+
+.placeholder-parade {
+    background-color: #331a1a;
+}
+
+.placeholder-checkpoint {
+    background-color: #1a331a;
+}
+
+.placeholder-briefing {
+    background-color: #33331a;
+}
+
+.placeholder-gear {
+    background-color: #1a3333;
+}
+
+.placeholder-awards {
+    background-color: #331a33;
+}
+
+.gallery-overlay {
+    padding: 1rem;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.gallery-overlay span {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    font-family: 'Courier New', monospace;
+}
+
+.gallery-overlay h3 {
+    margin: 0.2rem 0;
+    font-size: 1.1rem;
+}
+
+.gallery-overlay p {
+    font-size: 0.85rem;
+    color: var(--text-grey);
+}
+
+/* Manual Controls - Neon Arrows */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-arrow:hover {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.nav-arrow.prev {
+    left: 20px;
+}
+
+.nav-arrow.next {
+    right: 20px;
+}
+
+/* --- Supercharged Preloader Styles (Restored) --- */
+.system-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(204, 255, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.radar-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(204, 255, 0, 0.2);
+    box-shadow: 0 0 50px rgba(204, 255, 0, 0.05);
+}
+
+.radar-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px dashed rgba(204, 255, 0, 0.3);
+    animation: rotate 10s linear infinite;
+}
+
+.radar-sweep {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(204, 255, 0, 0.1) 60deg, rgba(204, 255, 0, 0.5) 90deg, transparent 91deg);
+    animation: radar-spin 4s linear infinite;
+    z-index: 0;
+}
+
+.traffic-light-loader {
+    z-index: 2;
+    position: relative;
+    margin-bottom: 0;
+}
+
+@keyframes radar-spin {
+    from {
+        transform: rotate(0deg);
     }
 
-         
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-         . s y s t e m - f o o t e r    {
-                 p o s i t i o n :    a b s o l u t e ;
-                 b o t t o m :    2 r e m ;
-                 w i d t h :    1 0 0 % ;
-                 d i s p l a y :    f l e x ;
-                 j u s t i f y - c o n t e n t :    s p a c e - b e t w e e n ;
-                 p a d d i n g :    0   4 r e m ;
-                 c o l o r :    v a r ( - - t e x t - g r e y ) ;
-                 f o n t - s i z e :    0 . 7 r e m ;
-                 f o n t - f a m i l y :    m o n o s p a c e ;
-                 l e t t e r - s p a c i n g :    2 p x ;
-         
-}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
 
-     
+    to {
+        transform: rotate(360deg);
+    }
+}

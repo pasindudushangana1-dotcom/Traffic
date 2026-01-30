@@ -131,33 +131,80 @@ document.addEventListener('DOMContentLoaded', () => {
         staggerObserver.observe(el);
     });
 
-    // --- Auto-Scroll Gallery ---
-    const galleryScroller = document.querySelector('.gallery-scroller');
-    if (galleryScroller) {
-        // Clone children for infinite scroll
-        const galleryContent = Array.from(galleryScroller.children);
-        galleryContent.forEach(item => {
-            const clone = item.cloneNode(true);
-            galleryScroller.appendChild(clone);
+    // --- Infinite Horizontal Gallery Loop ---
+    const galleryTrack = document.querySelector('.gallery-track');
+    const galleryContainer = document.querySelector('.gallery-container');
+    const prevBtn = document.querySelector('.nav-arrow.prev');
+    const nextBtn = document.querySelector('.nav-arrow.next');
+
+    if (galleryTrack && galleryContainer) {
+        // 1. Clone items for seamless loop
+        // We need enough duplicates to fill the screen width + buffer
+        const originalCards = Array.from(galleryTrack.children);
+
+        // Clone set 1
+        originalCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            galleryTrack.appendChild(clone);
         });
 
-        let scrollAmount = 0;
-        let isHovered = false;
+        // Clone set 2 (Double buffer for wide screens)
+        originalCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            galleryTrack.appendChild(clone);
+        });
 
-        galleryScroller.addEventListener('mouseenter', () => isHovered = true);
-        galleryScroller.addEventListener('mouseleave', () => isHovered = false);
+        let scrollPos = 0;
+        let speed = 0.5; // Radar sweep speed
+        let isPaused = false;
+        let animationFrameId;
 
-        function autoScroll() {
-            if (!isHovered) {
-                scrollAmount += 1; // Speed
-                if (scrollAmount >= galleryScroller.scrollWidth / 2) {
-                    scrollAmount = 0;
+        // Calculate single set width after render
+        const getSingleSetWidth = () => {
+            const gap = 32; // 2rem gap
+            const cardWidth = 300; // min-width
+            // Approximation or measure first card including gap
+            // Better to measure total scrollWidth / 3
+            return galleryTrack.scrollWidth / 3;
+        };
+
+        const loop = () => {
+            if (!isPaused) {
+                scrollPos += speed;
+                const singleSetWidth = galleryTrack.scrollWidth / 3; // Dynamic measure
+
+                if (scrollPos >= singleSetWidth) {
+                    scrollPos = 0; // Seamless snap back
                 }
-                galleryScroller.scrollLeft = scrollAmount;
+
+                galleryTrack.style.transform = `translateX(${-scrollPos}px)`;
             }
-            requestAnimationFrame(autoScroll);
-        }
-        autoScroll();
+            animationFrameId = requestAnimationFrame(loop);
+        };
+
+        // Start Loop
+        loop();
+
+        // Pause on Hover
+        galleryContainer.addEventListener('mouseenter', () => isPaused = true);
+        galleryContainer.addEventListener('mouseleave', () => isPaused = false);
+
+        // Manual Controls
+        nextBtn.addEventListener('click', () => {
+            const singleSetWidth = galleryTrack.scrollWidth / 3;
+            scrollPos += 300; // Jump one card width
+            if (scrollPos >= singleSetWidth) scrollPos = 0;
+            galleryTrack.style.transform = `translateX(${-scrollPos}px)`;
+        });
+
+        prevBtn.addEventListener('click', () => {
+            const singleSetWidth = galleryTrack.scrollWidth / 3;
+            scrollPos -= 300;
+            if (scrollPos < 0) scrollPos = singleSetWidth - 300; // Wrap around to end
+            galleryTrack.style.transform = `translateX(${-scrollPos}px)`;
+        });
     }
 
     // --- Hero Text Typewriter ---
