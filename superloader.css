@@ -1,0 +1,89 @@
+/* --- Supercharged Preloader --- */
+.system-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(204, 255, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(204, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.radar-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(204, 255, 0, 0.2);
+    box-shadow: 0 0 50px rgba(204, 255, 0, 0.05);
+}
+
+.radar-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px dashed rgba(204, 255, 0, 0.3);
+    animation: rotate 10s linear infinite;
+}
+
+.radar-sweep {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(204, 255, 0, 0.1) 60deg, rgba(204, 255, 0, 0.5) 90deg, transparent 91deg);
+    animation: radar-spin 4s linear infinite;
+    z-index: 0;
+}
+
+.traffic-light-loader {
+    z-index: 2;
+    /* Bring above radar sweep */
+    position: relative;
+    margin-bottom: 0;
+    /* Reset margin since it is inside container */
+}
+
+@keyframes radar-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.system-footer {
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4rem;
+    color: var(--text-grey);
+    font-size: 0.7rem;
+    font-family: monospace;
+    letter-spacing: 2px;
+}

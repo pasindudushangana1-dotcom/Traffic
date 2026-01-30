@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Traffic Warden Unit | Discipline & Safety</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Preloader -->
+
+
+    <!-- Custom Cursor -->
+    <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon">⚠️</span> TWU
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">Mission</a></li>
+            <li><a href="#knowledge">Signals</a></li>
+            <li><a href="#hierarchy">Leadership</a></li>
+            <li><a href="#gallery">Events</a></li>
+            <li><a href="https://tally.so/r/lb6orB" class="btn-sm">Join Now</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="badge-container">
+                <span class="status-badge">● Recruitment Open 2026</span>
+            </div>
+            <h1 class="glitch-text" data-text="DISCIPLINE. SAFETY. SERVICE.">DISCIPLINE.<br>SAFETY.<br>SERVICE.</h1>
+            <p class="hero-subtext">The first line of defense. Ensuring order and safety for the next generation of
+                leaders.</p>
+            <div class="cta-group">
+                <a href="https://tally.so/r/lb6orB" class="btn-primary">Join the Squad</a>
+                <button class="btn-secondary">View Protocol</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h4 class="section-label">Who We Are</h4>
+                    <h2>Guardians of <span class="highlight-text">Campus Order.</span></h2>
+                    <p>We are a specialized student unit dedicated to maintaining traffic flow and pedestrian safety.
+                        Bound by duty, we operate with military-like precision to ensure every student arrives and
+                        departs safely.</p>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h3>50+</h3>
+                            <p>Active Wardens</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>0</h3>
+                            <p>Incidents 2025</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-card-container">
+                    <div class="glass-card">
+                        <div class="card-header">
+                            <img src="unit_logo.png" alt="Unit Badge" class="unit-badge">
+                        </div>
+                        <div class="card-body">
+                            <h3>OFFICER CADET</h3>
+                            <p>Unit ID: 084-A</p>
+                            <div class="progress-bar">
+                                <div class="fill" style="width: 85%"></div>
+                            </div>
+                            <div class="card-footer">
+                                <span>Authority Level</span>
+                                <span>Level 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knowledge Base (Bento Box) -->
+    <section id="knowledge" class="knowledge-section">
+        <div class="container">
+            <h4 class="section-label">Operational Signals</h4>
+            <div class="section-header-row">
+                <h2>Standardized Command Protocols for Traffic Management.</h2>
+                <a href="#" class="text-link">View Full Manual -></a>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Large Item -->
+                <div class="bento-item large-item halt-card">
+                    <div class="icon-box red-glow">✋</div>
+                    <h3>The Halt Command</h3>
+                    <p>The primary signal used to stop all oncoming traffic immediately. Arm extended fully, palm facing
+                        forward, whistle blow is sharp and long.</p>
+                    <div class="visual-line"></div>
+                </div>
+
+                <!-- Medium Item -->
+                <div class="bento-item medium-item">
+                    <div class="icon-box green-glow">➔</div>
+                    <h3>Proceed</h3>
+                    <p>Traffic flow initiated.</p>
+                </div>
+
+                <!-- Medium Item -->
+                <div class="bento-item medium-item">
+                    <div class="icon-box yellow-glow">⚠️</div>
+                    <h3>Yield/Slow</h3>
+                    <p>Caution required.</p>
+                </div>
+
+                <!-- Wide Item -->
+                <div class="bento-item wide-item">
+                    <div class="icon-box blue-glow">🚶</div>
+                    <div class="text-content">
+                        <h3>Pedestrian Priority</h3>
+                        <p>Ensuring safe passage for students at all designated crosswalks during peak hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unit Hierarchy -->
+    <section id="hierarchy" class="hierarchy-section">
+        <div class="container">
+            <h4 class="section-label center-text">Command Structure</h4>
+            <h2 class="center-text">Unit Leadership</h2>
+
+            <div class="hierarchy-tree">
+                <!-- Captain -->
+                <div class="leader-node main-leader">
+                    <div class="profile-circle gold-border">
+                        <!-- Placeholder for leader image -->
+                        <img src="commander.png" alt="Captain">
+                    </div>
+                    <h3>Mr. Pasindu Dshangana</h3>
+                    <p>Unit Commander</p>
+                    <span class="rank-badge">Grade 12</span>
+                </div>
+
+                <div class="connector-line"></div>
+
+                <div class="sub-leaders">
+                    <!-- VC 1 -->
+                    <div class="leader-node">
+                        <div class="profile-circle silver-border">
+                            <img src="https://ui-avatars.com/api/?name=James+W&background=333&color=fff"
+                                alt="Vice Captain">
+                        </div>
+                        <h3>James Wilson</h3>
+                        <p>Alpha Squad</p>
+                    </div>
+
+                    <!-- VC 2 -->
+                    <div class="leader-node">
+                        <div class="profile-circle silver-border">
+                            <img src="https://ui-avatars.com/api/?name=David+C&background=333&color=fff"
+                                alt="Vice Captain">
+                        </div>
+                        <h3>David Chen</h3>
+                        <p>Bravo Squad</p>
+                    </div>
+
+                    <!-- VC 3 -->
+                    <div class="leader-node">
+                        <div class="profile-circle silver-border">
+                            <img src="https://ui-avatars.com/api/?name=Mike+T&background=333&color=fff"
+                                alt="Vice Captain">
+                        </div>
+                        <h3>Michael Torres</h3>
+                        <p>Charlie Squad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery / Highlights -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Field Operations</h2>
+            <p class="section-sub">Recent events and drills.</p>
+        </div>
+
+        <div class="gallery-scroller">
+            <div class="gallery-card">
+                <div class="gallery-img placeholder-drill"></div>
+                <div class="gallery-overlay">
+                    <span>Oct '25</span>
+                    <h3>Annual Drill Competition</h3>
+                    <p>Showcasing precision and discipline.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <div class="gallery-img placeholder-safety"></div>
+                <div class="gallery-overlay">
+                    <span>Nov '25</span>
+                    <h3>Safety Workshop</h3>
+                    <p>Advanced traffic management training.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <div class="gallery-img placeholder-morning"></div>
+                <div class="gallery-overlay">
+                    <span>Nov '25</span>
+                    <h3>Morning Duty Review</h3>
+                    <p>Live field operation assessment.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <div class="gallery-img placeholder-parade"></div>
+                <div class="gallery-overlay">
+                    <span>Dec '25</span>
+                    <h3>Founders Day Parade</h3>
+                    <p>Leading the march.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">TWU</div>
+                <h4>TRAFFIC WARDEN UNIT</h4>
+                <p>Dedicated to the safety and discipline of our school community. Serving with honor since 2010.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="https://tally.so/r/lb6orB">Apply Now</a></li>
+                    <li><a href="#">Unit History</a></li>
+                    <li><a href="#">Contact Command</a></li>
+                    <li><a href="#">Report Incident</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h5>Contact</h5>
+                <p>📍 Campus Main Gate, Block A</p>
+                <p>📧 command@twu.edu</p>
+                <p>📞 +1 (555) 000-0000</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Traffic Warden Unit. All rights reserved.</p>
+            <div class="socials">
+                <a href="#">X</a>
+                <a href="#">In</a>
+                <a href="#">Ig</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="particles.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
