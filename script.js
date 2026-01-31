@@ -56,6 +56,12 @@ window.addEventListener('load', () => {
         progressBar.style.width = percentage + '%';
         percentageEl.innerText = percentage + '%';
 
+        // Traffic Light Logic
+        const lights = document.querySelectorAll('.light');
+        if (percentage > 30) lights[0].classList.add('active'); // Red
+        if (percentage > 60) lights[1].classList.add('active'); // Yellow
+        if (percentage > 90) lights[2].classList.add('active'); // Green
+
         // Add random log messages
         if (percentage === 20) bootText.innerHTML += '<p>> LOADING_ASSETS...</p>';
         if (percentage === 50) bootText.innerHTML += '<p>> ESTABLISHING_SECURE_CONNECTION...</p>';
@@ -64,6 +70,10 @@ window.addEventListener('load', () => {
         if (percentage === 100) {
             clearInterval(interval);
             bootText.innerHTML += '<p>> ACCESS_GRANTED.</p>';
+
+            // Flash Green Light
+            lights[2].classList.add('active');
+
             setTimeout(() => {
                 bootScreen.style.opacity = '0';
                 bootScreen.style.pointerEvents = 'none';
@@ -98,39 +108,3 @@ if (track && prevBtn && nextBtn) {
         track.scrollBy({ left: 320, behavior: 'smooth' });
     });
 }
-
-// Facebook Modal Logic
-function initFacebookModal() {
-    const fbModal = document.getElementById('fb-modal');
-    const closeBtn = document.getElementById('close-fb-modal');
-
-    // We will attach listener dynamically if we haven't yet, 
-    // but since we are replacing script.js, we can do it here.
-    // However, the card might not exist yet if I haven't added it to HTML.
-    // I will add a delegated listener or wait for the card.
-
-    document.body.addEventListener('click', (e) => {
-        if (e.target.closest('[data-fb-trigger]')) {
-            e.preventDefault();
-            fbModal.classList.add('active');
-        }
-    });
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            fbModal.classList.remove('active');
-        });
-    }
-
-    // Close on outside click
-    if (fbModal) {
-        fbModal.addEventListener('click', (e) => {
-            if (e.target === fbModal) {
-                fbModal.classList.remove('active');
-            }
-        });
-    }
-}
-
-// Run init
-initFacebookModal();

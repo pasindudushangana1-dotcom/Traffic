@@ -15,12 +15,31 @@
 
 <body class="loading">
     <!-- System Boot Screen -->
+    <!-- System Boot Screen -->
     <div id="boot-screen">
+        <div class="system-grid"></div>
+        <div class="radar-container">
+            <div class="radar-circle"></div>
+            <div class="radar-sweep"></div>
+            <!-- Traffic Light Loader -->
+            <div class="traffic-light-loader">
+                <div class="light red"></div>
+                <div class="light yellow"></div>
+                <div class="light green"></div>
+            </div>
+        </div>
+
         <div class="boot-container">
+            <!-- Percentage will be injected here by JS -->
             <div class="boot-text" id="boot-text"></div>
             <div class="boot-progress">
                 <div class="progress-bar-fill"></div>
             </div>
+        </div>
+
+        <div class="system-footer">
+            <span>SYS.VER.2.0.26</span>
+            <span>SECURE_CONNECTION_ESTABLISHED</span>
         </div>
     </div>
 
@@ -121,7 +140,7 @@
                     <span class="notif-dot"></span>
                 </button>
 
-                <a href="https://tally.so/r/lb6orB" class="btn-enlist">ENLIST NOW</a>
+                <a href="https://tally.so/r/lb6orB" class="btn-enlist">Join with Us</a>
             </div>
 
             <!-- Mobile Toggle -->
@@ -408,38 +427,9 @@
                         <p>Honoring excellence.</p>
                     </div>
                 </div>
-                <!-- Card 9 (Facebook) -->
-                <div class="gallery-card" data-fb-trigger="true" style="cursor: pointer;">
-                    <div class="gallery-img"
-                        style="background-image: url('gallery_fb.jpg'); filter: grayscale(0%); opacity: 1;"></div>
-                    <div class="gallery-overlay">
-                        <span>Social</span>
-                        <h3>Community Update</h3>
-                        <p>View latest post.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-
-    <!-- Facebook Modal -->
-    <div id="fb-modal" class="modal-overlay">
-        <div class="modal-content glass-card">
-            <button id="close-fb-modal" class="icon-btn close-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <div class="iframe-container">
-                <iframe
-                    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fteambcpas%2Fposts%2Fpfbid08ihxXWRCPoBhn66FnmawdaV9YCMz8N5p5Rce8PXUDJxghnWF7pB8S2nhsfcDbSgxl&show_text=true&width=500"
-                    width="500" height="802" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-                    allowfullscreen="true"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer>
