@@ -334,6 +334,12 @@ body::after {
     background: rgba(255, 255, 255, 0.05);
 }
 
+.nav-text {
+    display: inline-block;
+    white-space: nowrap;
+    /* Prevent wrapping during scramble */
+}
+
 .chevron {
     width: 14px;
     height: 14px;
