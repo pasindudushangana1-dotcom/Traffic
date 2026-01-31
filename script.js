@@ -20,95 +20,96 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
     });
 
-    // --- Mobile Menu ---
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const links = document.querySelectorAll('.nav-links li a');
+    // --- Mobile Menu (Premium) ---
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navCapsule = document.querySelector('.nav-capsule');
+    const navCenter = document.querySelector('.nav-center');
+    const navActions = document.querySelector('.nav-actions');
 
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            // Toggle visibility of menu items on mobile
+            // Since we used display:none in CSS for mobile, we need a way to show them
+            // The simplest approach for this capsule design is to expand the capsule 
+            // and show a mobile-specific menu or unhide the standard ones flex-column.
 
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
+            navCapsule.classList.toggle('expanded');
+
+            // Note: For a true production mobile menu with this specific "capsule" design,
+            // we often create a separate full-screen overlay or expand the capsule significantly.
+            // For now, we'll toggle a class that valid CSS can hook into if we add it,
+            // or simply log that we need mobile CSS updates if they weren't fully covered.
         });
     }
 
-    // --- Scroll Progress ---
-    const scrollProgress = document.getElementById('scroll-progress');
-    window.addEventListener('scroll', () => {
-        const scrollTop = document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (scrollTop / scrollHeight) * 100;
-        if (scrollProgress) scrollProgress.style.width = `${scrolled}%`;
-    });
+    // --- Search Interaction ---
+    const searchInput = document.querySelector('.search-input');
+    const searchContainer = document.querySelector('.search-container');
 
-    // --- 3D Tilt Effect ---
-    const tiltCards = document.querySelectorAll('.glass-card, .bento-item, .leader-node');
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5;
-            const rotateY = ((x - centerX) / centerX) * 5;
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    if (searchInput) {
+        searchInput.addEventListener('focus', () => {
+            searchContainer.classList.add('focused');
         });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        searchInput.addEventListener('blur', () => {
+            searchContainer.classList.remove('focused');
         });
-    });
+    }
 
-    // --- Smooth Scroll ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    // --- Smooth Scroll (Updated Selectors) ---
+    document.querySelectorAll('.nav-link[href^="#"], .mega-link[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            if (targetId === '#' || !targetId) return;
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 targetElement.scrollIntoView({ behavior: 'smooth' });
+                // Close mobile menu if open
+                if (mobileToggle && mobileToggle.classList.contains('active')) {
+                    mobileToggle.classList.remove('active');
+                    navCapsule.classList.remove('expanded');
+                }
             }
         });
     });
 
-    // --- Sticky Navbar & ScrollSpy ---
-    const navbar = document.querySelector('.navbar');
+    // --- Sticky Navbar (Removed/Simplified) ---
+    // The floating capsule stays fixed. We might want to just add a 'scrolled' state
+    // if we want it to shrink slightly, but per requirements it's a constant float.
+    const navbar = document.querySelector('.nav-capsule');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.style.backdropFilter = 'blur(20px)';
+            navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+        } else {
+            navbar.style.backdropFilter = 'blur(16px)';
+            navbar.style.background = 'rgba(26, 26, 26, 0.85)';
+        }
+    });
+
+    // --- ScrollSpy (Re-enabled) ---
     const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-links a');
+    const navItems = document.querySelectorAll('.nav-link');
 
     window.addEventListener('scroll', () => {
-        // Sticky Nav
-        if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(5, 5, 5, 0.95)';
-            navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.8)';
-            navbar.style.padding = '1rem 2rem';
-        } else {
-            navbar.style.background = 'rgba(5, 5, 5, 0.7)';
-            navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
-            navbar.style.padding = '1.5rem 2rem';
-        }
-
-        // ScrollSpy
         let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            if (pageYOffset >= (sectionTop - 200)) {
+            if (scrollY >= (sectionTop - 200)) {
                 current = section.getAttribute('id');
             }
         });
-        navItems.forEach(li => {
-            li.classList.remove('active');
-            if (li.getAttribute('href').includes(current)) {
-                li.classList.add('active');
+
+        navItems.forEach(link => {
+            link.classList.remove('active');
+            // Check if href matches current id (only for links, not buttons)
+            if (link.tagName === 'A') {
+                const href = link.getAttribute('href');
+                if (href && href.includes(current) && current !== '') {
+                    link.classList.add('active');
+                }
             }
         });
     });
@@ -226,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Text Scramble Effect ---
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    document.querySelectorAll('.nav-links a').forEach(anchor => {
+    document.querySelectorAll('.nav-link').forEach(anchor => {
         anchor.addEventListener('mouseover', event => {
             let iteration = 0;
             clearInterval(event.target.interval);
@@ -251,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     // Set data-value for scramble (needed for restoration)
-    document.querySelectorAll('.nav-links a').forEach(a => a.dataset.value = a.innerText);
+    document.querySelectorAll('.nav-link').forEach(a => a.dataset.value = a.innerText);
 
 
     // --- Magnetic Buttons ---
