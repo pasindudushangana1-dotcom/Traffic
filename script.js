@@ -91,6 +91,13 @@ if (mobileToggle) {
     mobileToggle.addEventListener('click', () => {
         navCapsule.classList.toggle('expanded');
         mobileToggle.classList.toggle('active');
+
+        // Lock body scroll when menu is open
+        if (navCapsule.classList.contains('expanded')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     });
 }
 
