@@ -1,5 +1,112 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- System Boot Sequence ---
+    const bootScreen = document.getElementById('boot-screen');
+    const bootTextContainer = document.getElementById('boot-text');
+    const progressBar = document.querySelector('.progress-bar-fill');
+
+    // Only run if the elements exist (safety)
+    if (bootScreen && bootTextContainer && progressBar) {
+
+        const lines = [
+            "SYSTEM BOOT INITIATED...",
+            "LOADING ASSETS...",
+            "ESTABLISHING SECURE CONNECTION...",
+            "ACCESS GRANTED."
+        ];
+
+        let lineIndex = 0;
+        let charIndex = 0;
+        let currentLineElement = null;
+
+        // Function to create a new line element
+        const createLine = (text) => {
+            const p = document.createElement('p');
+            p.textContent = text; // Set text immediately for the CSS width animation to reveal it
+            // Actually, for pure JS typewriter, we might want to type char by char OR use CSS.
+            // Requirement asked for "Typewriter Effect". CSS 'width' animation is smoother for "lines".
+            // Let's stick to a hybrid: Add p, set text, let CSS animate width? 
+            // OR strictly JS char-by-char for "Hacker" feel. 
+            // JS char-by-char is more reliable for variable lengths.
+            p.textContent = "> " + text;
+            p.style.width = "100%"; // Override CSS width=0 if we don't use keyframes
+            p.style.borderRight = "none"; // Remove cursor from previous
+
+            // "Typewriter" via JS text content replacement? width:0 -> 100% CSS is easiest for lines.
+            // Let's try the CSS approach provided in styles for the "typing" animation, 
+            // but we need to trigger them one by one.
+
+            p.style.animation = `typing 0.8s steps(40, end) forwards`;
+            // We need a cursor on the current line only.
+
+            return p;
+        };
+
+        // Alternative High-Control JS Typewriter
+        const typeLine = (text, callback) => {
+            const p = document.createElement('p');
+            p.textContent = "> ";
+            p.style.width = "auto";
+            p.style.borderRight = "2px solid var(--primary-color)";
+            p.style.animation = "none"; // Disable CSS animation
+            bootTextContainer.appendChild(p);
+
+            let i = 0;
+            const interval = setInterval(() => {
+                p.textContent += text.charAt(i);
+                i++;
+                if (i >= text.length) {
+                    clearInterval(interval);
+                    p.style.borderRight = "none"; // Remove cursor
+                    if (callback) callback();
+                }
+            }, 30); // Speed
+        };
+
+        const runBootSequence = async () => {
+            // Line 1
+            await new Promise(r => typeLine(lines[0], r));
+            progressBar.style.width = "30%";
+
+            // Line 2
+            await new Promise(r => setTimeout(r, 400)); // Pause
+            await new Promise(r => typeLine(lines[1], r));
+            progressBar.style.width = "60%";
+
+            // Line 3
+            await new Promise(r => setTimeout(r, 400));
+            await new Promise(r => typeLine(lines[2], r));
+            progressBar.style.width = "90%";
+
+            // Line 4
+            await new Promise(r => setTimeout(r, 500));
+            await new Promise(r => typeLine(lines[3], r));
+            progressBar.style.width = "100%";
+
+            // Finish
+            setTimeout(() => {
+                // Reveal Site
+                document.body.classList.remove('loading');
+
+                // Allow a tiny frame for CSS to acknowledge display:block before animating transform
+                requestAnimationFrame(() => {
+                    bootScreen.classList.add('loaded');
+                });
+
+                // Cleanup (optional, remove display none completely after anim)
+                // setTimeout(() => bootScreen.style.display = 'none', 1000); 
+            }, 500);
+        };
+
+        runBootSequence();
+
+    } else {
+        // Fallback if HTML is missing
+        document.body.classList.remove('loading');
+    }
+
+
+
 
 
     // Hover effect for links and buttons

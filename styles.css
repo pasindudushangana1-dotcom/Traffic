@@ -17,8 +17,90 @@
     /* Tech/Futuristic */
     --font-body: 'Inter', sans-serif;
 
-    --spacing-container: 1200px;
     --border-radius-card: 16px;
+    --font-mono: 'Courier New', Courier, monospace;
+    /* Fallback or specific mono font */
+}
+
+/* --- System Boot Screen (Critical) --- */
+body.loading {
+    overflow: hidden;
+}
+
+/* Hard Block: Hide everything in body except the boot screen when loading */
+body.loading>*:not(#boot-screen) {
+    display: none !important;
+}
+
+#boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    color: var(--primary-color);
+}
+
+.boot-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+}
+
+.boot-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    min-height: 150px;
+    /* Space for lines */
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+}
+
+.boot-text p {
+    margin: 0;
+    overflow: hidden;
+    /* For typewriter */
+    white-space: nowrap;
+    border-right: 2px solid var(--primary-color);
+    /* Cursor */
+    width: 0;
+    animation: typing 0.5s steps(40, end) forwards;
+}
+
+.boot-progress {
+    width: 100%;
+    height: 4px;
+    background: #111;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+    transition: width 0.2s linear;
+}
+
+/* Removal Transition */
+#boot-screen.loaded {
+    transform: translateY(-100%);
+    transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+/* Utility Animations */
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
 }
 
 * {
@@ -1886,5 +1968,153 @@ h3 {
 
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+
+    /* Typographic Scale for Mobile */
+    html {
+        font-size: 14px;
+        /* Slightly smaller base */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        /* Scale down hero title */
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    /* Container Padding */
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    /* Navigation Mobile Tweaks */
+    .nav-capsule {
+        padding: 0.5rem 1rem;
+        width: 95%;
+        /* Wider on mobile */
+    }
+
+    .nav-brand {
+        gap: 0.5rem;
+    }
+
+    .brand-text {
+        font-size: 0.9rem;
+    }
+
+    /* Hero Section */
+    .hero-content {
+        padding-top: 6rem;
+        /* Adjust for fixed nav */
+    }
+
+    .hero-text h1 {
+        line-height: 1.2;
+    }
+
+    .hero-subtext {
+        font-size: 1rem;
+    }
+
+    /* Bento Grid Stacking */
+    .bento-grid {
+        grid-template-columns: 1fr;
+        /* Stack into single column */
+        gap: 1.5rem;
+    }
+
+    .bento-item {
+        min-height: 250px;
+        /* Ensure sufficient touch height */
+    }
+
+    .bento-item.large,
+    .bento-item.medium,
+    .bento-item.tall,
+    .bento-item.wide {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    /* Gallery Mobile */
+    .gallery-container {
+        padding: 1rem 0;
+    }
+
+    .gallery-card {
+        min-width: 260px;
+        /* Smaller cards */
+        height: 180px;
+    }
+
+    .nav-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+
+    /* Footer Stacking */
+    footer .container {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-col {
+        align-items: center;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .newsletter-input,
+    .btn-primary {
+        width: 100%;
+    }
+
+    /* Touch Targets */
+    .btn-primary,
+    .btn-secondary,
+    .nav-link,
+    .icon-btn {
+        min-height: 44px;
+        /* Accessibility standard */
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Small Phone adjustments */
+    .nav-capsule {
+        border-radius: 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    /* Ensure modals/mega menus fit */
+    .mega-menu {
+        width: 90vw;
+        left: 50%;
+        min-width: unset;
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    .mega-grid {
+        grid-template-columns: 1fr;
     }
 }
