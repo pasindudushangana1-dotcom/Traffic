@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bootScreen && bootTextContainer && progressBar) {
 
         const lines = [
-            "SYSTEM BOOT INITIATED...",
+            "GBC MAINFRAME INITIATED...",
             "LOADING ASSETS...",
             "ESTABLISHING SECURE CONNECTION...",
             "ACCESS GRANTED."

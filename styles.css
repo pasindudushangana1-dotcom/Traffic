@@ -1978,6 +1978,26 @@ h3 {
     html {
         font-size: 14px;
         /* Slightly smaller base */
+        overflow-x: hidden;
+        /* CRITICAL: Prevent horizontal scroll */
+    }
+
+    body {
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* Disable Heavy 3D Grid on Mobile for Performance */
+    .hero-section::before {
+        display: none;
+        /* OR simplify: animation: none; opacity: 0.1; */
+    }
+
+    /* Boot Screen Mobile */
+    .boot-text {
+        font-size: 0.9rem;
+        /* Smaller monospace for mobile */
+        min-height: 100px;
     }
 
     h1 {
