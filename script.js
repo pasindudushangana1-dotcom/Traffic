@@ -321,51 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeWriter, 1000);
     }
 
-    // --- Text Scramble Effect ---
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    // Target the specific text span to avoid wiping SVGs/Icons
-    document.querySelectorAll('.nav-text').forEach(textSpan => {
-        // We attach the listener to the parent .nav-link (button/a) so hover works on the whole area
-        // but we manipulate only the textSpan
-        const parent = textSpan.closest('.nav-link');
-        if (!parent) return;
 
-        parent.addEventListener('mouseenter', () => { // Changed to mouseenter to avoid frequent triggers
-            let iteration = 0;
-            clearInterval(textSpan.interval);
-
-            // Use original text from dataset
-            const originalText = textSpan.dataset.value;
-
-            textSpan.interval = setInterval(() => {
-                textSpan.innerText = originalText
-                    .split("")
-                    .map((letter, index) => {
-                        if (index < iteration) {
-                            return originalText[index];
-                        }
-                        return letters[Math.floor(Math.random() * 26)];
-                    })
-                    .join("");
-
-                if (iteration >= originalText.length) {
-                    clearInterval(textSpan.interval);
-                }
-
-                iteration += 1 / 3;
-            }, 30);
-        });
-    });
-    // Set data-value for scramble (needed for restoration)
-    // Set data-value for scramble and lock width to prevent layout shifts
-    document.querySelectorAll('.nav-text').forEach(span => {
-        span.dataset.value = span.innerText;
-        // Lock width to prevent jitter
-        const width = span.offsetWidth;
-        span.style.display = 'inline-block';
-        span.style.width = `${width}px`;
-        span.style.textAlign = 'center';
-    });
 
 
     // --- Advanced Card Hover Effect (Mouse Tracking) ---

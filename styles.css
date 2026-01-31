@@ -408,18 +408,23 @@ body::after {
     align-items: center;
     gap: 0.4rem;
     font-family: var(--font-body);
+    /* Improved Typography */
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link:focus {
     color: var(--text-white);
     background: rgba(255, 255, 255, 0.05);
+    /* Subtle tracked out effect on hover instead of scramble */
+    letter-spacing: 1px;
 }
 
 .nav-text {
     display: inline-block;
     white-space: nowrap;
-    /* Prevent wrapping during scramble */
+    /* Static improvement, no scramble needed */
 }
 
 .chevron {
