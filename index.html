@@ -94,14 +94,24 @@
 
             <!-- Right: Actions -->
             <div class="nav-actions">
-                <div class="search-container">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
-                    <input type="text" placeholder="Search..." class="search-input">
-                    <span class="search-hint">Ctrl K</span>
-                </div>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        style="display: none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
 
                 <button class="icon-btn" aria-label="Notifications">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -398,9 +408,38 @@
                         <p>Honoring excellence.</p>
                     </div>
                 </div>
+                <!-- Card 9 (Facebook) -->
+                <div class="gallery-card" data-fb-trigger="true" style="cursor: pointer;">
+                    <div class="gallery-img"
+                        style="background-image: url('gallery_fb.jpg'); filter: grayscale(0%); opacity: 1;"></div>
+                    <div class="gallery-overlay">
+                        <span>Social</span>
+                        <h3>Community Update</h3>
+                        <p>View latest post.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Facebook Modal -->
+    <div id="fb-modal" class="modal-overlay">
+        <div class="modal-content glass-card">
+            <button id="close-fb-modal" class="icon-btn close-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="iframe-container">
+                <iframe
+                    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fteambcpas%2Fposts%2Fpfbid08ihxXWRCPoBhn66FnmawdaV9YCMz8N5p5Rce8PXUDJxghnWF7pB8S2nhsfcDbSgxl&show_text=true&width=500"
+                    width="500" height="802" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+                    allowfullscreen="true"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
