@@ -151,88 +151,115 @@ h4,
     font-weight: 700;
 }
 
-/* --- Buttons --- */
+/* --- Advanced Buttons --- */
 .btn-primary {
-    background-color: var(--primary-color);
+    background: var(--primary-color);
     color: var(--bg-black);
-    padding: 1rem 2.5rem;
+    padding: 1rem 2.8rem;
     font-weight: 700;
     border: none;
     cursor: pointer;
-    clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
     font-size: 1rem;
     position: relative;
     overflow: hidden;
     z-index: 1;
     letter-spacing: 1px;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.btn-primary::after {
+.btn-primary::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -150%;
-    width: 50%;
+    left: -100%;
+    width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-    transform: skewX(-20deg);
-    transition: 0s;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transition: 0.6s;
     z-index: 2;
 }
 
-.btn-primary:hover::after {
-    left: 150%;
-    transition: 0.6s ease-in-out;
+.btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 15px 30px rgba(204, 255, 0, 0.4),
+        0 0 20px rgba(204, 255, 0, 0.2) inset;
+    letter-spacing: 3px;
+    background-color: #d4ff33;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    /* Morphs on hover to square */
 }
 
-.btn-primary:hover {
-    background-color: var(--accent-color);
-    transform: translateY(-3px);
-    box-shadow: 0 0 30px rgba(204, 255, 0, 0.5), 0 0 10px rgba(204, 255, 0, 0.8) inset;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%);
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-secondary {
-    background-color: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: var(--text-white);
-    padding: 1rem 2.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 2.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     font-weight: 600;
     cursor: pointer;
-    transition: 0.3s;
     font-size: 1rem;
     position: relative;
     overflow: hidden;
-    z-index: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, 95% 0, 100% 25%, 100% 100%, 5% 100%, 0 75%);
+}
+
+.btn-secondary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 40%, rgba(204, 255, 0, 0.2) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: 0.5s;
 }
 
 .btn-secondary:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
-    box-shadow: 0 0 20px rgba(204, 255, 0, 0.15);
-    background-color: rgba(204, 255, 0, 0.05);
+    box-shadow: 0 0 30px rgba(204, 255, 0, 0.15) inset;
+    text-shadow: 0 0 10px rgba(204, 255, 0, 0.8);
+    background: rgba(204, 255, 0, 0.05);
+}
+
+.btn-secondary:hover::after {
+    transform: translateX(100%);
 }
 
 .btn-sm {
-    background-color: var(--primary-color);
-    color: var(--bg-black);
-    padding: 0.5rem 1.2rem;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.6rem 1.5rem;
     font-weight: 700;
     border-radius: 4px;
-    font-size: 0.9rem;
-    transition: 0.3s;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .btn-sm:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(204, 255, 0, 0.5);
+    background: var(--primary-color);
+    color: var(--bg-black);
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.6);
+    letter-spacing: 2px;
 }
 
 /* --- Advanced UI: Global Effects --- */
@@ -401,15 +428,28 @@ body::after {
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.6rem 1.2rem;
-    border-radius: 50px;
+    border-radius: 4px;
+    /* Sharper */
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 0.4rem;
     font-family: var(--font-body);
-    /* Improved Typography */
     letter-spacing: 0.5px;
+    position: relative;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
     transition: all 0.3s ease;
 }
 
@@ -417,8 +457,11 @@ body::after {
 .nav-link:focus {
     color: var(--text-white);
     background: rgba(255, 255, 255, 0.05);
-    /* Subtle tracked out effect on hover instead of scramble */
-    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.nav-link:hover::before {
+    width: 80%;
 }
 
 .nav-text {
@@ -555,22 +598,33 @@ body::after {
 
 .icon-btn {
     background: transparent;
-    border: none;
+    border: 1px solid transparent;
     color: var(--text-white);
     cursor: pointer;
     position: relative;
     padding: 0.5rem;
-    transition: 0.3s;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-radius: 8px;
+    /* Slightly rounded */
 }
 
 .icon-btn:hover {
     color: var(--primary-color);
-    transform: scale(1.1);
+    background: rgba(204, 255, 0, 0.1);
+    border-color: rgba(204, 255, 0, 0.3);
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.2);
+    transform: translateY(-2px);
 }
 
 .icon-btn svg {
     width: 20px;
     height: 20px;
+    filter: drop-shadow(0 0 0 transparent);
+    transition: 0.3s;
+}
+
+.icon-btn:hover svg {
+    filter: drop-shadow(0 0 5px var(--primary-color));
 }
 
 .notif-dot {
@@ -582,25 +636,63 @@ body::after {
     background: var(--primary-color);
     border-radius: 50%;
     border: 2px solid var(--surface-dark);
+    box-shadow: 0 0 5px var(--primary-color);
+    animation: blink-dot 2s infinite;
+}
+
+@keyframes blink-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
 }
 
 .btn-enlist {
     background: var(--primary-color);
     color: #000;
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 0.9rem;
-    padding: 0.8rem 1.8rem;
-    border-radius: 50px;
+    padding: 0.8rem 2.2rem;
+    border-radius: 0px;
+    /* Tech block style */
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%, 0% 25%);
     text-transform: uppercase;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+    border: none;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+.btn-enlist::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    transform: translateX(-150%) skewX(-20deg);
+    transition: 0.6s;
+    z-index: -1;
 }
 
 .btn-enlist:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px) scale(1.02);
     background: #e6ff66;
-    box-shadow: 0 0 30px rgba(204, 255, 0, 0.5);
+    box-shadow: 0 0 40px rgba(204, 255, 0, 0.8), 0 0 10px rgba(255, 255, 255, 1) inset;
+    letter-spacing: 2px;
+}
+
+.btn-enlist:hover::after {
+    transform: translateX(150%) skewX(-20deg);
 }
 
 /* Mobile Toggle */
@@ -1868,31 +1960,39 @@ h3 {
     color: var(--text-grey);
 }
 
-/* Manual Controls - Neon Arrows */
+/* Manual Controls - Tech Arrows */
 .nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid var(--primary-color);
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid rgba(204, 255, 0, 0.3);
     color: var(--primary-color);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    /* Tech box shape */
     font-size: 1.2rem;
     cursor: pointer;
     z-index: 10;
-    backdrop-filter: blur(5px);
-    transition: 0.3s;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .nav-arrow:hover {
     background: var(--primary-color);
     color: #000;
-    box-shadow: 0 0 15px var(--primary-color);
+    box-shadow: 0 0 30px rgba(204, 255, 0, 0.5);
+    transform: translateY(-50%) scale(1.1);
+    border-color: var(--primary-color);
+}
+
+.nav-arrow:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .nav-arrow.prev {
