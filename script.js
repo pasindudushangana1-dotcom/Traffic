@@ -1,17 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Custom Cursor ---
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorRing = document.querySelector('.cursor-ring');
 
-    if (cursorDot && cursorRing) {
-        document.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = `${e.clientX}px`;
-            cursorDot.style.top = `${e.clientY}px`;
-            cursorRing.style.left = `${e.clientX}px`;
-            cursorRing.style.top = `${e.clientY}px`;
-        });
-    }
 
     // Hover effect for links and buttons
     const hoverables = document.querySelectorAll('a, button, .bento-item, .glass-card, .gallery-card, .leader-node');
@@ -254,6 +243,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set data-value for scramble (needed for restoration)
     document.querySelectorAll('.nav-link').forEach(a => a.dataset.value = a.innerText);
 
+
+    // --- Advanced Card Hover Effect (Mouse Tracking) ---
+    const cards = document.querySelectorAll('.glass-card, .bento-item, .nav-item');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        });
+    });
 
     // --- Magnetic Buttons ---
     const btns = document.querySelectorAll('.btn-primary, .btn-secondary');

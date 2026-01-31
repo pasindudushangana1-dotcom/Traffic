@@ -153,6 +153,86 @@ h4,
     box-shadow: 0 0 15px rgba(204, 255, 0, 0.5);
 }
 
+/* --- Advanced UI: Global Effects --- */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+}
+
+/* --- Advanced UI: Hero Grid --- */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background:
+        linear-gradient(transparent 0%, rgba(204, 255, 0, 0.1) 2%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(204, 255, 0, 0.1) 2%, transparent 3%);
+    background-size: 100px 100px;
+    transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+    animation: gridMove 20s linear infinite;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+@keyframes gridMove {
+    0% {
+        transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px);
+    }
+
+    100% {
+        transform: perspective(500px) rotateX(60deg) translateY(100px) translateZ(-200px);
+    }
+}
+
+/* --- Advanced UI: Mouse-tracking Border Glow --- */
+.glass-card,
+.bento-item,
+.nav-item {
+    position: relative;
+    overflow: hidden;
+    /* Ensure glow stays inside/border */
+}
+
+/* The Glow Element */
+.glass-card::before,
+.bento-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(600px circle at var(--x) var(--y),
+            rgba(204, 255, 0, 0.15),
+            transparent 40%);
+    opacity: 0;
+    /* Hidden by default */
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Border enhancement via pseudo-element masking (Optional high-tech look) */
+/* Or just simple inner glow which the above does */
+
+.glass-card:hover::before,
+.bento-item:hover::before {
+    opacity: 1;
+}
+
 /* --- Layout --- */
 .container {
     max-width: var(--spacing-container);
@@ -204,14 +284,7 @@ h4,
     flex-shrink: 0;
 }
 
-.brand-badge {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 5px rgba(204, 255, 0, 0.4));
-}
+
 
 .brand-text {
     font-family: var(--font-heading);
@@ -472,6 +545,50 @@ h4,
         width: 90%;
         padding: 0.8rem 1.5rem;
         justify-content: space-between;
+        flex-wrap: wrap;
+        /* Allow wrapping when expanded */
+    }
+
+    /* Mobile Expanded State */
+    .nav-capsule.expanded {
+        border-radius: 30px;
+        /* Less rounded when open */
+        background: rgba(26, 26, 26, 0.98);
+        padding-bottom: 2rem;
+        gap: 2rem;
+    }
+
+    .nav-capsule.expanded .nav-center,
+    .nav-capsule.expanded .nav-actions {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        order: 3;
+        /* Move below brand/toggle */
+    }
+
+    .nav-capsule.expanded .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-capsule.expanded .btn-enlist {
+        display: inline-block;
+        /* Re-show button */
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-capsule.expanded .search-container {
+        display: flex;
+        /* Re-show search */
+        width: 100%;
+    }
+
+    .nav-capsule.expanded .search-input {
+        width: 100%;
     }
 }
 
