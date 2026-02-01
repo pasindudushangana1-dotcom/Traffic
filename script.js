@@ -83,21 +83,41 @@ window.addEventListener('load', () => {
     }, 50); // Speed of loading
 });
 
-// Mobile Menu Toggle
-const mobileToggle = document.querySelector('.mobile-toggle');
-const navCapsule = document.querySelector('.nav-capsule');
-
-if (mobileToggle) {
-    mobileToggle.addEventListener('click', () => {
-        navCapsule.classList.toggle('expanded');
-        mobileToggle.classList.toggle('active');
-
-        // Lock body scroll when menu is open
-        if (navCapsule.classList.contains('expanded')) {
-            document.body.style.overflow = 'hidden';
+// Command Dock Scroll Effect
+const commandDock = document.querySelector('.command-dock');
+if (commandDock) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            commandDock.classList.add('scrolled');
         } else {
-            document.body.style.overflow = '';
+            commandDock.classList.remove('scrolled');
         }
+    });
+}
+
+// Mobile Overlay Logic
+const menuBtn = document.querySelector('.mobile-menu-btn');
+const closeBtn = document.querySelector('.close-menu-btn');
+const overlay = document.querySelector('.mobile-overlay');
+
+if (menuBtn && closeBtn && overlay) {
+    menuBtn.addEventListener('click', () => {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Lock scroll
+    });
+
+    closeBtn.addEventListener('click', () => {
+        overlay.classList.remove('active');
+        document.body.style.overflow = ''; // Unlock scroll
+    });
+
+    // Close on link click
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
     });
 }
 

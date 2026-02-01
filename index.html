@@ -54,67 +54,30 @@
 
     <!-- Navigation -->
     <!-- Navigation -->
-    <nav class="nav-wrapper">
-        <div class="nav-capsule">
+    <!-- Navigation: Floating Glass Command Dock -->
+    <nav class="command-dock">
+        <div class="dock-capsule">
             <!-- Left: Branding -->
-            <div class="nav-brand">
-
-                <span class="brand-text">BCG TRAFFIC UNIT</span>
+            <div class="dock-brand">
+                <img src="unit_logo.png" alt="Logo" class="dock-logo">
+                <span class="brand-text">TRAFFIC UNIT</span>
             </div>
 
-            <!-- Center: Links & Mega Menu -->
-            <div class="nav-center">
-                <ul class="nav-menu">
-                    <li class="nav-item has-mega">
-                        <button class="nav-link">
-                            <span class="nav-text">Operations</span>
-                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <!-- Mega Menu -->
-                        <div class="mega-menu">
-                            <div class="mega-grid">
-                                <div class="mega-col">
-                                    <h5 class="mega-header">Daily Duties</h5>
-                                    <a href="#" class="mega-link">
-                                        <div class="mega-icon">☀️</div>
-                                        <span>Morning Patrol</span>
-                                    </a>
-                                    <a href="#" class="mega-link">
-                                        <div class="mega-icon">🌤️</div>
-                                        <span>Afternoon Shift</span>
-                                    </a>
-                                    <a href="#" class="mega-link">
-                                        <div class="mega-icon">🚩</div>
-                                        <span>Special Event Detail</span>
-                                    </a>
-                                </div>
-                                <div class="mega-col">
-                                    <h5 class="mega-header">Protocols</h5>
-                                    <a href="#" class="mega-link">
-                                        <div class="mega-icon">🚨</div>
-                                        <span>Emergency Procedures</span>
-                                    </a>
-                                    <a href="#" class="mega-link">
-                                        <div class="mega-icon">📝</div>
-                                        <span>Reporting Guidelines</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a href="#hierarchy" class="nav-link"><span class="nav-text">The
-                                Unit</span></a></li>
-                    <li class="nav-item"><a href="#knowledge" class="nav-link"><span
-                                class="nav-text">Resources</span></a></li>
-                </ul>
+            <!-- Center: Links -->
+            <div class="dock-links">
+                <a href="#" class="dock-item">Home</a>
+                <a href="#about" class="dock-item">Duties</a>
+                <a href="#hierarchy" class="dock-item">Squad</a>
+                <a href="#gallery" class="dock-item">Gallery</a>
             </div>
 
             <!-- Right: Actions -->
-            <div class="nav-actions">
-                <!-- Theme Toggle -->
-                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+            <div class="dock-actions">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                </div>
+                <!-- Theme Toggle (Preserving existing functionality) -->
+                <button id="theme-toggle" class="icon-btn theme-dock-btn" aria-label="Toggle Theme">
                     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -132,22 +95,33 @@
                     </svg>
                 </button>
 
-                <button class="icon-btn" aria-label="Notifications">
+                <a href="https://tally.so/r/lb6orB" class="btn-enlist-dock">ENLIST</a>
+
+                <button class="mobile-menu-btn" aria-label="Menu">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
                     </svg>
-                    <span class="notif-dot"></span>
                 </button>
-
-                <a href="https://tally.so/r/lb6orB" class="btn-enlist">Join with Us</a>
             </div>
+        </div>
 
-            <!-- Mobile Toggle -->
-            <button class="mobile-toggle" aria-label="Menu">
-                <span></span>
-                <span></span>
+        <!-- Mobile Full Screen Overlay -->
+        <div class="mobile-overlay">
+            <button class="close-menu-btn" aria-label="Close Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
             </button>
+            <div class="mobile-links">
+                <a href="#" class="mobile-link">Home</a>
+                <a href="#about" class="mobile-link">Duties</a>
+                <a href="#hierarchy" class="mobile-link">Squad</a>
+                <a href="#gallery" class="mobile-link">Gallery</a>
+                <a href="https://tally.so/r/lb6orB" class="mobile-link highlight">Enlist Now</a>
+            </div>
         </div>
     </nav>
 
@@ -257,85 +231,113 @@
         </div>
     </section>
 
-    <!-- Unit Hierarchy -->
+    <!-- Unit Hierarchy: Command Grid -->
     <section id="hierarchy" class="hierarchy-section">
         <div class="container">
             <h4 class="section-label center-text">Command Structure</h4>
             <h2 class="center-text">Unit Leadership</h2>
 
-            <div class="hierarchy-tree">
-                <!-- Captain -->
-                <div class="leader-node main-leader">
-                    <div class="profile-circle gold-border">
-                        <!-- Placeholder for leader image -->
-                        <img src="commander.png" alt="Captain">
+            <div class="command-hierarchy">
+                <!-- Tier 1: Unit Commander -->
+                <div class="tier-1">
+                    <div class="command-card commander-card">
+                        <div class="card-img-container">
+                            <div class="radar-scan"></div>
+                            <img src="commander.png" alt="Commander">
+                        </div>
+                        <div class="card-info">
+                            <h3>Pasindu Dshangana</h3>
+                            <p class="rank">UNIT COMMANDER</p>
+                            <div class="official-stamp">Cmdr.</div>
+                        </div>
                     </div>
-                    <h3>Mr. Pasindu Dshangana</h3>
-                    <p>Unit Commander</p>
-                    <span class="rank-badge">Grade 12</span>
                 </div>
 
-                <div class="connector-line"></div>
-
-                <div class="sub-leaders">
-                    <!-- VC 1 -->
-                    <div class="leader-node stagger-item">
-                        <div class="profile-circle silver-border">
-                            <img src="https://ui-avatars.com/api/?name=James+W&background=333&color=fff"
-                                alt="Vice Captain">
+                <!-- Tier 2: The Executives -->
+                <div class="tier-2-scroll-wrapper">
+                    <div class="tier-2">
+                        <div class="command-card">
+                            <div class="card-img-container">
+                                <div class="radar-scan"></div>
+                                <img src="https://ui-avatars.com/api/?name=Teacher+IC&background=800000&color=fff"
+                                    alt="TIC">
+                            </div>
+                            <div class="card-info">
+                                <h3>Mrs. K. Perera</h3>
+                                <p class="rank">TEACHER IN CHARGE</p>
+                                <div class="official-stamp">TIC</div>
+                            </div>
                         </div>
-                        <h3>James Wilson</h3>
-                        <p>Alpha Squad</p>
+                        <div class="command-card">
+                            <div class="card-img-container">
+                                <div class="radar-scan"></div>
+                                <img src="https://ui-avatars.com/api/?name=Secretary&background=333&color=fff"
+                                    alt="Sec">
+                            </div>
+                            <div class="card-info">
+                                <h3>James Wilson</h3>
+                                <p class="rank">SECRETARY</p>
+                                <div class="official-stamp">Sec.</div>
+                            </div>
+                        </div>
+                        <div class="command-card">
+                            <div class="card-img-container">
+                                <div class="radar-scan"></div>
+                                <img src="https://ui-avatars.com/api/?name=Treasurer&background=333&color=fff"
+                                    alt="Tres">
+                            </div>
+                            <div class="card-info">
+                                <h3>David Chen</h3>
+                                <p class="rank">TREASURER</p>
+                                <div class="official-stamp">Tres.</div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <!-- VC 2 -->
-                    <div class="leader-node stagger-item">
-                        <div class="profile-circle silver-border">
-                            <img src="https://ui-avatars.com/api/?name=David+C&background=333&color=fff"
-                                alt="Vice Captain">
+                <!-- Tier 3: Squad Leaders -->
+                <div class="tier-3-scroll-wrapper">
+                    <div class="tier-3">
+                        <div class="command-card small-card">
+                            <div class="card-img-container">
+                                <div class="radar-scan"></div>
+                                <img src="https://ui-avatars.com/api/?name=Mike+T&background=333&color=fff" alt="SL">
+                            </div>
+                            <div class="card-info">
+                                <h3>M. Torres</h3>
+                                <p class="rank">ALPHA LDR</p>
+                            </div>
                         </div>
-                        <h3>David Chen</h3>
-                        <p>Bravo Squad</p>
-                    </div>
-
-                    <!-- VC 3 -->
-                    <div class="leader-node stagger-item">
-                        <div class="profile-circle silver-border">
-                            <img src="https://ui-avatars.com/api/?name=Mike+T&background=333&color=fff"
-                                alt="Vice Captain">
+                        <div class="command-card small-card">
+                            <div class="card-img-container">
+                                <div class="radar-scan"></div>
+                                <img src="https://ui-avatars.com/api/?name=Sarah+L&background=333&color=fff" alt="SL">
+                            </div>
+                            <div class="card-info">
+                                <h3>S. Lee</h3>
+                                <p class="rank">BRAVO LDR</p>
+                            </div>
                         </div>
-                        <h3>Michael Torres</h3>
-                        <p>Charlie Squad</p>
-                    </div>
-
-                    <!-- New Member 1 -->
-                    <div class="leader-node stagger-item">
-                        <div class="profile-circle silver-border">
-                            <img src="https://ui-avatars.com/api/?name=Sarah+L&background=333&color=fff"
-                                alt="Squad Leader">
+                        <div class="command-card small-card">
+                            <div class="card-img-container">
+                                <div class="radar-scan"></div>
+                                <img src="https://ui-avatars.com/api/?name=Ryan+K&background=333&color=fff" alt="SL">
+                            </div>
+                            <div class="card-info">
+                                <h3>R. Khan</h3>
+                                <p class="rank">CHARLIE LDR</p>
+                            </div>
                         </div>
-                        <h3>Sarah Lee</h3>
-                        <p>Delta Squad</p>
-                    </div>
-
-                    <!-- New Member 2 -->
-                    <div class="leader-node stagger-item">
-                        <div class="profile-circle silver-border">
-                            <img src="https://ui-avatars.com/api/?name=Ryan+K&background=333&color=fff"
-                                alt="Squad Leader">
+                        <div class="command-card small-card">
+                            <div class="card-img-container">
+                                <div class="radar-scan"></div>
+                                <img src="https://ui-avatars.com/api/?name=Emma+P&background=333&color=fff" alt="SL">
+                            </div>
+                            <div class="card-info">
+                                <h3>E. Patel</h3>
+                                <p class="rank">DELTA LDR</p>
+                            </div>
                         </div>
-                        <h3>Ryan Khan</h3>
-                        <p>Echo Squad</p>
-                    </div>
-
-                    <!-- New Member 3 -->
-                    <div class="leader-node stagger-item">
-                        <div class="profile-circle silver-border">
-                            <img src="https://ui-avatars.com/api/?name=Emma+P&background=333&color=fff"
-                                alt="Squad Leader">
-                        </div>
-                        <h3>Emma Patel</h3>
-                        <p>Foxtrot Squad</p>
                     </div>
                 </div>
             </div>
