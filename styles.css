@@ -412,18 +412,13 @@ body::after {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     /* Highlight top edge */
-    border-bottom: 1px solid rgba(204, 255, 0, 0.15);
-    /* Subtle neon hint at bottom */
     border-radius: 100px;
     padding: 0.6rem 0.6rem 0.6rem 2rem;
     /* Slightly more spacious */
     display: flex;
     align-items: center;
     gap: 3rem;
-    box-shadow:
-        0 10px 40px -10px rgba(0, 0, 0, 0.8),
-        0 0 30px rgba(204, 255, 0, 0.02),
-        inset 0 0 20px rgba(255, 255, 255, 0.02);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
     /* Inner depth */
     max-width: 1100px;
     width: 100%;
