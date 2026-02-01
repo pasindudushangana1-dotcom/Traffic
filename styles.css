@@ -409,8 +409,6 @@ body::after {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    /* Highlight top edge */
     border-radius: 100px;
     padding: 0.6rem 0.6rem 0.6rem 2rem;
     /* Slightly more spacious */
@@ -449,7 +447,7 @@ body::after {
     letter-spacing: 1.5px;
     /* Widened for premium feel */
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
 }
 
 /* Center Links */
@@ -505,7 +503,6 @@ body::after {
 .nav-link:focus {
     color: var(--text-white);
     background: rgba(255, 255, 255, 0.05);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .nav-link:hover::before {
