@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     const loader = document.getElementById('orbital-loader');
 
     // Ensure body starts in hidden state if not already
-    document.body.classList.add('content-hidden');
+    // document.body.classList.add('content-hidden'); // Handled in HTML now for faster LCP
     document.body.classList.remove('loading'); // Unlock potential CSS locks
 
     if (loader) {
