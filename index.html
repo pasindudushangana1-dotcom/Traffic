@@ -16,30 +16,15 @@
 <body class="loading">
     <!-- System Boot Screen -->
     <!-- System Boot Screen -->
-    <div id="boot-screen">
-        <div class="system-grid"></div>
-        <div class="radar-container">
-            <div class="radar-circle"></div>
-            <div class="radar-sweep"></div>
-            <!-- Traffic Light Loader -->
-            <div class="traffic-light-loader">
-                <div class="light red"></div>
-                <div class="light yellow"></div>
-                <div class="light green"></div>
+    <!-- Cinematic Orbital Loading Screen -->
+    <div id="orbital-loader">
+        <div class="loader-content">
+            <div class="loader-visuals">
+                <div class="orbital-ring ring-1"></div>
+                <div class="orbital-ring ring-2"></div>
+                <img src="unit_logo.png" alt="Unit Logo" class="loader-logo">
             </div>
-        </div>
-
-        <div class="boot-container">
-            <!-- Percentage will be injected here by JS -->
-            <div class="boot-text" id="boot-text"></div>
-            <div class="boot-progress">
-                <div class="progress-bar-fill"></div>
-            </div>
-        </div>
-
-        <div class="system-footer">
-            <span>SYS.VER.2.0.26</span>
-            <span>SECURE_CONNECTION_ESTABLISHED</span>
+            <div class="loader-text">SECURE CONNECTION ESTABLISHED</div>
         </div>
     </div>
 
@@ -76,24 +61,6 @@
                 <div class="status-indicator">
                     <span class="status-dot"></span>
                 </div>
-                <!-- Theme Toggle (Preserving existing functionality) -->
-                <button id="theme-toggle" class="icon-btn theme-dock-btn" aria-label="Toggle Theme">
-                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        style="display: none;">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </button>
 
                 <a href="https://tally.so/r/lb6orB" class="btn-enlist-dock">ENLIST</a>
 
