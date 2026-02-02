@@ -1,22 +1,63 @@
 
 
 // Cinematic Orbital Loader Logic
+// Futuristic Quantum Core Loader Logic
 window.addEventListener('load', () => {
-    const loader = document.getElementById('orbital-loader');
+    const loader = document.getElementById('quantum-loader');
+    const counterElement = document.querySelector('.percentage-counter');
+    const codesElement = document.querySelector('.system-codes');
+    const systemCodes = [
+        "CORE_VOLTAGE: OK",
+        "MEM_ALLOC: 4096TB",
+        "UPLINK: SECURE",
+        "QUANTUM_SYNC: INITIALIZED",
+        "NEURAL_NET: ONLINE",
+        "DEFENSE_MATRIX: ACTIVE",
+        "PROTOCOL: OMEGA",
+        "TRAFFIC_CONTROL: READY"
+    ];
 
-    // Ensure body starts in hidden state if not already
-    // document.body.classList.add('content-hidden'); // Handled in HTML now for faster LCP
-    document.body.classList.remove('loading'); // Unlock potential CSS locks
+    // Ensure body starts in hidden state
+    document.body.classList.remove('loading');
 
-    if (loader) {
-        // Dramatic delay (optional, but good for "Cinematic" feel)
-        setTimeout(() => {
-            loader.classList.add('loader-hidden');
+    if (loader && counterElement && codesElement) {
+        let progress = 0;
 
-            // Reveal Content
-            document.body.classList.remove('content-hidden');
-            document.body.classList.add('content-visible');
-        }, 800); // 800ms delay before reveal
+        // Random system codes flashing
+        const codeInterval = setInterval(() => {
+            const randomCode = systemCodes[Math.floor(Math.random() * systemCodes.length)];
+            codesElement.innerText = randomCode;
+        }, 100); // Rapid flashing
+
+        // Counter Logic
+        const interval = setInterval(() => {
+            progress += Math.random() * 2.5; // Random increment
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                clearInterval(codeInterval);
+                counterElement.innerText = "100.00%";
+                codesElement.innerText = "ACCESS GRANTED";
+                codesElement.style.color = "var(--neon-cyan)";
+                codesElement.style.textShadow = "0 0 10px var(--neon-cyan)";
+
+                // Explode and Reveal
+                setTimeout(() => {
+                    loader.classList.add('loader-hidden');
+                    document.body.classList.remove('content-hidden');
+                    document.body.classList.add('content-visible');
+
+                    // Cleanup loader from DOM after transition
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 550);
+
+                }, 300); // Brief pause at 100%
+
+            } else {
+                counterElement.innerText = progress.toFixed(2) + "%";
+            }
+        }, 30); // Fast update rate
     }
 });
 
@@ -155,4 +196,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.2 });
 
     typewriterElements.forEach(el => typewriterObserver.observe(el));
+});
+
+// Mobile Auto-Scroll for Unit Leadership
+function initAutoScroll(selector) {
+    if (window.innerWidth >= 768) return; // Mobile check
+
+    const container = document.querySelector(selector);
+    if (!container) return;
+
+    const scrollAmount = 240; // Approx card width
+
+    const autoScrollTimer = setInterval(() => {
+        // Loop Logic
+        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+            container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }, 3500); // 3.5 seconds
+
+    // Smart Interaction: Pause on Touch
+    const stopScroll = () => {
+        clearInterval(autoScrollTimer);
+    };
+
+    container.addEventListener('touchstart', stopScroll);
+    container.addEventListener('mousedown', stopScroll);
+}
+
+// Initialize for Tier 2 and Tier 3
+document.addEventListener('DOMContentLoaded', () => {
+    initAutoScroll('.tier-2-scroll-wrapper');
+    initAutoScroll('.tier-3-scroll-wrapper');
 });
