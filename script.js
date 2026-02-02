@@ -72,3 +72,45 @@ if (track && prevBtn && nextBtn) {
         track.scrollBy({ left: 320, behavior: 'smooth' });
     });
 }
+
+// Tactical Scroll Reveal System
+document.addEventListener('DOMContentLoaded', () => {
+    // Target major elements
+    const revealElements = document.querySelectorAll('section, h1, h2, .card, .glass-card, .command-card, .stat-item, .dock-item, .bento-item');
+
+    // Add .reveal class programmatically
+    revealElements.forEach(el => el.classList.add('reveal'));
+
+    // Intersection Observer Options
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add staggered delay for grids
+                const target = entry.target;
+
+                // Check if element is part of a group (grid/flex siblings)
+                const parent = target.parentElement;
+                if (parent && (parent.classList.contains('tier-2') ||
+                    parent.classList.contains('tier-3') ||
+                    parent.classList.contains('stats-row') ||
+                    parent.classList.contains('about-grid'))) {
+
+                    const siblings = Array.from(parent.children);
+                    const index = siblings.indexOf(target);
+                    // 100ms stagger per item
+                    target.style.transitionDelay = `${index * 100}ms`;
+                }
+
+                target.classList.add('active');
+                observer.unobserve(target); // One-time animation
+            }
+        });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+});

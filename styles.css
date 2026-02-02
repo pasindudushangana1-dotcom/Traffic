@@ -2525,3 +2525,24 @@ h3 {
         grid-template-columns: 1fr;
     }
 }
+
+/* --- Tactical Scroll Reveal System --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    will-change: opacity, transform;
+    /* Performance optimization */
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Optimization: Reduce travel distance */
+@media (max-width: 768px) {
+    .reveal {
+        transform: translateY(20px);
+    }
+}
