@@ -1,65 +1,27 @@
+// High-Tech Preloader Logic
+const overlay = document.getElementById('loader-overlay');
+const percentageElement = document.getElementById('loading-percentage');
 
+if (overlay && percentageElement) {
+    document.body.style.overflow = 'hidden';
+    let progress = 0;
 
-// Cinematic Orbital Loader Logic
-// Futuristic Quantum Core Loader Logic
-window.addEventListener('load', () => {
-    const loader = document.getElementById('quantum-loader');
-    const counterElement = document.querySelector('.percentage-counter');
-    const codesElement = document.querySelector('.system-codes');
-    const systemCodes = [
-        "CORE_VOLTAGE: OK",
-        "MEM_ALLOC: 4096TB",
-        "UPLINK: SECURE",
-        "QUANTUM_SYNC: INITIALIZED",
-        "NEURAL_NET: ONLINE",
-        "DEFENSE_MATRIX: ACTIVE",
-        "PROTOCOL: OMEGA",
-        "TRAFFIC_CONTROL: READY"
-    ];
+    const interval = setInterval(() => {
+        progress++;
+        percentageElement.innerText = progress + "%";
 
-    // Ensure body starts in hidden state
-    document.body.classList.remove('loading');
+        if (progress >= 100) {
+            clearInterval(interval);
+            overlay.style.transition = 'opacity 0.5s ease';
+            overlay.style.opacity = '0';
 
-    if (loader && counterElement && codesElement) {
-        let progress = 0;
-
-        // Random system codes flashing
-        const codeInterval = setInterval(() => {
-            const randomCode = systemCodes[Math.floor(Math.random() * systemCodes.length)];
-            codesElement.innerText = randomCode;
-        }, 100); // Rapid flashing
-
-        // Counter Logic
-        const interval = setInterval(() => {
-            progress += Math.random() * 2.5; // Random increment
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-                clearInterval(codeInterval);
-                counterElement.innerText = "100.00%";
-                codesElement.innerText = "ACCESS GRANTED";
-                codesElement.style.color = "var(--neon-cyan)";
-                codesElement.style.textShadow = "0 0 10px var(--neon-cyan)";
-
-                // Explode and Reveal
-                setTimeout(() => {
-                    loader.classList.add('loader-hidden');
-                    document.body.classList.remove('content-hidden');
-                    document.body.classList.add('content-visible');
-
-                    // Cleanup loader from DOM after transition
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                    }, 550);
-
-                }, 300); // Brief pause at 100%
-
-            } else {
-                counterElement.innerText = progress.toFixed(2) + "%";
-            }
-        }, 30); // Fast update rate
-    }
-});
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 500);
+        }
+    }, 20); // 20ms per percent
+}
 
 // Command Dock Scroll Effect
 const commandDock = document.querySelector('.command-dock');
@@ -76,16 +38,16 @@ if (commandDock) {
 // Mobile Overlay Logic
 const menuBtn = document.querySelector('.mobile-menu-btn');
 const closeBtn = document.querySelector('.close-menu-btn');
-const overlay = document.querySelector('.mobile-overlay');
+const overlayMenu = document.querySelector('.mobile-overlay');
 
-if (menuBtn && closeBtn && overlay) {
+if (menuBtn && closeBtn && overlayMenu) {
     menuBtn.addEventListener('click', () => {
-        overlay.classList.add('active');
+        overlayMenu.classList.add('active');
         document.body.style.overflow = 'hidden'; // Lock scroll
     });
 
     closeBtn.addEventListener('click', () => {
-        overlay.classList.remove('active');
+        overlayMenu.classList.remove('active');
         document.body.style.overflow = ''; // Unlock scroll
     });
 
@@ -93,7 +55,7 @@ if (menuBtn && closeBtn && overlay) {
     const mobileLinks = document.querySelectorAll('.mobile-link');
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-            overlay.classList.remove('active');
+            overlayMenu.classList.remove('active');
             document.body.style.overflow = '';
         });
     });
