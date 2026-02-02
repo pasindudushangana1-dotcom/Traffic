@@ -23,6 +23,25 @@
     --neon-cyan: #00f3ff;
 }
 
+/* --- Visual Polish: Custom Scrollbar --- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-cyan);
+}
+
 :root[data-theme="light"] {
     --bg-dark: #f0f0f0;
     --bg-black: #ffffff;
@@ -64,173 +83,8 @@
 }
 
 
-/* --- System Boot Screen (Critical) --- */
-/* --- Futuristic Quantum Core Loader --- */
-#quantum-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--bg-black);
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-    z-index: 999999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-    /* For 3D effect */
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out, transform 0.5s ease-in;
-}
+/* --- Utility Animations --- */
 
-#quantum-loader.loader-hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: scale(1.5);
-    /* Explode outwards */
-    filter: blur(10px);
-}
-
-.loader-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-}
-
-/* --- The Reactor --- */
-.quantum-reactor {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    transform-style: preserve-3d;
-}
-
-.reactor-ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px var(--neon-cyan) inset;
-}
-
-/* Ring 1: Large Outer */
-.ring-outer {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-top-color: var(--neon-cyan);
-    border-bottom-color: var(--neon-cyan);
-    animation: spin-cw 4s linear infinite;
-}
-
-/* Ring 2: Smaller Inner, Tilted */
-.ring-inner {
-    top: 15%;
-    left: 15%;
-    width: 70%;
-    height: 70%;
-    border-left-color: var(--primary-color);
-    border-right-color: var(--primary-color);
-    box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color) inset;
-    animation: spin-ccw-tilted 0.8s linear infinite;
-    /* Fast spin */
-}
-
-/* The Core */
-.reactor-core {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    background: var(--neon-cyan);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-cyan);
-    animation: pulse-core 0.8s ease-in-out infinite;
-}
-
-/* --- Data Stream --- */
-.data-stream {
-    text-align: center;
-    font-family: var(--font-mono);
-    color: var(--neon-cyan);
-    text-shadow: 0 0 10px var(--neon-cyan);
-}
-
-.percentage-counter {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-
-.system-codes {
-    font-size: 0.8rem;
-    color: var(--primary-color);
-    opacity: 0.8;
-    margin-top: 0.5rem;
-    height: 1.2em;
-    /* Prevent layout shift */
-}
-
-/* Animations */
-@keyframes spin-cw {
-    from {
-        transform: rotateZ(0deg) rotateX(20deg);
-    }
-
-    to {
-        transform: rotateZ(360deg) rotateX(20deg);
-    }
-}
-
-@keyframes spin-ccw-tilted {
-    from {
-        transform: rotateX(70deg) rotateZ(0deg);
-    }
-
-    to {
-        transform: rotateX(70deg) rotateZ(-360deg);
-    }
-}
-
-@keyframes pulse-core {
-
-    0%,
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.2);
-        opacity: 1;
-    }
-}
-
-/* Page Reveal Effect */
-/* Initial state for body content to scale in */
-
-
-body {
-    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-}
-
-body.content-hidden {
-    overflow: hidden;
-    /* Prevent scroll during load */
-    transform: scale(0.98);
-    opacity: 0;
-}
-
-body.content-visible {
-    transform: scale(1);
-    opacity: 1;
-    overflow-y: auto;
-}
 
 /* Utility Animations */
 @keyframes blink {
@@ -482,6 +336,8 @@ body::after {
     max-width: var(--spacing-container);
     margin: 0 auto;
     padding: 0 2rem;
+    padding-top: 1rem;
+    /* Added breathing room */
 }
 
 /* --- Floating Glass Command Dock --- */
@@ -505,9 +361,9 @@ body::after {
 
 .dock-capsule {
     pointer-events: auto;
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(204, 255, 0, 0.2);
     border-radius: 100px;
     padding: 0.5rem 0.5rem 0.5rem 1.5rem;
@@ -811,6 +667,25 @@ body::after {
 /* --- Hero Section --- */
 .hero-section {
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    /* Clean look */
+}
+
+/* Polished Typography */
+.glitch-text {
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    text-shadow: 0 0 30px rgba(204, 255, 0, 0.3);
+    position: relative;
+}
+
+.hero-overlay {
     width: 100%;
     position: relative;
     display: flex;
@@ -1696,64 +1571,7 @@ footer {
 }
 
 
-.traffic-light-loader {
-    display: flex;
-    gap: 1.5rem;
-    background: #111;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    border: 2px solid #333;
-    margin-bottom: 2rem;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-}
 
-.light {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #222;
-    transition: 0.3s;
-    box-shadow: inset 0 0 10px #000;
-}
-
-.light.active.red {
-    background: #ff4444;
-    box-shadow: 0 0 20px #ff4444;
-}
-
-.light.active.yellow {
-    background: #ffcc00;
-    box-shadow: 0 0 20px #ffcc00;
-}
-
-.light.active.green {
-    background: #44ff88;
-    box-shadow: 0 0 20px #44ff88;
-}
-
-.loader-percent {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--text-white);
-    margin-bottom: 0.5rem;
-}
-
-.pulse-text {
-    animation: flash 1s infinite;
-}
-
-@keyframes flash {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-}
 
 .terminal-log {
     margin-top: 1.5rem;

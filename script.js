@@ -1,27 +1,36 @@
-// High-Tech Preloader Logic
-const overlay = document.getElementById('loader-overlay');
-const percentageElement = document.getElementById('loading-percentage');
 
-if (overlay && percentageElement) {
-    document.body.style.overflow = 'hidden';
-    let progress = 0;
+// Mobile Auto-Scroll for Unit Leadership
+function initAutoScroll(selector) {
+    if (window.innerWidth >= 768) return; // Mobile check
 
-    const interval = setInterval(() => {
-        progress++;
-        percentageElement.innerText = progress + "%";
+    const container = document.querySelector(selector);
+    if (!container) return;
 
-        if (progress >= 100) {
-            clearInterval(interval);
-            overlay.style.transition = 'opacity 0.5s ease';
-            overlay.style.opacity = '0';
+    const scrollAmount = 240; // Approx card width
 
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 500);
+    const autoScrollTimer = setInterval(() => {
+        // Loop Logic
+        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+            container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
-    }, 20); // 20ms per percent
+    }, 3500); // 3.5 seconds
+
+    // Smart Interaction: Pause on Touch
+    const stopScroll = () => {
+        clearInterval(autoScrollTimer);
+    };
+
+    container.addEventListener('touchstart', stopScroll);
+    container.addEventListener('mousedown', stopScroll);
 }
+
+// Initialize for Tier 2 and Tier 3
+document.addEventListener('DOMContentLoaded', () => {
+    initAutoScroll('.tier-2-scroll-wrapper');
+    initAutoScroll('.tier-3-scroll-wrapper');
+});
 
 // Command Dock Scroll Effect
 const commandDock = document.querySelector('.command-dock');
@@ -38,16 +47,16 @@ if (commandDock) {
 // Mobile Overlay Logic
 const menuBtn = document.querySelector('.mobile-menu-btn');
 const closeBtn = document.querySelector('.close-menu-btn');
-const overlayMenu = document.querySelector('.mobile-overlay');
+const overlay = document.querySelector('.mobile-overlay');
 
-if (menuBtn && closeBtn && overlayMenu) {
+if (menuBtn && closeBtn && overlay) {
     menuBtn.addEventListener('click', () => {
-        overlayMenu.classList.add('active');
+        overlay.classList.add('active');
         document.body.style.overflow = 'hidden'; // Lock scroll
     });
 
     closeBtn.addEventListener('click', () => {
-        overlayMenu.classList.remove('active');
+        overlay.classList.remove('active');
         document.body.style.overflow = ''; // Unlock scroll
     });
 
@@ -55,7 +64,7 @@ if (menuBtn && closeBtn && overlayMenu) {
     const mobileLinks = document.querySelectorAll('.mobile-link');
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-            overlayMenu.classList.remove('active');
+            overlay.classList.remove('active');
             document.body.style.overflow = '';
         });
     });
@@ -158,37 +167,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.2 });
 
     typewriterElements.forEach(el => typewriterObserver.observe(el));
-});
-
-// Mobile Auto-Scroll for Unit Leadership
-function initAutoScroll(selector) {
-    if (window.innerWidth >= 768) return; // Mobile check
-
-    const container = document.querySelector(selector);
-    if (!container) return;
-
-    const scrollAmount = 240; // Approx card width
-
-    const autoScrollTimer = setInterval(() => {
-        // Loop Logic
-        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
-            container.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
-    }, 3500); // 3.5 seconds
-
-    // Smart Interaction: Pause on Touch
-    const stopScroll = () => {
-        clearInterval(autoScrollTimer);
-    };
-
-    container.addEventListener('touchstart', stopScroll);
-    container.addEventListener('mousedown', stopScroll);
-}
-
-// Initialize for Tier 2 and Tier 3
-document.addEventListener('DOMContentLoaded', () => {
-    initAutoScroll('.tier-2-scroll-wrapper');
-    initAutoScroll('.tier-3-scroll-wrapper');
 });
