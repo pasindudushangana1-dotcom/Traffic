@@ -1367,7 +1367,8 @@ body::after {
 }
 
 /* --- Mobile Responsiveness (Snap Scroll) --- */
-@media (max-width: 900px) {
+/* --- Mobile Responsiveness (Snap Scroll) --- */
+@media (max-width: 768px) {
     .hierarchy-section {
         padding: 4rem 0;
     }
@@ -1376,13 +1377,30 @@ body::after {
         gap: 2rem;
     }
 
+    /* Tier 1: Fixed & Centered */
+    .tier-1 {
+        display: flex;
+        justify-content: center;
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+        /* Separation */
+    }
+
+    .commander-card {
+        transform: scale(1);
+        width: 100%;
+        max-width: 320px;
+    }
+
+    /* Tiers 2 & 3: Horizontal Swipe */
     .tier-2,
     .tier-3 {
         display: flex;
-        gap: 1.5rem;
-        width: 100%;
+        gap: 16px;
+        /* 16px gap */
+        width: max-content;
+        /* Ensure they don't wrap */
         padding: 1rem 0 2rem 0;
-        /* Space for shadow/hover transform */
     }
 
     .tier-2-scroll-wrapper,
@@ -1390,82 +1408,49 @@ body::after {
         width: 100vw;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        /* Center alignment for scroll */
-        padding-left: max(2rem, calc(50vw - 150px));
-        padding-right: 2rem;
+        /* Center alignment calculations */
+        padding-left: calc(50vw - 42.5vw);
+        /* Center 85vw card */
+        padding-right: calc(50vw - 42.5vw);
         margin-left: -2rem;
-        /* Break out of container */
+        /* Break out of container (assumes 2rem padding on parent) */
         scrollbar-width: none;
         /* Hide scrollbar Firefox */
-    }
-
-    .tier-3-scroll-wrapper {
-        width: 100vw;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        /* Center alignment for scroll */
-        padding-left: max(2rem, calc(50vw - 110px));
-        /* Adjusted for smaller cards */
-        padding-right: 2rem;
-        margin-left: -2rem;
-        /* Break out of container */
-        scrollbar-width: none;
-        /* Hide scrollbar Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
     }
 
     .tier-2-scroll-wrapper::-webkit-scrollbar,
     .tier-3-scroll-wrapper::-webkit-scrollbar {
         display: none;
+        /* Hide scrollbar Chrome/Safari */
     }
 
+    /* Mobile Card Sizing */
     .command-card {
-        min-width: 220px;
-        /* Reduced from 280px */
-        padding: 1.2rem 1rem;
-        /* Reduced padding */
+        min-width: 85vw;
+        /* 85% of screen width */
+        max-width: 300px;
+        /* Cap it so it doesn't get huge */
+        padding: 1.5rem;
         scroll-snap-align: center;
         flex-shrink: 0;
+        margin: 0;
+        /* Reset margins */
     }
 
+    /* Optimize internals for mobile */
     .card-img-container {
-        width: 90px;
-        height: 90px;
-        margin-bottom: 1rem;
+        width: 100px;
+        height: 100px;
     }
 
     .card-info h3 {
-        font-size: 1rem;
-    }
-
-    .card-info .rank {
-        font-size: 0.7rem;
-        margin-bottom: 0.8rem;
-    }
-
-    /* Keep Commader Centered & Static but slightly smaller than desktop */
-    .tier-1 {
-        padding: 0 1rem;
-    }
-
-    .commander-card {
-        transform: scale(1);
-        width: 100%;
-        max-width: 320px;
-        min-width: auto;
-        padding: 1.5rem;
-    }
-
-    .commander-card .card-img-container {
-        width: 110px;
-        height: 110px;
-    }
-
-    .commander-card h3 {
         font-size: 1.2rem;
     }
 
-    .commander-card:hover {
-        transform: translateY(-5px);
+    .commander-card h3 {
+        font-size: 1.4rem;
     }
 }
 
@@ -2545,4 +2530,32 @@ h3 {
     .reveal {
         transform: translateY(20px);
     }
+}
+
+/* --- Custom Tactical Scrollbar --- */
+/* Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #0a0a0a;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    border: 2px solid #0a0a0a;
+    /* Creates padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #e6ff66;
+    /* Brighter neon */
 }

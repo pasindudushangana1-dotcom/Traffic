@@ -114,3 +114,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 });
+
+// Typewriter Scroll Reveal
+document.addEventListener('DOMContentLoaded', () => {
+    const typewriterElements = document.querySelectorAll('.typewriter');
+
+    // Initial State: Empty content
+    typewriterElements.forEach(el => {
+        el.dataset.fullText = el.textContent.trim();
+        el.textContent = '';
+        el.style.visibility = 'visible'; // Ensure it takes up space if possible, or handle resizing
+        // To prevent layout shift, min-height could be useful in CSS, but let's stick to user request.
+    });
+
+    const typewriterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const fullText = target.dataset.fullText;
+
+                observer.unobserve(target);
+
+                let i = 0;
+                const speed = 50; // 50ms per char
+
+                function type() {
+                    if (i < fullText.length) {
+                        target.innerHTML = fullText.substring(0, i + 1) + '<span class="typewriter-cursor"></span>';
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        // Finish: remove cursor after a moment or keep it? 
+                        // User said "Remove the cursor when typing is finished."
+                        target.innerHTML = fullText;
+                    }
+                }
+                type();
+            }
+        });
+    }, { threshold: 0.2 });
+
+    typewriterElements.forEach(el => typewriterObserver.observe(el));
+});
