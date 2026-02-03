@@ -52,11 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (statusElement) {
                 statusElement.style.color = activeColor;
 
-                if (counter <= 20) statusElement.innerText = "INITIALIZING CORE...";
-                else if (counter <= 50) statusElement.innerText = "VERIFYING SECURITY PROTOCOLS...";
-                else if (counter <= 80) statusElement.innerText = "CONNECTING TO MAIN UPLINK...";
-                else if (counter <= 99) statusElement.innerText = "DECRYPTING ASSETS...";
-                else statusElement.innerText = "ACCESS GRANTED.";
+                let newText = "";
+                if (counter <= 20) newText = "INITIALIZING CORE...";
+                else if (counter <= 50) newText = "VERIFYING SECURITY PROTOCOLS...";
+                else if (counter <= 80) newText = "CONNECTING TO MAIN UPLINK...";
+                else if (counter <= 99) newText = "DECRYPTING ASSETS...";
+                else newText = "ACCESS GRANTED.";
+
+                if (statusElement.innerText !== newText && !statusElement.isScrambling) {
+                    scrambleText(statusElement, newText);
+                }
             }
 
             // 3. Ignition Shake
@@ -79,6 +84,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }, intervalTime);
     }
 });
+
+// Decryption Effect Helper
+function scrambleText(element, finalText) {
+    element.isScrambling = true;
+    let iteration = 0;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
+    const duration = 20; // Frames (approx 600ms at 30ms interval)
+
+    const interval = setInterval(() => {
+        element.innerText = finalText
+            .split("")
+            .map((letter, index) => {
+                if (index < iteration) {
+                    return finalText[index];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+
+        if (iteration >= finalText.length) {
+            clearInterval(interval);
+            element.isScrambling = false;
+        }
+
+        iteration += 1 / 2; // Slower resolve
+    }, 30);
+}
 
 // Mobile Auto-Scroll for Unit Leadership
 function initAutoScroll(selector) {

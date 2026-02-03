@@ -2433,9 +2433,54 @@ html {
     position: relative;
 }
 
+/* 5. Biometric Scanner */
+.scanner-wrapper {
+    position: relative;
+    overflow: hidden;
+    /* Ensure scan line stays over logo */
+}
+
 .loader-logo {
     width: 120px;
+    opacity: 0.5;
+    /* Dimmed base state */
+    /* Remove old pulse to avoid conflict or keep it subtle? Keeping it subtle. */
     animation: loaderPulse 1s infinite alternate;
+}
+
+.scanner-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #00f3ff;
+    /* Cyan Scanner */
+    box-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+    animation: scanBeam 2s ease-in-out infinite;
+    mix-blend-mode: hard-light;
+    /* Make it "burn" */
+    opacity: 0.9;
+}
+
+@keyframes scanBeam {
+    0% {
+        top: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
 }
 
 @keyframes loaderPulse {
@@ -2445,6 +2490,64 @@ html {
 
     to {
         transform: scale(1.05);
+    }
+}
+
+/* 6. Sound Wave Visualizer */
+.loader-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.sound-wave {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    height: 30px;
+}
+
+.bar {
+    width: 4px;
+    height: 100%;
+    background: #CCFF00;
+    box-shadow: 0 0 5px #CCFF00;
+    animation: soundWave 0.5s ease-in-out infinite alternate;
+}
+
+.bar:nth-child(1) {
+    height: 40%;
+    animation-delay: 0.1s;
+}
+
+.bar:nth-child(2) {
+    height: 70%;
+    animation-delay: 0.2s;
+}
+
+.bar:nth-child(3) {
+    height: 100%;
+    animation-delay: 0.3s;
+}
+
+.bar:nth-child(4) {
+    height: 60%;
+    animation-delay: 0.15s;
+}
+
+.bar:nth-child(5) {
+    height: 30%;
+    animation-delay: 0.4s;
+}
+
+@keyframes soundWave {
+    0% {
+        transform: scaleY(0.4);
+    }
+
+    100% {
+        transform: scaleY(1);
     }
 }
 
