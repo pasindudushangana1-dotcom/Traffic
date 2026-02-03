@@ -2390,3 +2390,72 @@ html {
     background-color: #e6ff66;
     /* Brighter neon */
 }
+
+/* --- High-Fidelity Command Preloader --- */
+#loader-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    z-index: 9999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.loader-logo {
+    width: 120px;
+    animation: loaderPulse 1s infinite alternate;
+}
+
+@keyframes loaderPulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
+
+#loader-text {
+    font-family: 'Courier New', monospace;
+    /* Monospace/Digital */
+    font-size: 2rem;
+    color: #CCFF00;
+    /* Neon Yellow hardcoded to ensure exact match or var(--primary-color) */
+    font-weight: bold;
+    text-shadow: 0 0 10px #CCFF00;
+}
+
+.loader-bar-container {
+    width: 300px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#loader-bar {
+    height: 100%;
+    width: 0%;
+    background: #CCFF00;
+    box-shadow: 0 0 10px #CCFF00;
+    transition: width 0.06s linear;
+    /* Smooth update matching interval */
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}

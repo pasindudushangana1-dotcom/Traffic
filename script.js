@@ -1,4 +1,41 @@
 
+// --- High-Fidelity Preloader Logic ---
+// 1. Hard Block (Immediately)
+document.body.style.overflow = 'hidden';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const textElement = document.getElementById('loader-text');
+    const barElement = document.getElementById('loader-bar');
+    const screenElement = document.getElementById('loader-screen');
+
+    // Safety check
+    if (textElement && barElement && screenElement) {
+        let counter = 0;
+        const duration = 6000; // 6 seconds
+        const intervalTime = 60; // 60ms * 100 steps = 6000ms
+
+        const loaderInterval = setInterval(() => {
+            counter++;
+
+            // Update DOM
+            textElement.textContent = counter + '%';
+            barElement.style.width = counter + '%';
+
+            if (counter >= 100) {
+                clearInterval(loaderInterval);
+
+                // Completion sequence
+                screenElement.classList.add('fade-out');
+
+                setTimeout(() => {
+                    screenElement.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Re-enable scrolling
+                }, 800); // 0.8s transition match
+            }
+        }, intervalTime);
+    }
+});
+
 // Mobile Auto-Scroll for Unit Leadership
 function initAutoScroll(selector) {
     if (window.innerWidth >= 768) return; // Mobile check
