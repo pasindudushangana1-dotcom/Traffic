@@ -7,6 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const textElement = document.getElementById('loader-text');
     const barElement = document.getElementById('loader-bar');
     const screenElement = document.getElementById('loader-screen');
+    const loaderContent = document.querySelector('.loader-content');
+
+    // 3. Dynamic Status Log Injection
+    let statusElement = document.getElementById('loader-status');
+    if (!statusElement && loaderContent) {
+        statusElement = document.createElement('div');
+        statusElement.id = 'loader-status';
+        // Insert before the bar to keep layout nice
+        loaderContent.insertBefore(statusElement, document.querySelector('.loader-bar-container'));
+    }
 
     // Safety check
     if (textElement && barElement && screenElement) {
@@ -17,9 +27,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const loaderInterval = setInterval(() => {
             counter++;
 
-            // Update DOM
+            // Update Percentage
             textElement.textContent = counter + '%';
             barElement.style.width = counter + '%';
+
+            // 2. Reactive Color Logic
+            let activeColor = '#CCFF00'; // Default Green
+
+            if (counter <= 40) {
+                activeColor = '#FF3333'; // Emergency Red
+            } else if (counter <= 80) {
+                activeColor = '#FFCC00'; // Warning Yellow
+            } else {
+                activeColor = '#CCFF00'; // Secure Neon Green
+            }
+
+            // Apply Colors
+            barElement.style.backgroundColor = activeColor;
+            barElement.style.boxShadow = `0 0 10px ${activeColor}`;
+            textElement.style.color = activeColor;
+            textElement.style.textShadow = `0 0 10px ${activeColor}`;
+
+            // Update status text color too for consistency
+            if (statusElement) {
+                statusElement.style.color = activeColor;
+
+                if (counter <= 20) statusElement.innerText = "INITIALIZING CORE...";
+                else if (counter <= 50) statusElement.innerText = "VERIFYING SECURITY PROTOCOLS...";
+                else if (counter <= 80) statusElement.innerText = "CONNECTING TO MAIN UPLINK...";
+                else if (counter <= 99) statusElement.innerText = "DECRYPTING ASSETS...";
+                else statusElement.innerText = "ACCESS GRANTED.";
+            }
+
+            // 3. Ignition Shake
+            if (counter === 98) {
+                const logo = document.querySelector('.loader-logo');
+                if (logo) logo.classList.add('shake-critical');
+            }
 
             if (counter >= 100) {
                 clearInterval(loaderInterval);
