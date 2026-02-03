@@ -2608,21 +2608,92 @@ html {
     text-transform: uppercase;
 }
 
+/* 1. The Segmented Progress Bar */
 .loader-bar-container {
     width: 300px;
-    height: 4px;
-    background: #333;
+    height: 12px;
+    /* Increased height for chunks */
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
     border-radius: 2px;
     overflow: hidden;
+    /* Changed back to hidden to crop bar */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 #loader-bar {
     height: 100%;
     width: 0%;
-    background: #CCFF00;
-    box-shadow: 0 0 10px #CCFF00;
-    transition: width 0.06s linear;
+    /* Segmented Gradient: 4px color, 2px black (transparent) */
+    background: repeating-linear-gradient(90deg,
+            currentColor,
+            currentColor 4px,
+            transparent 4px,
+            transparent 6px);
+    box-shadow: 0 0 10px currentColor;
+    /* Keeps the glow matching color */
+    transition: width 0.03s linear;
+    /* Faster transition for smooth decimal steps */
+    position: relative;
+    /* Ensure background color is set via JS logic or default */
+    background-color: transparent;
+    /* Rely on gradient */
+}
+
+/* Leading Edge */
+#loader-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 0 15px #FFFFFF, 0 0 5px #FFFFFF;
+    z-index: 2;
+}
+
+/* 2. Targeting Percentage HUD */
+#loader-text::before {
+    content: '[';
+    margin-right: 10px;
+    display: inline-block;
+    animation: bracketPulse 1s infinite;
+}
+
+#loader-text::after {
+    content: ']';
+    margin-left: 10px;
+    display: inline-block;
+    animation: bracketPulse 1s infinite;
+}
+
+@keyframes bracketPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+        color: #fff;
+    }
+}
+
+/* 3. Micro-Telemetry */
+#telemetry-speed {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: #888;
+    margin-top: 5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 300px;
+    text-align: right;
 }
 
 /* 3. Atmospheric Particles */

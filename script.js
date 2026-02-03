@@ -22,14 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (textElement && barElement && screenElement) {
         let counter = 0;
         const duration = 6000; // 6 seconds
-        const intervalTime = 60; // 60ms * 100 steps = 6000ms
+        const intervalTime = 30; // 30ms for faster updates
+        const step = 0.5; // 0.5% per 30ms -> 100% in 6000ms
 
         const loaderInterval = setInterval(() => {
-            counter++;
+            counter += step;
+            if (counter > 100) counter = 100;
 
-            // Update Percentage
-            textElement.textContent = counter + '%';
+            // Update Percentage (Decimal Precision)
+            // Use toFixed(1) for "45.5%"
+            textElement.textContent = counter.toFixed(1) + '%';
             barElement.style.width = counter + '%';
+
+            // Micro-Telemetry
+            const telemetry = document.getElementById('telemetry-speed');
+            if (telemetry) {
+                const speed = Math.floor(Math.random() * (900 - 200 + 1)) + 200;
+                telemetry.innerText = "SPEED: " + speed + " MB/s";
+            }
 
             // 2. Reactive Color Logic
             let activeColor = '#CCFF00'; // Default Green
@@ -43,8 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Apply Colors
-            barElement.style.backgroundColor = activeColor;
+            // For segmented gradient, we set text color to activeColor.
+            // The gradient in CSS uses 'currentColor' so we set color on the bar itself.
+            barElement.style.color = activeColor;
+            barElement.style.background = `repeating-linear-gradient(90deg, ${activeColor}, ${activeColor} 4px, transparent 4px, transparent 6px)`;
+
+            // Only update box shadow if needed, but CSS handles it via currentColor too if we change it there?
+            // Actually CSS has box-shadow: 0 0 10px currentColor; so we just need to set color.
+            // BUT inline style overrides might be safer to be explicit
             barElement.style.boxShadow = `0 0 10px ${activeColor}`;
+
             textElement.style.color = activeColor;
             textElement.style.textShadow = `0 0 10px ${activeColor}`;
 
@@ -65,7 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // 3. Ignition Shake
-            if (counter === 98) {
+            // With float counter, strict equality === 98 might miss. Use range.
+            if (counter >= 98 && counter < 98.5) {
                 const logo = document.querySelector('.loader-logo');
                 if (logo) logo.classList.add('shake-critical');
             }
