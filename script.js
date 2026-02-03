@@ -25,6 +25,65 @@ document.addEventListener('DOMContentLoaded', () => {
         const intervalTime = 30; // 30ms for faster updates
         const step = 0.5; // 0.5% per 30ms -> 100% in 6000ms
 
+        // --- Rolling System Log Logic ---
+        const logElement = document.getElementById('system-log');
+        if (logElement) {
+            const logLines = [
+                "> SYSTEM_BOOT_SEQ_INIT",
+                "> CHECKING_BIOS_INTEGRITY... OK",
+                "> LOADING_KERNEL_MODULES",
+                "> MOUNTING_VOL_01 [RO]",
+                "> BYPASSING_FIREWALL_L3",
+                "> OPTIMIZING_VRAM_ALLOC",
+                "> ESTABLISHING_SECURE_Handshake",
+                "> [WARNING] CORE_TEMP_ELEVATED",
+                "> REROUTING_POWER_GRID: AUX",
+                "> UPLINK_ESTABLISHED: PORT 443",
+                "> DOWNLOADING_PACKETS [#############]",
+                "> DECRYPTING_ASSETS_MANIFEST",
+                "> PARSING_DOM_STRUCTURE",
+                "> INJECTING_STYLESHEETS",
+                "> COMPILING_SCRIPTS_V8",
+                "> VERIFYING_IDENT_TOKEN",
+                "> ACCESSING_MAINFRAME_DB",
+                "> [SUCCESS] AUTH_GRANTED",
+                "> INITIALIZING_RENDER_ENGINE",
+                "> PRE_CACHING_TEXTURES",
+                "> BINDING_EVENTS_LISTENER",
+                "> SYNC_HZ: 144",
+                "> GPU_ACCEL: ENABLED",
+                "> NET_LATENCY: 12ms",
+                "> SCANNING_VULNERABILITIES... 0 FOUND",
+                "> EXECUTING_STARTUP.EXE",
+                "> WELCOME_USER_ADMIN",
+                "> SYSTEM_READY."
+            ];
+
+            let logIndex = 0;
+            const logInterval = setInterval(() => {
+                if (logIndex < logLines.length) {
+                    const line = document.createElement('div');
+                    line.innerText = logLines[logIndex];
+                    logElement.appendChild(line);
+                    logElement.scrollTop = logElement.scrollHeight; // Auto-scroll
+                    logIndex++;
+                } else {
+                    // Add random noise lines if we run out
+                    const noise = "> PROCESS_" + Math.floor(Math.random() * 9999) + "_ACTIVE";
+                    const line = document.createElement('div');
+                    line.innerText = noise;
+                    logElement.appendChild(line);
+                    logElement.scrollTop = logElement.scrollHeight;
+                }
+            }, 100);
+
+            // Clear log interval on completion (handled inside main loaderInterval completion block if desired, 
+            // but separate is fine too, or we clear it when loader finishes)
+            // Let's attach it to the main completion block logic below to be clean.
+            // We'll store it on the element or a var to clear it later.
+            logElement.dataset.intervalId = logInterval;
+        }
+
         const loaderInterval = setInterval(() => {
             counter += step;
             if (counter > 100) counter = 100;
@@ -33,13 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Use toFixed(1) for "45.5%"
             textElement.textContent = counter.toFixed(1) + '%';
             barElement.style.width = counter + '%';
-
-            // Micro-Telemetry
-            const telemetry = document.getElementById('telemetry-speed');
-            if (telemetry) {
-                const speed = Math.floor(Math.random() * (900 - 200 + 1)) + 200;
-                telemetry.innerText = "SPEED: " + speed + " MB/s";
-            }
 
             // 2. Reactive Color Logic
             let activeColor = '#CCFF00'; // Default Green
@@ -91,6 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (counter >= 100) {
                 clearInterval(loaderInterval);
+
+                // Clear System Log Interval
+                const logElement = document.getElementById('system-log');
+                if (logElement && logElement.dataset.intervalId) {
+                    clearInterval(parseInt(logElement.dataset.intervalId));
+                }
 
                 // Completion sequence
                 screenElement.classList.add('fade-out');

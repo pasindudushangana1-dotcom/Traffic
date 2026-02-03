@@ -2398,11 +2398,93 @@ html {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #000000;
+    background-color: #000000;
+    /* 3. Hexagon Mesh / Grid Background */
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(204, 255, 0, 0.05) 20px),
+        repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(204, 255, 0, 0.05) 20px);
+    background-size: 20px 20px;
     z-index: 9999999;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* 1. Rolling System Log */
+#system-log {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 300px;
+    height: 100px;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: #008F11;
+    /* Dim Matrix Green */
+    text-align: left;
+    opacity: 0.8;
+    z-index: 5;
+    /* Glassmorphism */
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 10px;
+    pointer-events: none;
+    line-height: 1.2;
+}
+
+/* 2. Tactical Corner Reticles */
+.corner-bracket {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-color: #CCFF00;
+    border-style: solid;
+    border-width: 0;
+    opacity: 0.8;
+    z-index: 20;
+    animation: cornerBreathe 2s infinite ease-in-out alternate;
+}
+
+.corner-bracket.top-left {
+    top: 20px;
+    left: 20px;
+    border-top-width: 3px;
+    border-left-width: 3px;
+}
+
+.corner-bracket.top-right {
+    top: 20px;
+    right: 20px;
+    border-top-width: 3px;
+    border-right-width: 3px;
+}
+
+.corner-bracket.bottom-left {
+    bottom: 20px;
+    left: 20px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+}
+
+.corner-bracket.bottom-right {
+    bottom: 20px;
+    right: 20px;
+    border-bottom-width: 3px;
+    border-right-width: 3px;
+}
+
+@keyframes cornerBreathe {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* 1. CRT Monitor Overlay (Scanlines & Vignette) */
@@ -2431,6 +2513,14 @@ html {
     gap: 1.5rem;
     z-index: 10;
     position: relative;
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 /* 5. Biometric Scanner */
@@ -2684,16 +2774,19 @@ html {
     }
 }
 
-/* 3. Micro-Telemetry */
-#telemetry-speed {
-    font-family: 'Courier New', monospace;
-    font-size: 10px;
-    color: #888;
-    margin-top: 5px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    width: 300px;
-    text-align: right;
+@keyframes bracketPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+        color: #fff;
+    }
 }
 
 /* 3. Atmospheric Particles */
