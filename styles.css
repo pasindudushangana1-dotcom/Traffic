@@ -3015,3 +3015,175 @@ html {
     opacity: 0;
     transition: opacity 0.8s ease-out;
 }
+
+/* --- Holographic Training Database (Operational Signals) --- */
+.signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .signal-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.signal-card {
+    position: relative;
+    border: 1px solid #333;
+    overflow: hidden;
+    height: 300px;
+    /* Fixed height for uniformity */
+    /* Glass panel styles are inherited via class, but we can enforce dark bg */
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.signal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+    /* Night Vision Filter */
+    filter: grayscale(100%) brightness(0.8) sepia(100%) hue-rotate(50deg) saturate(300%);
+}
+
+.signal-card:hover .signal-img {
+    filter: none;
+    /* Reveal true color */
+}
+
+/* Data Overlay */
+.signal-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateY(calc(100% - 40px));
+    /* Show only title area initially */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.signal-card:hover .signal-overlay {
+    transform: translateY(0);
+}
+
+.signal-overlay h3 {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    color: #CCFF00;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.signal-details {
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+}
+
+.signal-card:hover .signal-details {
+    opacity: 1;
+}
+
+.signal-details p {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #DDDDDD;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.priority-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    background: #CCFF00;
+    color: #000;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: monospace;
+    margin-bottom: 5px;
+    border-radius: 2px;
+}
+
+/* Corner Markers (+) */
+.card-corners {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.card-corners::before,
+.card-corners::after {
+    content: '+';
+    position: absolute;
+    color: #CCFF00;
+    /* Neon */
+    font-family: monospace;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: bold;
+}
+
+/* Top Left & Top Right (via clone) */
+.card-corners::before {
+    top: 0;
+    left: 0;
+    /* Clone to Top Right */
+    /* Accessing container width is tricky with text-shadow percentage, 
+       but we can use absolute positioning for TR if we separate or use flex.
+       Actually, let's just do TL and BR for now to ensure cleanliness 
+       and avoid "floating plus" issues. 
+       Reverting to standard diagonal brackets which looks very tactical. */
+}
+
+.card-corners::after {
+    bottom: 0;
+    right: 0;
+}
+
+/* Add Top Right and Bottom Left using shadows on the box? 
+   Let's try gradients for the corners instead of text + signs if we want 4.
+   Linear Gradient 4 corners: */
+.card-corners {
+    background:
+        linear-gradient(to right, #CCFF00 2px, transparent 2px) 0 0,
+        linear-gradient(to bottom, #CCFF00 2px, transparent 2px) 0 0,
+        linear-gradient(to left, #CCFF00 2px, transparent 2px) 100% 0,
+        linear-gradient(to bottom, #CCFF00 2px, transparent 2px) 100% 0,
+        linear-gradient(to right, #CCFF00 2px, transparent 2px) 0 100%,
+        linear-gradient(to top, #CCFF00 2px, transparent 2px) 0 100%,
+        linear-gradient(to left, #CCFF00 2px, transparent 2px) 100% 100%,
+        linear-gradient(to top, #CCFF00 2px, transparent 2px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+    /* Size of the marker */
+    /* This creates L-brackets at 4 corners. 
+       To make them +, we need intersecting lines. 
+       Let's stick to the simpler Code:
+       TL and BR text pluses. It's cleaner. 
+       I will use the previous logic but cleaner.
+    */
+}
+
+.card-corners::before {
+    top: 0;
+    left: 0;
+}
+
+.card-corners::after {
+    bottom: 0;
+    right: 0;
+}
