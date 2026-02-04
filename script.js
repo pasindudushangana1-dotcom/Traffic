@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (screenElement && barElement) {
         let counter = 0;
-        const duration = 8000; // 8 Seconds
+        const duration = 4000; // 4 Seconds
         const intervalTime = 50; // Slower tick for reel feel
         const step = (100 / (duration / intervalTime));
 

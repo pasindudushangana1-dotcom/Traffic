@@ -2485,58 +2485,21 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 60px;
+    gap: 40px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 900px;
+    /* Reduced width since 2 cols */
 }
 
-/* Left Zone: Telemetry */
+/* Left Zone: Removed */
 .loader-col.left {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 15px;
-    min-width: 150px;
-    text-align: right;
+    display: none;
 }
-
-.telemetry-item {
-    font-size: 12px;
-    letter-spacing: 1px;
-}
-
-.telemetry-item .label {
-    color: #555;
-    display: block;
-    font-size: 10px;
-    margin-bottom: 2px;
-}
-
-.telemetry-item .value {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.telemetry-item .value.cyan {
-    color: #00F3FF;
-    text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
-}
-
-.telemetry-item .value.green {
-    color: #00FF9D;
-    text-shadow: 0 0 5px rgba(0, 255, 157, 0.5);
-}
-
-.telemetry-item .value.magenta {
-    color: #FF00FF;
-    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-}
-
 
 /* Center Zone: Progress */
 .loader-col.center {
-    flex: 1;
-    max-width: 600px;
+    flex: 2;
+    /* Give more space to bar */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2548,6 +2511,7 @@ html {
     letter-spacing: 2px;
     margin-bottom: 12px;
     text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+    white-space: nowrap;
 }
 
 .blink {
@@ -2612,6 +2576,8 @@ html {
 /* Right Zone: Rolling Counter */
 .loader-col.right {
     min-width: 120px;
+    display: flex;
+    justify-content: center;
 }
 
 .counter-window {
@@ -2671,6 +2637,81 @@ html {
 .fade-out {
     opacity: 0;
     transition: opacity 0.8s ease-out;
+}
+
+/* Mobile Responsiveness for Loader */
+@media (max-width: 768px) {
+    #loader-screen {
+        padding: 1rem;
+    }
+
+    .loader-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .loader-col.center {
+        width: 100%;
+        order: 2;
+        /* Bar below number or above? Let's verify */
+        /* Design choice: Bar usually below. But reel is big. */
+        /* Let's keep order: Bar first, Counter second? Or Stack? */
+        /* Default is row. Column makes Center top, Right bottom. */
+    }
+
+    .loader-col.right {
+        order: 1;
+        /* Percentage on top is cooler on mobile */
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .counter-window {
+        height: 60px;
+        /* Smaller reel */
+    }
+
+    .num {
+        height: 60px;
+    }
+
+    .num.current {
+        font-size: 60px;
+        justify-content: center;
+    }
+
+    .num.prev,
+    .num.next {
+        display: none;
+        /* Hide ghosts on mobile to save space */
+    }
+
+    .counter-reel {
+        transform: translateY(-33.33%);
+    }
+
+    /* If hiding ghosts, maybe adjust?
+       Actually if ghosts hidden, we just see Middle. transform still centers it if logic holds.
+       Let's keep ghosts but smaller? Or just hide for clean look.
+       If we hide ghosts, we must center the .current.
+    */
+
+    .loader-header {
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .loader-sub {
+        font-size: 9px;
+        text-align: center;
+    }
+
+    .loader-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        bottom: 20px;
+    }
 }
 
 /* Legacy cleanup */
