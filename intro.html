@@ -103,7 +103,8 @@
                     if (counter >= 100) {
                         clearInterval(loaderInterval);
                         setTimeout(() => {
-                            // Redirect to main site
+                            // Set session flag and redirect
+                            sessionStorage.setItem('introShown', 'true');
                             window.location.href = 'index.html';
                         }, 500);
                     }

@@ -3314,3 +3314,39 @@ html {
         transform: scale(0.9);
     }
 }
+
+/* --- Mobile Grid Adjustments (2 Columns) --- */
+@media (max-width: 768px) {
+
+    .personnel-grid,
+    .tier-2 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .personnel-card,
+    .command-card.small-card {
+        padding: 1rem 0.5rem;
+    }
+
+    .personnel-card h3,
+    .command-card h3 {
+        font-size: 0.95rem;
+    }
+
+    .personnel-card .role,
+    .command-card .rank {
+        font-size: 0.7rem;
+    }
+
+    .avatar-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* specific adjustment for tier-2 to ensure it overrides any flex behavior if present */
+    .tier-2 {
+        display: grid;
+        width: 100%;
+    }
+}
