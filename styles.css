@@ -3284,3 +3284,33 @@ html {
         gap: 0.5rem;
     }
 }
+
+/* --- Loader Mobile Optimization --- */
+@media (max-width: 768px) {
+    #loader-screen {
+        padding: 1.5rem;
+        flex-direction: column;
+    }
+
+    .loader-grid {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .loader-col.center {
+        width: 100%;
+    }
+
+    .loader-header {
+        font-size: 1.2rem;
+    }
+
+    .loader-sub {
+        font-size: 0.8rem;
+    }
+
+    .loader-col.right {
+        margin-top: 1rem;
+        transform: scale(0.9);
+    }
+}

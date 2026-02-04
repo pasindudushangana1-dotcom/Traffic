@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initializing - Traffic Warden Unit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #020205;
+            /* Seamless transition */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Tactical Cyberpunk OS Loader -->
+    <div id="loader-screen">
+        <div class="loader-scanline"></div>
+
+        <div class="loader-grid">
+            <!-- Center Zone: Progress -->
+            <div class="loader-col center">
+                <div class="loader-header">
+                    <span class="blink">“</span> INITIALIZING STREAM ...
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill" id="loader-bar"></div>
+                </div>
+                <div class="loader-sub">
+                    LOADING RESOURCES... PACKET <span id="packet-count">0</span>/5120
+                </div>
+            </div>
+
+            <!-- Right Zone: Rolling Counter -->
+            <div class="loader-col right">
+                <div class="counter-window">
+                    <div class="counter-reel" id="counter-reel">
+                        <div class="num prev">00</div>
+                        <div class="num current">00</div>
+                        <div class="num next">01</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Details -->
+        <div class="loader-footer">
+            <span class="footer-left">SECURE CONNECTION ESTABLISHED</span>
+            <span class="footer-right">ID: 8X-9021 ZONE: EU-CENTRAL</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const barElement = document.getElementById('loader-bar');
+            const packetElement = document.getElementById('packet-count');
+
+            // Reel Elements
+            const reel = document.getElementById('counter-reel');
+            const numPrev = reel ? reel.querySelector('.num.prev') : null;
+            const numCurrent = reel ? reel.querySelector('.num.current') : null;
+            const numNext = reel ? reel.querySelector('.num.next') : null;
+
+            if (barElement) {
+                let counter = 0;
+                const duration = 4000; // 4 Seconds
+                const intervalTime = 50;
+                const step = (100 / (duration / intervalTime));
+
+                const loaderInterval = setInterval(() => {
+                    counter += step;
+                    if (counter > 100) counter = 100;
+
+                    // Update Bar
+                    barElement.style.width = counter + '%';
+
+                    // Update Packets (LINEAR MAP)
+                    if (packetElement) {
+                        const totalPackets = 5120;
+                        const currentPackets = Math.floor((counter / 100) * totalPackets);
+                        packetElement.textContent = currentPackets;
+                    }
+
+                    // Update Rolling Counter
+                    if (reel && numCurrent) {
+                        const intVal = Math.floor(counter);
+                        if (parseInt(numCurrent.textContent) !== intVal) {
+                            numPrev.textContent = (intVal - 1 < 0 ? 0 : intVal - 1).toString().padStart(2, '0');
+                            numCurrent.textContent = intVal.toString().padStart(2, '0');
+                            numNext.textContent = (intVal + 1 > 100 ? 100 : intVal + 1).toString().padStart(2, '0');
+                        }
+                    }
+
+                    if (counter >= 100) {
+                        clearInterval(loaderInterval);
+                        setTimeout(() => {
+                            // Redirect to main site
+                            window.location.href = 'index.html';
+                        }, 500);
+                    }
+                }, intervalTime);
+            }
+        });
+    </script>
+</body>
+
+</html>
