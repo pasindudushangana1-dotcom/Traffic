@@ -2032,73 +2032,128 @@ h3 {
     background-color: #331a33;
 }
 
+/* --- Premium Infinite Gallery (Marquee) --- */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    /* Vignette Edge Fade */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.gallery-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: marqueeScroll 40s linear infinite;
+}
+
+.gallery-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-33.33%);
+        /* Scroll 1/3 since we triplicated content (original + 2 clones) */
+    }
+}
+
+/* Premium Gallery Card */
+.gallery-card {
+    min-width: 320px;
+    height: 420px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    cursor: pointer;
+}
+
+.gallery-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(204, 255, 0, 0.1);
+    border-color: #CCFF00;
+    z-index: 2;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s ease, filter 0.4s ease;
+    filter: grayscale(100%) contrast(1.1);
+    /* Tactical B&W default */
+}
+
+.gallery-card:hover .gallery-img {
+    transform: scale(1.1);
+    filter: grayscale(0%) contrast(1);
+    /* Color reveal */
+}
+
 .gallery-overlay {
-    padding: 1rem;
-    color: #fff;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.6) 50%, transparent);
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.gallery-card:hover .gallery-overlay {
+    transform: translateY(0);
 }
 
 .gallery-overlay span {
-    font-size: 0.75rem;
-    color: var(--primary-color);
     font-family: 'Courier New', monospace;
+    color: #CCFF00;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
 .gallery-overlay h3 {
-    margin: 0.2rem 0;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    color: #FFF;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .gallery-overlay p {
-    font-size: 0.85rem;
-    color: var(--text-grey);
+    font-size: 0.9rem;
+    color: #CCC;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease 0.1s;
 }
 
-/* Manual Controls - Tech Arrows */
+.gallery-card:hover .gallery-overlay p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hide manual arrows since we use marquee */
 .nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(10, 10, 10, 0.6);
-    border: 1px solid rgba(204, 255, 0, 0.3);
-    color: var(--primary-color);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    /* Tech box shape */
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 10;
-    backdrop-filter: blur(8px);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.nav-arrow:hover {
-    background: var(--primary-color);
-    color: #000;
-    box-shadow: 0 0 30px rgba(204, 255, 0, 0.5);
-    transform: translateY(-50%) scale(1.1);
-    border-color: var(--primary-color);
-}
-
-.nav-arrow:active {
-    transform: translateY(-50%) scale(0.95);
-}
-
-.nav-arrow.prev {
-    left: 20px;
-}
-
-.nav-arrow.next {
-    right: 20px;
+    display: none !important;
 }
 
 /* --- Supercharged Preloader Styles (Restored) --- */
@@ -3016,106 +3071,145 @@ html {
     transition: opacity 0.8s ease-out;
 }
 
-/* --- Glowing Holographic Icon Pods --- */
+/* --- Tactical Control Deck (Operational Signals) --- */
 .signal-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
     margin-top: 30px;
 }
 
-@media (max-width: 768px) {
-    .signal-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.signal-pod {
-    background: rgba(20, 20, 30, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 20px;
-    padding: 30px;
-    border: 1px solid rgba(204, 255, 0, 0.2);
+.signal-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom-width: 1px;
+    /* Start thin */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        border-color 0.3s ease,
-        box-shadow 0.3s ease,
-        background-color 0.3s ease;
+    transition: transform 0.3s ease, border-bottom-width 0.2s ease, box-shadow 0.3s ease;
     cursor: default;
     position: relative;
     overflow: hidden;
 }
 
-.signal-pod:hover {
-    transform: translateY(-8px);
-    border-color: #FFFFFF;
-    background-color: rgba(30, 30, 45, 0.7);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+.signal-card:hover {
+    transform: translateY(-5px);
+    border-bottom-width: 4px;
 }
 
-/* Icon Wrapper & Volumetric Glow */
-.pod-icon-wrapper {
-    position: relative;
-    width: 80px;
-    height: 80px;
+/* Color Variations */
+.signal-card.stop {
+    border-color: #FF3333;
+    box-shadow: 0 4px 20px rgba(255, 51, 51, 0.1);
+    color: #FF3333;
+}
+
+.signal-card.stop:hover {
+    box-shadow: 0 8px 30px rgba(255, 51, 51, 0.2);
+}
+
+.signal-card.go {
+    border-color: #00FF99;
+    box-shadow: 0 4px 20px rgba(0, 255, 153, 0.1);
+    color: #00FF99;
+    /* Fallback */
+}
+
+.signal-card.go:hover {
+    box-shadow: 0 8px 30px rgba(0, 255, 153, 0.2);
+}
+
+.signal-card.warning {
+    border-color: #FFCC00;
+    box-shadow: 0 4px 20px rgba(255, 204, 0, 0.1);
+    color: #FFCC00;
+}
+
+.signal-card.warning:hover {
+    box-shadow: 0 8px 30px rgba(255, 204, 0, 0.2);
+}
+
+.signal-card.pedestrian {
+    border-color: #00CCFF;
+    box-shadow: 0 4px 20px rgba(0, 204, 255, 0.1);
+    color: #00CCFF;
+}
+
+.signal-card.pedestrian:hover {
+    box-shadow: 0 8px 30px rgba(0, 204, 255, 0.2);
+}
+
+/* Icons */
+.card-icon-wrapper {
+    margin-bottom: 20px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
-    z-index: 1;
-}
-
-.pod-icon-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: rgba(204, 255, 0, 0.4);
-    filter: blur(30px);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 50%;
-    z-index: -1;
-    transition: opacity 0.3s ease, filter 0.3s ease;
-    opacity: 0.6;
 }
 
-.signal-pod:hover .pod-icon-wrapper::before {
-    opacity: 0.9;
-    filter: blur(35px);
-    background: rgba(204, 255, 0, 0.6);
+.card-icon {
+    width: 36px;
+    height: 36px;
+    fill: transparent;
+    stroke-width: 2px;
+    transition: fill 0.3s ease;
+    /* Stroke color inherited from parent color */
+    stroke: currentColor;
 }
 
-.pod-icon {
-    width: 50px;
-    height: 50px;
-    color: #CCFF00;
-    transition: transform 0.3s ease;
+.signal-card:hover .card-icon {
+    fill: currentColor;
+    /* Optional: Contrast stroke if filled, or keep same */
 }
 
-.signal-pod:hover .pod-icon {
-    transform: scale(1.1);
-    color: #FFF;
-    filter: drop-shadow(0 0 10px #CCFF00);
+.signal-card.stop .card-icon {
+    stroke: #FF3333;
+}
+
+.signal-card.go .card-icon {
+    stroke: #00FF99;
+}
+
+.signal-card.warning .card-icon {
+    stroke: #FFCC00;
+}
+
+.signal-card.pedestrian .card-icon {
+    stroke: #00CCFF;
 }
 
 /* Typography */
-.signal-pod h3 {
-    font-size: 18px;
-    font-weight: 700;
+.signal-card h3 {
+    font-size: 16px;
+    font-weight: 800;
     color: #FFFFFF;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
 }
 
-.signal-pod p {
-    font-size: 14px;
+.instruction {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #888;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.desc {
+    font-size: 13px;
     color: #AAAAAA;
-    line-height: 1.6;
+    line-height: 1.5;
 }
