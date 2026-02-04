@@ -2764,9 +2764,11 @@ html {
     pointer-events: none;
 }
 
-.glass-panel:hover::before {
-    left: 150%;
-    transition: left 0.7s ease-in-out;
+@media (hover: hover) {
+    .glass-panel:hover::before {
+        left: 150%;
+        transition: left 0.7s ease-in-out;
+    }
 }
 
 /* Enforce Bright Text inside Glass Panels */
