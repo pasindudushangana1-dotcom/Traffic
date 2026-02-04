@@ -361,24 +361,37 @@ body::after {
 
 .dock-capsule {
     pointer-events: auto;
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(204, 255, 0, 0.2);
+    background: rgba(5, 5, 5, 0.85);
+    /* Darker base */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    /* Top highlight */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    /* Bottom shadow */
     border-radius: 100px;
-    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    padding: 0.6rem 0.6rem 0.6rem 1.8rem;
+    /* Slightly more padding */
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 900px;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
+    max-width: 920px;
+    /* Slightly wider */
+    box-shadow:
+        0 20px 40px -5px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .command-dock.scrolled .dock-capsule {
-    background: rgba(5, 5, 5, 0.95);
-    border-color: rgba(204, 255, 0, 0.1);
+    background: rgba(2, 2, 2, 0.95);
+    border-color: rgba(204, 255, 0, 0.15);
+    box-shadow:
+        0 10px 30px -5px rgba(0, 0, 0, 0.8),
+        0 0 15px rgba(204, 255, 0, 0.05);
+    /* Subtle glow on scroll */
 }
 
 /* Brand */
@@ -396,38 +409,49 @@ body::after {
 
 .brand-text {
     font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 0.9rem;
+    font-weight: 800;
+    /* Bolder */
+    font-size: 1rem;
     color: #fff;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Links */
 .dock-links {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
+    /* Tighter gap */
 }
 
 .dock-item {
-    color: var(--text-grey);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
     padding: 0.5rem 1.2rem;
     border-radius: 50px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    letter-spacing: 0.5px;
 }
 
 .dock-item:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    /* More subtle bg */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    /* Neon text glow */
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.02);
 }
 
 .dock-item.active {
     color: var(--primary-color);
+    background: rgba(204, 255, 0, 0.1);
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.15);
+    text-shadow: 0 0 8px rgba(204, 255, 0, 0.5);
 }
 
 /* Actions */
@@ -3275,7 +3299,10 @@ html {
     }
 }
 
+/* --- Mobile Optimization & Grid Adjustments --- */
 @media (max-width: 768px) {
+
+    /* Layout & Signal Grid */
     .signal-grid {
         grid-template-columns: 1fr;
     }
@@ -3285,10 +3312,8 @@ html {
         align-items: flex-start;
         gap: 0.5rem;
     }
-}
 
-/* --- Loader Mobile Optimization --- */
-@media (max-width: 768px) {
+    /* Loader Screen */
     #loader-screen {
         padding: 1.5rem;
         flex-direction: column;
@@ -3301,6 +3326,15 @@ html {
 
     .loader-col.center {
         width: 100%;
+        order: 2;
+    }
+
+    .loader-col.right {
+        width: 100%;
+        order: 1;
+        margin-top: 1rem;
+        transform: scale(0.9);
+        margin-bottom: 20px;
     }
 
     .loader-header {
@@ -3311,21 +3345,29 @@ html {
         font-size: 0.8rem;
     }
 
-    .loader-col.right {
-        margin-top: 1rem;
-        transform: scale(0.9);
-    }
-}
-
-/* --- Mobile Grid Adjustments (2 Columns) --- */
-@media (max-width: 768px) {
-
+    /* Personnel & Leadership Grid (2 Columns) */
     .personnel-grid,
     .tier-2 {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
     }
 
+    .tier-3 {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        width: 100%;
+    }
+
+    /* Disable Auto-Scroll Wrappers */
+    .tier-2-scroll-wrapper,
+    .tier-3-scroll-wrapper {
+        overflow-x: visible !important;
+        white-space: normal !important;
+        display: block !important;
+    }
+
+    /* Card Adjustments */
     .personnel-card,
     .command-card.small-card {
         padding: 1rem 0.5rem;
@@ -3346,9 +3388,22 @@ html {
         height: 60px;
     }
 
-    /* specific adjustment for tier-2 to ensure it overrides any flex behavior if present */
+    /* Specific adjustment for tier-2 */
     .tier-2 {
         display: grid;
         width: 100%;
+    }
+
+    /* Commander Centering */
+    .tier-1 {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .commander-card {
+        max-width: 100%;
+        width: auto;
     }
 }

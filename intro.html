@@ -49,6 +49,7 @@
                         <div class="num next">01</div>
                     </div>
                 </div>
+                <div class="percent-symbol">%</div>
             </div>
         </div>
 
@@ -58,6 +59,25 @@
             <span class="footer-right">ID: 8X-9021 ZONE: EU-CENTRAL</span>
         </div>
     </div>
+
+    <style>
+        .percent-symbol {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 40px;
+            color: #fff;
+            align-self: center;
+            margin-left: 5px;
+            opacity: 0.8;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .percent-symbol {
+                font-size: 30px;
+            }
+        }
+    </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

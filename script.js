@@ -30,7 +30,7 @@ function scrambleText(element, finalText) {
 
 // Mobile Auto-Scroll for Unit Leadership
 function initAutoScroll(selector) {
-    if (window.innerWidth >= 768) return; // Mobile check
+    if (window.innerWidth < 768) return; // Disable on Mobile as per user request
 
     const container = document.querySelector(selector);
     if (!container) return;
