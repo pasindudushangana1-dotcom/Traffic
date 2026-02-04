@@ -1,162 +1,39 @@
-
-// --- High-Fidelity Preloader Logic ---
-// 1. Hard Block (Immediately)
+// --- Neon Void Loader Logic ---
 document.body.style.overflow = 'hidden';
 
 document.addEventListener('DOMContentLoaded', () => {
     const textElement = document.getElementById('loader-text');
     const barElement = document.getElementById('loader-bar');
     const screenElement = document.getElementById('loader-screen');
-    const loaderContent = document.querySelector('.loader-content');
 
-    // 3. Dynamic Status Log Injection
-    let statusElement = document.getElementById('loader-status');
-    if (!statusElement && loaderContent) {
-        statusElement = document.createElement('div');
-        statusElement.id = 'loader-status';
-        // Insert before the bar to keep layout nice
-        loaderContent.insertBefore(statusElement, document.querySelector('.loader-bar-container'));
-    }
-
-    // Safety check
     if (textElement && barElement && screenElement) {
         let counter = 0;
-        const duration = 6000; // 6 seconds
-        const intervalTime = 30; // 30ms for faster updates
-        const step = 0.5; // 0.5% per 30ms -> 100% in 6000ms
-
-        // --- Rolling System Log Logic ---
-        const logElement = document.getElementById('system-log');
-        if (logElement) {
-            const logLines = [
-                "> SYSTEM_BOOT_SEQ_INIT",
-                "> CHECKING_BIOS_INTEGRITY... OK",
-                "> LOADING_KERNEL_MODULES",
-                "> MOUNTING_VOL_01 [RO]",
-                "> BYPASSING_FIREWALL_L3",
-                "> OPTIMIZING_VRAM_ALLOC",
-                "> ESTABLISHING_SECURE_Handshake",
-                "> [WARNING] CORE_TEMP_ELEVATED",
-                "> REROUTING_POWER_GRID: AUX",
-                "> UPLINK_ESTABLISHED: PORT 443",
-                "> DOWNLOADING_PACKETS [#############]",
-                "> DECRYPTING_ASSETS_MANIFEST",
-                "> PARSING_DOM_STRUCTURE",
-                "> INJECTING_STYLESHEETS",
-                "> COMPILING_SCRIPTS_V8",
-                "> VERIFYING_IDENT_TOKEN",
-                "> ACCESSING_MAINFRAME_DB",
-                "> [SUCCESS] AUTH_GRANTED",
-                "> INITIALIZING_RENDER_ENGINE",
-                "> PRE_CACHING_TEXTURES",
-                "> BINDING_EVENTS_LISTENER",
-                "> SYNC_HZ: 144",
-                "> GPU_ACCEL: ENABLED",
-                "> NET_LATENCY: 12ms",
-                "> SCANNING_VULNERABILITIES... 0 FOUND",
-                "> EXECUTING_STARTUP.EXE",
-                "> WELCOME_USER_ADMIN",
-                "> SYSTEM_READY."
-            ];
-
-            let logIndex = 0;
-            const logInterval = setInterval(() => {
-                if (logIndex < logLines.length) {
-                    const line = document.createElement('div');
-                    line.innerText = logLines[logIndex];
-                    logElement.appendChild(line);
-                    logElement.scrollTop = logElement.scrollHeight; // Auto-scroll
-                    logIndex++;
-                } else {
-                    // Add random noise lines if we run out
-                    const noise = "> PROCESS_" + Math.floor(Math.random() * 9999) + "_ACTIVE";
-                    const line = document.createElement('div');
-                    line.innerText = noise;
-                    logElement.appendChild(line);
-                    logElement.scrollTop = logElement.scrollHeight;
-                }
-            }, 100);
-
-            // Clear log interval on completion (handled inside main loaderInterval completion block if desired, 
-            // but separate is fine too, or we clear it when loader finishes)
-            // Let's attach it to the main completion block logic below to be clean.
-            // We'll store it on the element or a var to clear it later.
-            logElement.dataset.intervalId = logInterval;
-        }
+        const duration = 4000; // 4 seconds total
+        const intervalTime = 20; // 20ms updates
+        const step = (100 / (duration / intervalTime)); // Calculate step needed to reach 100 in duration
 
         const loaderInterval = setInterval(() => {
             counter += step;
+
+            // Cap at 100
             if (counter > 100) counter = 100;
 
-            // Update Percentage (Decimal Precision)
-            // Use toFixed(1) for "45.5%"
-            textElement.textContent = counter.toFixed(1) + '%';
+            // Update DOM (Integer for cleaner look or Decimal if desired, user asked for tabular-nums so stable)
+            // Let's go with Integers for the "Giant" look mostly, or 1 decimal.
+            // Reference image often implies Int, but let's stick to simple Math.floor for giant numbers.
+            textElement.textContent = Math.floor(counter) + '%';
             barElement.style.width = counter + '%';
-
-            // 2. Reactive Color Logic
-            let activeColor = '#CCFF00'; // Default Green
-
-            if (counter <= 40) {
-                activeColor = '#FF3333'; // Emergency Red
-            } else if (counter <= 80) {
-                activeColor = '#FFCC00'; // Warning Yellow
-            } else {
-                activeColor = '#CCFF00'; // Secure Neon Green
-            }
-
-            // Apply Colors
-            // For segmented gradient, we set text color to activeColor.
-            // The gradient in CSS uses 'currentColor' so we set color on the bar itself.
-            barElement.style.color = activeColor;
-            barElement.style.background = `repeating-linear-gradient(90deg, ${activeColor}, ${activeColor} 4px, transparent 4px, transparent 6px)`;
-
-            // Only update box shadow if needed, but CSS handles it via currentColor too if we change it there?
-            // Actually CSS has box-shadow: 0 0 10px currentColor; so we just need to set color.
-            // BUT inline style overrides might be safer to be explicit
-            barElement.style.boxShadow = `0 0 10px ${activeColor}`;
-
-            textElement.style.color = activeColor;
-            textElement.style.textShadow = `0 0 10px ${activeColor}`;
-
-            // Update status text color too for consistency
-            if (statusElement) {
-                statusElement.style.color = activeColor;
-
-                let newText = "";
-                if (counter <= 20) newText = "INITIALIZING CORE...";
-                else if (counter <= 50) newText = "VERIFYING SECURITY PROTOCOLS...";
-                else if (counter <= 80) newText = "CONNECTING TO MAIN UPLINK...";
-                else if (counter <= 99) newText = "DECRYPTING ASSETS...";
-                else newText = "ACCESS GRANTED.";
-
-                if (statusElement.innerText !== newText && !statusElement.isScrambling) {
-                    scrambleText(statusElement, newText);
-                }
-            }
-
-            // 3. Ignition Shake
-            // With float counter, strict equality === 98 might miss. Use range.
-            if (counter >= 98 && counter < 98.5) {
-                const logo = document.querySelector('.loader-logo');
-                if (logo) logo.classList.add('shake-critical');
-            }
 
             if (counter >= 100) {
                 clearInterval(loaderInterval);
 
-                // Clear System Log Interval
-                const logElement = document.getElementById('system-log');
-                if (logElement && logElement.dataset.intervalId) {
-                    clearInterval(parseInt(logElement.dataset.intervalId));
-                }
-
-                // Completion sequence
+                // Content fade out
                 screenElement.classList.add('fade-out');
 
                 setTimeout(() => {
                     screenElement.style.display = 'none';
-                    document.body.style.overflow = 'auto'; // Re-enable scrolling
-                }, 800); // 0.8s transition match
+                    document.body.style.overflow = 'auto';
+                }, 800);
             }
         }, intervalTime);
     }
