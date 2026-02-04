@@ -1,35 +1,59 @@
-// --- Neon Void Loader Logic ---
+// --- Tactical Cyberpunk OS Loader Logic ---
 document.body.style.overflow = 'hidden';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const textElement = document.getElementById('loader-text');
-    const barElement = document.getElementById('loader-bar');
     const screenElement = document.getElementById('loader-screen');
+    const barElement = document.getElementById('loader-bar');
+    const packetElement = document.getElementById('packet-count');
 
-    if (textElement && barElement && screenElement) {
+    // Reel Elements
+    const reel = document.getElementById('counter-reel');
+    const numPrev = reel ? reel.querySelector('.num.prev') : null;
+    const numCurrent = reel ? reel.querySelector('.num.current') : null;
+    const numNext = reel ? reel.querySelector('.num.next') : null;
+
+    if (screenElement && barElement) {
         let counter = 0;
-        const duration = 4000; // 4 seconds total
-        const intervalTime = 20; // 20ms updates
-        const step = (100 / (duration / intervalTime)); // Calculate step needed to reach 100 in duration
+        const duration = 8000; // 8 Seconds
+        const intervalTime = 50; // Slower tick for reel feel
+        const step = (100 / (duration / intervalTime));
 
         const loaderInterval = setInterval(() => {
             counter += step;
-
-            // Cap at 100
             if (counter > 100) counter = 100;
 
-            // Update DOM (Integer for cleaner look or Decimal if desired, user asked for tabular-nums so stable)
-            // Let's go with Integers for the "Giant" look mostly, or 1 decimal.
-            // Reference image often implies Int, but let's stick to simple Math.floor for giant numbers.
-            textElement.textContent = Math.floor(counter) + '%';
+            // Update Bar
             barElement.style.width = counter + '%';
+
+            // Update Packets (LINEAR MAP)
+            if (packetElement) {
+                const totalPackets = 5120;
+                const currentPackets = Math.floor((counter / 100) * totalPackets);
+                packetElement.textContent = currentPackets;
+            }
+
+            // Update Rolling Counter
+            if (reel && numCurrent) {
+                const intVal = Math.floor(counter);
+
+                // Only update if number changed to avoid jitter
+                if (parseInt(numCurrent.textContent) !== intVal) {
+                    // Update values
+                    // For a true "roll", we would animate translateY, but for this simulation:
+                    // Simple snap update is robust. 
+                    // To fake a roll: Update Next -> Slide -> Reset. Too complex for simple setInterval?
+                    // Let's stick to updating the text in place for "Current" 
+                    // and updating prev/next for visual context.
+
+                    numPrev.textContent = (intVal - 1 < 0 ? 0 : intVal - 1).toString().padStart(2, '0');
+                    numCurrent.textContent = intVal.toString().padStart(2, '0');
+                    numNext.textContent = (intVal + 1 > 100 ? 100 : intVal + 1).toString().padStart(2, '0');
+                }
+            }
 
             if (counter >= 100) {
                 clearInterval(loaderInterval);
-
-                // Content fade out
                 screenElement.classList.add('fade-out');
-
                 setTimeout(() => {
                     screenElement.style.display = 'none';
                     document.body.style.overflow = 'auto';

@@ -15,60 +15,60 @@
 
 <body>
     <!-- High-Fidelity Command Preloader -->
+    <!-- Tactical Cyberpunk OS Loader -->
     <div id="loader-screen">
-        <!-- Tactical Corner Reticles -->
-        <div class="corner-bracket top-left"></div>
-        <div class="corner-bracket top-right"></div>
-        <div class="corner-bracket bottom-left"></div>
-        <div class="corner-bracket bottom-right"></div>
+        <div class="loader-scanline"></div>
 
-        <!-- Rolling System Log -->
-        <div id="system-log"></div>
-
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-
-        <!-- Cinematic Lens Blur -->
-        <div id="lens-overlay"></div>
-
-        <div class="loader-content">
-            <!-- God Rays Backlight -->
-            <div id="god-rays"></div>
-
-            <div class="scanner-wrapper">
-                <img src="unit_logo.png" alt="Unit Logo" class="loader-logo">
-                <div class="scanner-line"></div>
-            </div>
-
-            <div class="loader-stats-row">
-                <div id="loader-text">0%</div>
-                <div class="sound-wave">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
+        <div class="loader-grid">
+            <!-- Left Zone: Telemetry -->
+            <div class="loader-col left">
+                <div class="telemetry-item">
+                    <span class="label">LATENCY</span>
+                    <span class="value cyan">12ms</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="label">NODES</span>
+                    <span class="value green">ACTIVE</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="label">BANDWIDTH</span>
+                    <span class="value cyan">4.2 GB/s</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="label">ENCRYPTION</span>
+                    <span class="value magenta">AES-256</span>
                 </div>
             </div>
 
-            <div class="loader-bar-container">
-                <div id="loader-bar"></div>
+            <!-- Center Zone: Progress -->
+            <div class="loader-col center">
+                <div class="loader-header">
+                    <span class="blink">“</span> INITIALIZING STREAM ...
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill" id="loader-bar"></div>
+                </div>
+                <div class="loader-sub">
+                    LOADING RESOURCES... PACKET <span id="packet-count">0</span>/5120
+                </div>
             </div>
+
+            <!-- Right Zone: Rolling Counter -->
+            <div class="loader-col right">
+                <div class="counter-window">
+                    <div class="counter-reel" id="counter-reel">
+                        <div class="num prev">00</div>
+                        <div class="num current">00</div>
+                        <div class="num next">01</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Details -->
+        <div class="loader-footer">
+            <span class="footer-left">SECURE CONNECTION ESTABLISHED</span>
+            <span class="footer-right">ID: 8X-9021 ZONE: EU-CENTRAL</span>
         </div>
     </div>
     <!-- Cinematic Orbital Loading Screen -->
