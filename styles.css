@@ -3409,4 +3409,55 @@ html {
         /* Min width for readability */
         max-width: 100%;
     }
+}/* --- Unit Leadership Section --- */
+.commander-tier {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.commander-card-style {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* Staff Card - Green Accent */
+.staff-card-style {
+    border-bottom: 2px solid rgba(0, 255, 157, 0.3);
+}
+
+/* Mobile Optimization for Leadership */
+@media (max-width: 768px) {
+    .staff-grid {
+        grid-template-columns: 1fr 1fr;
+        /* Strictly 2 columns */
+    }
+
+    .staff-grid .personnel-card {
+        padding: 15px;
+    }
+
+    .staff-grid .personnel-info h3 {
+        font-size: 0.9rem;
+    }
+
+    .staff-grid .personnel-info .role {
+        font-size: 0.7rem;
+    }
+
+    .commander-tier {
+        width: 100%;
+    }
+
+    .commander-card-style {
+        width: 100%;
+        max-width: 90%;
+        /* Scale down slightly */
+    }
 }
