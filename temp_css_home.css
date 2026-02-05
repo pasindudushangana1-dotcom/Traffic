@@ -1,0 +1,173 @@
+/* --- High Command Directorate (Home) --- */
+#command-home {
+    background: #050505;
+    background-image: radial-gradient(circle at center, transparent 0%, #050505 90%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.leadership-triangle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.deputy-row {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.home-glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-glass:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.commander-img {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    position: relative;
+    border-radius: 50%;
+}
+
+.commander-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 215, 0, 0.8);
+    position: relative;
+    z-index: 2;
+}
+
+.gold-pulse-ring {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.5);
+    animation: goldPulse 2s infinite;
+    z-index: 1;
+}
+
+@keyframes goldPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    }
+
+    70% {
+        transform: scale(1.15);
+        opacity: 0;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+    }
+
+    100% {
+        transform: scale(1.15);
+        opacity: 0;
+    }
+}
+
+.deputy-img {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    /* Static Cyan Glow */
+}
+
+.deputy-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(0, 255, 255, 0.5);
+}
+
+.profile-info h3 {
+    margin: 0;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.home-rank {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #ccc;
+    letter-spacing: 2px;
+}
+
+.home-rank-sub {
+    margin: 5px 0 0;
+    font-size: 0.8rem;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+.btn-roster-home {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid #00ff9d;
+    /* Neon Green */
+    color: #00ff9d;
+    font-family: 'Chakra Petch', sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-roster-home:hover {
+    background: #00ff9d;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
+}
+
+@media (max-width: 768px) {
+    #command-home {
+        padding: 50px 20px;
+    }
+
+    .deputy-row {
+        gap: 20px;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .command-profile {
+        width: 100%;
+    }
+
+    .home-glass {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
