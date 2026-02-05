@@ -361,28 +361,24 @@ body::after {
 
 .dock-capsule {
     pointer-events: auto;
-    background: rgba(5, 5, 5, 0.85);
-    /* Darker base */
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    /* Premium Glass Effect */
+    background: rgba(8, 8, 8, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     border-top: 1px solid rgba(255, 255, 255, 0.15);
-    /* Top highlight */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-    /* Bottom shadow */
     border-radius: 100px;
-    padding: 0.6rem 0.6rem 0.6rem 1.8rem;
-    /* Slightly more padding */
+    padding: 0.7rem 0.8rem 0.7rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 920px;
-    /* Slightly wider */
+    max-width: 960px;
     box-shadow:
-        0 20px 40px -5px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        0 20px 50px -10px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .command-dock.scrolled .dock-capsule {
@@ -415,7 +411,8 @@ body::after {
     color: #fff;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 15px rgba(204, 255, 0, 0.6);
+    /* Rich Neon Glow */
 }
 
 /* Links */
@@ -440,11 +437,11 @@ body::after {
 
 .dock-item:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.08);
-    /* More subtle bg */
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-    /* Neon text glow */
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.05);
+    /* Lighter hover bg */
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dock-item.active {
@@ -3409,7 +3406,9 @@ html {
         /* Min width for readability */
         max-width: 100%;
     }
-}/* --- Unit Leadership Section --- */
+}
+
+/* --- Unit Leadership Section --- */
 .commander-tier {
     display: flex;
     justify-content: center;
@@ -3461,6 +3460,7 @@ html {
         /* Scale down slightly */
     }
 }
+
 /* --- High Command Directorate (Home) --- */
 #command-home {
     background: #050505;
@@ -3633,4 +3633,28 @@ html {
         max-width: 350px;
         margin: 0 auto;
     }
+}
+
+/* --- Premium Commander Card (Members Page) --- */
+.premium-commander-card {
+    border: 1px solid rgba(255, 215, 0, 0.4) !important;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.15) !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0, 0, 0, 0.4));
+    transition: all 0.3s ease;
+}
+
+.premium-commander-card:hover {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.3) !important;
+    border-color: rgba(255, 215, 0, 0.8) !important;
+    transform: translateY(-5px);
+}
+
+.premium-commander-card h3 {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.premium-commander-card .role {
+    color: #FFD700 !important;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
