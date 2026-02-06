@@ -2,15 +2,33 @@
 
 /* --- Variables & Reset --- */
 :root {
-    /* ... (existing vars remain, but logical override below) */
+    --primary-color: #CCFF00;
+    /* Neon Yellow */
+    --accent-color: #E6FF66;
+    /* Lighter Yellow Hover */
+    --bg-dark: #121212;
+    /* Asphalt Grey */
+    --bg-black: #050505;
+    /* Matte Black */
+    --surface-dark: #1E1E1E;
+    --text-white: #FFFFFF;
+    --text-grey: #A0A0A0;
+    --border-color: #333333;
+
+    --font-heading: 'Chakra Petch', sans-serif;
+    /* Tech/Futuristic */
+    --font-body: 'Inter', sans-serif;
+
+    --border-radius-card: 16px;
+    --font-mono: 'Courier New', Courier, monospace;
+    /* Fallback or specific mono font */
+    --neon-cyan: #00f3ff;
 }
 
-/* Default English Font (Your current font) */
+/* Default English Font */
 body {
     font-family: 'Inter', sans-serif;
 }
-
-/* Assuming Inter is current body font based on prev context or user request 'Orbitron' but file has Inter. User said 'Orbitron' in prompt example, I should respect current file 'Inter' or switch to Orbitron if requested? User said "Default English Font (Your current font) body { font-family: 'Orbitron'... }". The file actually uses 'Inter'. I will stick to what is in file unless explicitly told to change English font. Wait, directive says "Apply the code" and gives "body { font-family: 'Orbitron'... }". I should probably follow the directive pattern but keep the existing English font if Orbitron isn't loaded. Actually, I see 'Chakra Petch' and 'Inter' in the file. I will use the file's existing font for default to avoid breaking design, but add the Sinhala override. */
 
 /* Sinhala Mode Override */
 body.sinhala-mode {
@@ -23,34 +41,6 @@ body.sinhala-mode h2,
 body.sinhala-mode h3 {
     font-weight: 900;
     letter-spacing: 0px;
-    /* Sinhala doesn't look good with wide spacing */
-}
-
---primary-color: #CCFF00;
-/* Neon Yellow */
---accent-color: #E6FF66;
-/* Lighter Yellow Hover */
---bg-dark: #121212;
-/* Asphalt Grey */
---bg-black: #050505;
-/* Matte Black */
---surface-dark: #1E1E1E;
---text-white: #FFFFFF;
---text-grey: #A0A0A0;
---border-color: #333333;
-
---font-heading: 'Chakra Petch',
-sans-serif;
-/* Tech/Futuristic */
---font-body: 'Inter',
-sans-serif;
-
---border-radius-card: 16px;
---font-mono: 'Courier New',
-Courier,
-monospace;
-/* Fallback or specific mono font */
---neon-cyan: #00f3ff;
 }
 
 /* --- Visual Polish: Custom Scrollbar --- */
