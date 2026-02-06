@@ -3724,3 +3724,93 @@ html {
     letter-spacing: 2px;
     font-weight: 600;
 }
+
+/* --- Squadron Gateway Section --- */
+#squad-gateway {
+    background-color: var(--bg-black);
+    padding: 4rem 0;
+    position: relative;
+    /* Hexagon Mesh Overlay */
+    background-image:
+        linear-gradient(30deg, #111 12%, transparent 12.5%, transparent 87%, #111 87.5%, #111),
+        linear-gradient(150deg, #111 12%, transparent 12.5%, transparent 87%, #111 87.5%, #111),
+        linear-gradient(30deg, #111 12%, transparent 12.5%, transparent 87%, #111 87.5%, #111),
+        linear-gradient(150deg, #111 12%, transparent 12.5%, transparent 87%, #111 87.5%, #111),
+        linear-gradient(60deg, #1a1a1a 25%, transparent 25.5%, transparent 75%, #1a1a1a 75%, #1a1a1a),
+        linear-gradient(60deg, #1a1a1a 25%, transparent 25.5%, transparent 75%, #1a1a1a 75%, #1a1a1a);
+    background-size: 40px 70px;
+    background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+    opacity: 1;
+}
+
+.squad-header {
+    text-align: center;
+    color: var(--text-white);
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    /* Neon White */
+    letter-spacing: 2px;
+}
+
+.squad-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* 15px gap vertically on mobile default, using rem for better scaling */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .squad-grid {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+.squad-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.05);
+    /* Dark Glass */
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    border-left: 5px solid var(--primary-color);
+    /* Neon Green Border */
+    transition: transform 0.3s ease, background 0.3s ease;
+    backdrop-filter: blur(5px);
+    flex: 1;
+    min-width: 250px;
+}
+
+.squad-card:hover {
+    transform: translateX(10px);
+    /* Slide Right */
+    background: rgba(204, 255, 0, 0.1);
+    /* Green Tint */
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.card-text {
+    font-family: var(--font-heading);
+    color: var(--text-white);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.card-arrow {
+    color: var(--text-grey);
+    transition: color 0.3s ease;
+}
+
+.squad-card:hover .card-arrow {
+    color: var(--primary-color);
+}
