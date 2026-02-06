@@ -42,6 +42,13 @@ function applyLanguage(lang) {
             }
         }
     }
+
+    // 3. Update Font Mode (Typography)
+    if (lang === 'si') {
+        document.body.classList.add('sinhala-mode');
+    } else {
+        document.body.classList.remove('sinhala-mode');
+    }
 }
 
 // Initialize Language
