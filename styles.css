@@ -3664,3 +3664,106 @@ html {
     font-weight: bold;
     letter-spacing: 2px;
 }
+
+/* --- Stats Section --- */
+.stats-section {
+    /* Updated styling for impact stats */
+    background-color: var(--bg-black);
+    /* Faint grid overlay */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    padding: 6rem 0;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-counter-item {
+    flex: 1;
+    min-width: 200px;
+    padding: 1.5rem;
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--text-grey);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.counter {
+    font-family: var(--font-mono);
+    font-size: 3rem;
+    color: #00ff66;
+    /* Neon Green */
+    text-shadow: 0 0 15px rgba(0, 255, 102, 0.6);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    color: var(--text-white);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* --- Language Toggle --- */
+.lang-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.3rem 0.5rem;
+    /* Adjusted padding */
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: var(--text-white);
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+}
+
+.lang-toggle:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(204, 255, 0, 0.2);
+}
+
+.lang-option {
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    /* Pill shape for inner items */
+    opacity: 0.5;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.lang-option.active {
+    opacity: 1;
+    background-color: var(--primary-color);
+    /* Neon Green Background */
+    color: var(--bg-black);
+    /* Black Text */
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
+}
+
+.separator {
+    color: var(--text-grey);
+    opacity: 0.3;
+    font-size: 0.8rem;
+    margin: 0 0.1rem;
+}

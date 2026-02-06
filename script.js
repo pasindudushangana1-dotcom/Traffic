@@ -1,3 +1,95 @@
+// --- Language Toggle System ---
+const translations = {
+    en: {
+        "TRAFFIC UNIT": "TRAFFIC UNIT"
+    },
+    si: {
+        "TRAFFIC UNIT": "රථවාහන අංශය"
+    }
+};
+
+function toggleLanguage() {
+    const currentLang = localStorage.getItem('language') === 'si' ? 'en' : 'si';
+    localStorage.setItem('language', currentLang);
+    applyLanguage(currentLang);
+}
+
+function applyLanguage(lang) {
+    // 1. Update Text via Data Attributes
+    document.querySelectorAll('.lang-text').forEach(el => {
+        if (lang === 'si' && el.dataset.si) {
+            el.innerText = el.dataset.si;
+        } else if (el.dataset.en) {
+            el.innerText = el.dataset.en;
+        }
+    });
+
+    // 2. Update Toggle Button Visuals
+    const enOption = document.querySelector('.lang-option:first-child');
+    const siOption = document.querySelector('.lang-option:last-child');
+
+    // Safety check if button exists
+    const toggleBtn = document.querySelector('.lang-toggle');
+    if (toggleBtn) {
+        const spans = toggleBtn.querySelectorAll('.lang-option');
+        if (spans.length >= 2) {
+            if (lang === 'si') {
+                spans[0].classList.remove('active');
+                spans[1].classList.add('active');
+            } else {
+                spans[1].classList.remove('active');
+                spans[0].classList.add('active');
+            }
+        }
+    }
+}
+
+// Initialize Language
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('language') || 'en';
+    applyLanguage(savedLang);
+});
+
+
+// --- Impact Statistics Counter ---
+document.addEventListener('DOMContentLoaded', () => {
+    const statsSection = document.querySelector('#stats');
+
+    if (statsSection) {
+        console.log("Traffic Stats Module Initialized"); // Verify Load
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.counter');
+
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const speed = 200;
+                        const increment = target / speed;
+
+                        const updateCount = () => {
+                            const count = +counter.innerText;
+
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + increment);
+                                setTimeout(updateCount, 20);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+
+                        updateCount();
+                    });
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+    }
+});
+
 // --- Tactical Cyberpunk OS Loader Logic ---
 
 
