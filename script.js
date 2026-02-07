@@ -13,6 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     counters.forEach(counter => {
                         const target = +counter.getAttribute('data-target');
+
+                        // Handle non-numeric targets (e.g. "UNCOUNTABLE")
+                        if (isNaN(target)) {
+                            counter.innerText = counter.getAttribute('data-target');
+                            return;
+                        }
+
                         const speed = 200;
                         const increment = target / speed;
 
