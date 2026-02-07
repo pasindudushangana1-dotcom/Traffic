@@ -52,7 +52,7 @@
             <div class="dock-links">
                 <a href="#" class="dock-item">Home</a>
                 <a href="#about" class="dock-item">Duties</a>
-
+                <a href="members.html" class="dock-item">Members</a>
                 <a href="#gallery" class="dock-item">Gallery</a>
             </div>
 
@@ -61,8 +61,6 @@
                 <div class="status-indicator">
                     <span class="status-dot"></span>
                 </div>
-
-
 
                 <a href="https://tally.so/r/lb6orB" class="btn-enlist-dock">JOIN US</a>
 
@@ -87,7 +85,7 @@
             <div class="mobile-links">
                 <a href="#" class="mobile-link">Home</a>
                 <a href="#about" class="mobile-link">Duties</a>
-
+                <a href="members.html" class="mobile-link">Members</a>
                 <a href="#gallery" class="mobile-link">Gallery</a>
                 <a href="https://tally.so/r/lb6orB" class="mobile-link highlight">Join Us</a>
             </div>
@@ -190,66 +188,37 @@
         </div>
     </section>
 
-    <!-- Knowledge Base (Bento Box) -->
-    <section id="knowledge" class="knowledge-section">
+    <!-- Interactive Protocol Grid -->
+    <section id="signals" class="protocol-section">
         <div class="container">
-            <h4 class="section-label">Operational Signals</h4>
-            <div class="section-header-row">
-                <h2>Standardized Command Protocols for Traffic Management.</h2>
-                <a href="#" class="text-link">View Full Manual -></a>
-            </div>
+            <h2 class="glitch-title" data-text="TRAFFIC CONTROL PROTOCOLS">TRAFFIC CONTROL PROTOCOLS</h2>
 
-            <div class="signal-grid">
-                <!-- STOP Card -->
-                <div class="signal-card stop">
-                    <div class="card-icon-wrapper">
-                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 10h.01M15 10h.01" />
-                        </svg>
+            <div class="protocol-grid">
+                <!-- Card 1: STOP -->
+                <div class="holo-card card-stop">
+                    <div class="card-icon-container">
+                        <i class="fa-solid fa-hand"></i>
                     </div>
-                    <h3>STOP ALL TRAFFIC</h3>
-                    <p class="instruction">ACTION: HALT_TRAFFIC_FLOW</p>
-                    <p class="desc">Raise hand vertically, palm facing forward to halt incoming flow immediately.</p>
+                    <h3>HALT / STOP</h3>
+                    <p>Raise hand vertically. Palm facing traffic.</p>
                 </div>
 
-                <!-- GO Card -->
-                <div class="signal-card go">
-                    <div class="card-icon-wrapper">
-                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
+                <!-- Card 2: GO -->
+                <div class="holo-card card-go">
+                    <div class="card-icon-container">
+                        <i class="fa-solid fa-arrow-right-long"></i>
                     </div>
                     <h3>PROCEED</h3>
-                    <p class="instruction">ACTION: INITIATE_MOVEMENT</p>
-                    <p class="desc">Clear horizontal gesture indicating traffic may safely move forward.</p>
+                    <p>Swing arm horizontally across chest.</p>
                 </div>
 
-                <!-- WARNING Card -->
-                <div class="signal-card warning">
-                    <div class="card-icon-wrapper">
-                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
+                <!-- Card 3: SLOW -->
+                <div class="holo-card card-slow">
+                    <div class="card-icon-container">
+                        <i class="fa-solid fa-hand-point-down"></i>
                     </div>
-                    <h3>YIELD / CAUTION</h3>
-                    <p class="instruction">ACTION: PREPARE_STOP</p>
-                    <p class="desc">Slow down signal. Be prepared to stop for hazards or changing conditions.</p>
-                </div>
-
-                <!-- PEDESTRIAN Card -->
-                <div class="signal-card pedestrian">
-                    <div class="card-icon-wrapper">
-                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M13.5 4.5L11 13l-4-2-1 4m8-2l4 4m-9-6l1-5h4l1 5m-2.5-12a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-                        </svg>
-                    </div>
-                    <h3>PEDESTRIAN PRIORITY</h3>
-                    <p class="instruction">ACTION: SECURE_CROSSWALK</p>
-                    <p class="desc">Ensure safe passage for civilians and students at designated crosswalks.</p>
+                    <h3>REDUCE SPEED</h3>
+                    <p>Wave arm downwards repeatedly.</p>
                 </div>
             </div>
         </div>
@@ -404,32 +373,7 @@
         </div>
     </section>
 
-    <!-- Squadron Gateway Section -->
-    <section id="squad-gateway">
-        <div class="container">
-            <h2 class="squad-header">ACTIVE DUTY ROSTERS</h2>
-            <div class="squad-grid">
-                <!-- Card 1: Command -->
-                <a href="members.html" class="squad-card">
-                    <div class="card-icon"><i class="fa-solid fa-star"></i></div>
-                    <div class="card-text">GRADE 13 - COMMAND</div>
-                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </a>
-                <!-- Card 2: Officers -->
-                <a href="members.html" class="squad-card">
-                    <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div class="card-text">GRADE 12/11 - OFFICERS</div>
-                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </a>
-                <!-- Card 3: Cadets -->
-                <a href="members.html" class="squad-card">
-                    <div class="card-icon"><i class="fa-solid fa-user-group"></i></div>
-                    <div class="card-text">GRADE 10/09 - CADETS</div>
-                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </a>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Footer -->
     <footer class="site-footer">
