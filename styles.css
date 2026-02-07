@@ -3672,180 +3672,157 @@ html {
 }
 
 
-/* --- Command Dashboard Grid (Elite Tactical Gold) --- */
+/* --- Command Dashboard Grid (Clean High-Contrast) --- */
 .stats-section {
-    background-color: #050505;
+    background-color: #000;
     padding: 6rem 0;
-    /* Subtle Gold Grid & Radar Scan Effect */
-    background-image:
-        linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Optional central radar ring effect */
-.stats-section::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 800px;
-    border: 1px solid rgba(255, 215, 0, 0.05);
-    border-radius: 50%;
-    pointer-events: none;
 }
 
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 24px;
     width: 100%;
 }
 
-/* --- Elite Card Container --- */
-.stat-card.elite-card {
-    background: rgba(10, 10, 10, 0.8);
-    border: none;
+.stat-card {
+    background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+    border: 1px solid #333;
+    border-top: 2px solid #00ff00;
     padding: 25px;
     position: relative;
     overflow: hidden;
-    height: 320px;
-    /* Fixed height for consistent grid */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     border-radius: 0;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* --- Corner Brackets --- */
-.corner-border {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-color: rgba(255, 215, 0, 0.5);
-    /* Dull Gold default */
-    border-style: solid;
-    transition: all 0.3s ease;
-}
-
-.top-left {
-    top: 0;
-    left: 0;
-    border-width: 2px 0 0 2px;
-}
-
-.top-right {
-    top: 0;
-    right: 0;
-    border-width: 2px 2px 0 0;
-}
-
-.bottom-left {
-    bottom: 0;
-    left: 0;
-    border-width: 0 0 2px 2px;
-}
-
-.bottom-right {
-    bottom: 0;
-    right: 0;
-    border-width: 0 2px 2px 0;
-}
-
-.stat-card:hover .corner-border {
-    border-color: #FFD700;
-    /* Bright Gold on hover */
-    width: 40px;
-    /* Slight expansion */
-    box-shadow: 0 0 10px #FFD700;
+    transition: transform 0.3s ease;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 5px 20px rgba(0, 255, 0, 0.1);
 }
 
-/* --- Top Info --- */
-.card-top-status {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.6rem;
-    color: rgba(255, 215, 0, 0.4);
-    text-align: center;
-    margin-bottom: 1.5rem;
-    letter-spacing: 1px;
-}
-
-.elite-header {
+.card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     position: relative;
     z-index: 2;
 }
 
-.elite-pill {
-    background: transparent;
-    border: 1px solid #FFD700;
-    color: #FFD700;
-    font-size: 0.8rem;
-    padding: 5px 15px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+.pill {
+    background: rgba(0, 255, 0, 0.1);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 2px;
 }
 
-.signal-icon {
-    color: #FFD700;
-    opacity: 0.8;
-}
-
-.data-rate {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 0.6rem;
-    color: rgba(255, 215, 0, 0.4);
-    margin-bottom: 3rem;
-    /* Spacing before big number */
-    text-transform: uppercase;
-}
-
-/* --- Content --- */
-.card-content {
-    position: relative;
-    z-index: 2;
-    margin-top: auto;
-    /* Push to bottom area */
-    margin-bottom: 1.5rem;
-}
-
-.elite-label {
-    font-family: 'Open Sans', sans-serif;
-    color: #888;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin-bottom: 0.2rem;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.dot {
-    width: 6px;
-    height: 6px;
-    background: #FFD700;
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff00;
     border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 5px #FFD700;
+    box-shadow: 0 0 8px #00ff00;
+}
+
+.label {
+    color: #888;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8rem;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+}
+
+.counter {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    font-weight: 700;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+    margin-top: 0.5rem;
+}
+
+.stat-card:last-child .counter {
+    font-size: 2rem;
+    color: #00ff00;
+}
+
+.bg-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.05);
+    /* Very subtle */
+    z-index: 1;
+}
+
+/* Corner Decor */
+.corner-L {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #333;
+    transition: all 0.3s ease;
+}
+
+.stat-card .corner-L {
+    top: 0;
+    right: 0;
+    border-width: 0 2px 2px 0;
+    /* Top Right L-shape (actually inverted) - user requested top-right corner */
+    border-color: #00ff00;
+}
+
+/* Wait, user asked for "Only top-right and bottom-left" */
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    border-top: 2px solid #00ff00;
+    border-right: 2px solid #00ff00;
+}
+
+.stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-bottom: 2px solid #00ff00;
+    border-left: 2px solid #00ff00;
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .counter {
