@@ -3672,10 +3672,31 @@ html {
 }
 
 
-/* --- Command Dashboard Grid --- */
+/* --- Command Dashboard Grid (Elite Tactical Gold) --- */
 .stats-section {
-    background-color: #0a0a0a;
+    background-color: #050505;
     padding: 6rem 0;
+    /* Subtle Gold Grid & Radar Scan Effect */
+    background-image:
+        linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional central radar ring effect */
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    border: 1px solid rgba(255, 215, 0, 0.05);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .dashboard-grid {
@@ -3685,112 +3706,193 @@ html {
     width: 100%;
 }
 
-.stat-card {
-    background: #050505;
-    border: 1px solid #333;
-    border-top: 2px solid #00ff00;
-    padding: 20px;
+/* --- Elite Card Container --- */
+.stat-card.elite-card {
+    background: rgba(10, 10, 10, 0.8);
+    border: none;
+    padding: 25px;
     position: relative;
     overflow: hidden;
-    height: 100%;
+    height: 320px;
+    /* Fixed height for consistent grid */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     border-radius: 0;
-    /* Tactical square edges */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Corner Brackets --- */
+.corner-border {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: rgba(255, 215, 0, 0.5);
+    /* Dull Gold default */
+    border-style: solid;
+    transition: all 0.3s ease;
+}
+
+.top-left {
+    top: 0;
+    left: 0;
+    border-width: 2px 0 0 2px;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+    border-width: 2px 2px 0 0;
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 2px 2px;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+    border-width: 0 2px 2px 0;
+}
+
+.stat-card:hover .corner-border {
+    border-color: #FFD700;
+    /* Bright Gold on hover */
+    width: 40px;
+    /* Slight expansion */
+    box-shadow: 0 0 10px #FFD700;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    border-color: #00ff00;
-    box-shadow: 0 5px 20px rgba(0, 255, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
 }
 
-.card-top {
+/* --- Top Info --- */
+.card-top-status {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    color: rgba(255, 215, 0, 0.4);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.elite-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     position: relative;
     z-index: 2;
 }
 
-.tech-pill {
-    background: #00ff00;
-    color: #000;
-    font-size: 10px;
-    padding: 4px 8px;
-    font-weight: 900;
-    letter-spacing: 1px;
+.elite-pill {
+    background: transparent;
+    border: 1px solid #FFD700;
+    color: #FFD700;
+    font-size: 0.8rem;
+    padding: 5px 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
 }
 
-.status-light {
-    width: 8px;
-    height: 8px;
-    background-color: #00ff00;
-    border-radius: 50%;
-    box-shadow: 0 0 5px #00ff00;
-    animation: flash 2s infinite;
+.signal-icon {
+    color: #FFD700;
+    opacity: 0.8;
 }
 
-@keyframes flash {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.3;
-    }
+.data-rate {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.6rem;
+    color: rgba(255, 215, 0, 0.4);
+    margin-bottom: 3rem;
+    /* Spacing before big number */
+    text-transform: uppercase;
 }
 
+/* --- Content --- */
 .card-content {
     position: relative;
     z-index: 2;
+    margin-top: auto;
+    /* Push to bottom area */
+    margin-bottom: 1.5rem;
 }
 
-.label {
+.elite-label {
     font-family: 'Open Sans', sans-serif;
     color: #888;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.2rem;
     text-transform: uppercase;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: #FFD700;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 5px #FFD700;
 }
 
 .counter {
     font-family: 'Orbitron', sans-serif;
     font-size: 3.5rem;
     color: #fff;
-    text-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
     font-weight: 700;
     line-height: 1;
-    text-align: left;
-    margin-left: -2px;
-    /* Visual optical alignment */
 }
 
+.stat-card:last-child .counter {
+    font-size: 2.2rem;
+    /* Adjustment for UNCOUNTABLE */
+    color: #FFD700;
+}
+
+/* --- Watermark --- */
 .watermark-icon {
     position: absolute;
-    right: -20px;
-    bottom: -20px;
-    font-size: 120px;
-    color: rgba(255, 255, 255, 0.04);
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(-10deg);
+    font-size: 150px;
+    color: rgba(255, 215, 0, 0.02);
+    /* Very faint */
     z-index: 0;
     pointer-events: none;
-    transition: transform 0.4s ease;
+    transition: all 0.5s ease;
 }
 
 .stat-card:hover .watermark-icon {
-    transform: scale(1.1) rotate(-10deg);
-    color: rgba(0, 255, 0, 0.1);
+    color: rgba(255, 215, 0, 0.08);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* --- Footer Encryption Key --- */
+.encryption-footer {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.5rem;
+    color: rgba(255, 215, 0, 0.2);
+    letter-spacing: 1px;
 }
 
 /* Responsive */
