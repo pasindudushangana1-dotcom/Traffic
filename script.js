@@ -31,11 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 setTimeout(updateCount, 20);
                             } else {
                                 counter.innerText = target;
-                            }
-                        };
+                                counter.style.color = "#ffffff";
+                                counter.style.textShadow = "0 0 20px #00ff00";
+                            };
 
-                        updateCount();
-                    });
+                            updateCount();
+                        });
 
                     observer.unobserve(entry.target);
                 }

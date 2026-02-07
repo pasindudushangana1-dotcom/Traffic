@@ -3672,103 +3672,91 @@ html {
 }
 
 
-/* --- Command Dashboard Grid (Clean High-Contrast) --- */
-.stats-section {
-    background-color: #000;
-    padding: 6rem 0;
+/* --- Command Dashboard Grid (Clean Slate Repair) --- */
+.dashboard-section {
+    background: #050505;
+    padding: 60px 20px;
+    background-image: radial-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
 }
 
-.dashboard-grid {
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.mono-title {
+    color: #00ff00;
+    font-family: monospace;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.main-title {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+}
+
+/* The Grid */
+.stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    width: 100%;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* The Cards */
 .stat-card {
-    background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
-    border: 1px solid #333;
+    background: linear-gradient(180deg, #0a0a0a, #000);
+    border: 1px solid #222;
     border-top: 2px solid #00ff00;
-    padding: 25px;
+    padding: 20px;
     position: relative;
     overflow: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border-radius: 0;
-    transition: transform 0.3s ease;
+    height: 180px;
 }
 
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 255, 0, 0.1);
-}
-
-.card-header {
+/* Internal Elements */
+.card-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 2;
+    margin-bottom: 15px;
 }
 
-.pill {
+.tech-pill {
     background: rgba(0, 255, 0, 0.1);
     color: #00ff00;
     border: 1px solid #00ff00;
-    padding: 4px 10px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    padding: 2px 8px;
     font-weight: bold;
-    letter-spacing: 1px;
-    border-radius: 2px;
 }
 
 .status-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #00ff00;
+    width: 6px;
+    height: 6px;
+    background: #00ff00;
     border-radius: 50%;
-    box-shadow: 0 0 8px #00ff00;
+    box-shadow: 0 0 5px #00ff00;
+    animation: pulse 2s infinite;
 }
 
-.label {
+.stat-label {
     color: #888;
-    font-family: 'Open Sans', sans-serif;
     font-size: 0.8rem;
-    margin-top: 15px;
-    text-transform: uppercase;
     letter-spacing: 1px;
-    position: relative;
-    z-index: 2;
-}
-
-.counter {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3.5rem;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    font-weight: 700;
-    line-height: 1;
-    position: relative;
-    z-index: 2;
-    margin-top: 0.5rem;
-}
-
-.stat-card:last-child .counter {
-    font-size: 2rem;
-    color: #00ff00;
 }
 
 .bg-icon {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
-    font-size: 5rem;
-    color: rgba(255, 255, 255, 0.05);
-    /* Very subtle */
-    z-index: 1;
+    right: -10px;
+    bottom: -10px;
+    font-size: 6rem;
+    color: rgba(255, 255, 255, 0.03);
+    transform: rotate(-15deg);
 }
 
 /* Corner Decor */
@@ -3776,39 +3764,57 @@ html {
     position: absolute;
     width: 15px;
     height: 15px;
-    border: 2px solid #333;
+    border-color: #00ff00;
+    border-style: solid;
     transition: all 0.3s ease;
 }
 
-.stat-card .corner-L {
+.top-right {
     top: 0;
     right: 0;
-    border-width: 0 2px 2px 0;
-    /* Top Right L-shape (actually inverted) - user requested top-right corner */
-    border-color: #00ff00;
+    border-width: 2px 2px 0 0;
 }
 
-/* Wait, user asked for "Only top-right and bottom-left" */
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 15px;
-    height: 15px;
-    border-top: 2px solid #00ff00;
-    border-right: 2px solid #00ff00;
-}
-
-.stat-card::after {
-    content: '';
-    position: absolute;
+.bottom-left {
     bottom: 0;
     left: 0;
-    width: 15px;
-    height: 15px;
-    border-bottom: 2px solid #00ff00;
-    border-left: 2px solid #00ff00;
+    border-width: 0 0 2px 2px;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Counter Specifics (Base styles, JS handles completion) */
+.counter {
+    color: #fff;
+    font-family: 'Orbitron';
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 
