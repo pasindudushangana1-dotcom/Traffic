@@ -4207,6 +4207,242 @@ html {
     transition: color 0.3s ease;
 }
 
-.squad-card:hover .card-arrow {
-    color: var(--primary-color);
+
+/* --- Roster Page Styles --- */
+.members-hero {
+    padding: 10rem 0 4rem;
+    text-align: center;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 70%);
+}
+
+.roster-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.roster-stat-item {
+    text-align: center;
+    border-right: 1px solid #333;
+    padding-right: 3rem;
+}
+
+.roster-stat-item:last-child {
+    border: none;
+    padding: 0;
+}
+
+.stat-val {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.stat-lbl {
+    font-size: 0.7rem;
+    color: #888;
+    letter-spacing: 2px;
+}
+
+.tier-heading {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+.tier-line {
+    flex-grow: 1;
+    height: 1px;
+    background: #333;
+}
+
+.gold-tier .tier-line {
+    background: linear-gradient(90deg, #FFD700, transparent);
+}
+
+.silver-tier .tier-line {
+    background: linear-gradient(90deg, #ccc, transparent);
+}
+
+.green-tier .tier-line {
+    background: linear-gradient(90deg, #00ff00, transparent);
+}
+
+.gold-tier {
+    color: #FFD700;
+}
+
+.silver-tier {
+    color: #ccc;
+}
+
+.green-tier {
+    color: #00ff00;
+}
+
+.roster-section {
+    padding: 3rem 0;
+}
+
+.roster-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.compact-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* Command Card */
+.command-card {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.command-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #FFD700;
+}
+
+.member-img-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+}
+
+.member-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.rank-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #000;
+}
+
+.rank-badge.gold {
+    background: #FFD700;
+    box-shadow: 0 0 10px #FFD700;
+}
+
+.rank-badge.silver {
+    background: #ccc;
+    color: #000;
+    box-shadow: 0 0 5px #ccc;
+}
+
+.status-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    background: rgba(0, 255, 0, 0.1);
+    color: #00ff00;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+/* Officer Card (Compact) */
+.officer-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+}
+
+.officer-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+}
+
+.member-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.code {
+    font-family: 'Courier New', monospace;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.role {
+    color: #888;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Roster Table */
+.roster-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.roster-table th,
+.roster-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.roster-table th {
+    color: #888;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.roster-table td {
+    color: #fff;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.status-dot.green {
+    background: #00ff00;
+    box-shadow: 0 0 5px #00ff00;
+}
+
+.status-dot.orange {
+    background: #ffaa00;
+    box-shadow: 0 0 5px #ffaa00;
 }
