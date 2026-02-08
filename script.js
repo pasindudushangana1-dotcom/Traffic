@@ -33,10 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                 counter.innerText = target;
                                 counter.style.color = "#ffffff";
                                 counter.style.textShadow = "0 0 20px #00ff00";
-                            };
+                            }
+                        };
 
-                            updateCount();
-                        });
+                        updateCount();
+                    });
 
                     observer.unobserve(entry.target);
                 }
@@ -181,7 +182,7 @@ if (galleryTrack) {
 // Tactical Scroll Reveal System
 document.addEventListener('DOMContentLoaded', () => {
     // Target major elements
-    const revealElements = document.querySelectorAll('section, h1, h2, .card, .glass-card, .command-card, .stat-item, .dock-item, .bento-item');
+    const revealElements = document.querySelectorAll('section, h1, h2, .card, .glass-card, .command-card, .stat-item, .dock-item, .bento-item, .member-card, .grade-header, .directory-header');
 
     // Add .reveal class programmatically
     revealElements.forEach(el => el.classList.add('reveal'));
@@ -203,7 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (parent && (parent.classList.contains('tier-2') ||
                     parent.classList.contains('tier-3') ||
                     parent.classList.contains('stats-row') ||
-                    parent.classList.contains('about-grid'))) {
+                    parent.classList.contains('about-grid') ||
+                    parent.classList.contains('members-grid'))) {
 
                     const siblings = Array.from(parent.children);
                     const index = siblings.indexOf(target);
@@ -260,48 +262,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.2 });
 
     typewriterElements.forEach(el => typewriterObserver.observe(el));
-});
-
-// --- Members Page Search Logic ---
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('memberSearch');
-
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            const memberCards = document.querySelectorAll('.member-card');
-            const gradeSections = document.querySelectorAll('.grade-section');
-
-            memberCards.forEach(card => {
-                const name = card.querySelector('h3').textContent.toLowerCase();
-                const role = card.querySelector('.member-role').textContent.toLowerCase();
-
-                if (name.includes(searchTerm) || role.includes(searchTerm)) {
-                    card.style.display = 'flex'; // Restore display
-                    // Re-trigger animation if needed or just show
-                    card.style.opacity = '1';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Optional: Hide empty sections
-            gradeSections.forEach(section => {
-                const visibleCards = section.querySelectorAll('.member-card[style="display: flex;"]');
-                // Note: The selector above might fail if style is set exactly, 
-                // safer to check :not([style*="display: none"])
-
-                let hasVisible = false;
-                section.querySelectorAll('.member-card').forEach(c => {
-                    if (c.style.display !== 'none') hasVisible = true;
-                });
-
-                if (!hasVisible) {
-                    section.style.display = 'none';
-                } else {
-                    section.style.display = 'block';
-                }
-            });
-        });
-    }
 });

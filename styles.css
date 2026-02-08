@@ -4609,41 +4609,83 @@ html {
 /* Members Grid */
 .members-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 slots per line desktop */
     gap: 1.5rem;
 }
 
 .member-card {
-    background: rgba(20, 20, 20, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 3rem 2rem;
+    background: rgba(10, 10, 10, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    /* Tactical squared look */
+    padding: 2rem 1rem;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+/* Tactical Corner Markers */
+.member-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid var(--grade-color);
+    border-left: 2px solid var(--grade-color);
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+
+.member-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid var(--grade-color);
+    border-right: 2px solid var(--grade-color);
+    opacity: 0.5;
+    transition: all 0.3s;
 }
 
 .member-card:hover {
     transform: translateY(-5px);
+    background: rgba(20, 20, 20, 0.95);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
     border-color: var(--grade-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--grade-color) inset;
-    background: rgba(30, 30, 30, 0.8);
+}
+
+.member-card:hover::before,
+.member-card:hover::after {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
 }
 
 .card-avatar {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 1.5rem;
+    width: 90px;
+    height: 90px;
+    margin-bottom: 1.2rem;
     border-radius: 50%;
-    padding: 4px;
-    border: 2px solid var(--grade-color);
-    /* Theme color border */
+    padding: 3px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
     position: relative;
     background: rgba(0, 0, 0, 0.5);
+    transition: border-color 0.3s;
+}
+
+.member-card:hover .card-avatar {
+    border-color: var(--grade-color);
+    box-shadow: 0 0 15px var(--grade-color);
 }
 
 .card-avatar img {
@@ -4651,21 +4693,32 @@ html {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    filter: grayscale(100%);
+    /* Tactical monochrome init */
+    transition: filter 0.3s;
+}
+
+.member-card:hover .card-avatar img {
+    filter: grayscale(0%);
 }
 
 .member-card h3 {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     color: #fff;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     font-family: var(--font-heading);
+    letter-spacing: 1px;
 }
 
 .member-role {
     color: var(--grade-color);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
 }
 
 /* Search Bar in Nav */
@@ -4683,21 +4736,24 @@ html {
 }
 
 .dock-search {
-    background: #1a1a1a;
+    background: rgba(0, 0, 0, 0.5);
     border: 1px solid #333;
     padding: 0.6rem 0.6rem 0.6rem 2.2rem;
-    border-radius: 20px;
+    border-radius: 4px;
+    /* Tactical square */
     color: #fff;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     width: 240px;
     outline: none;
     transition: all 0.3s ease;
+    font-family: var(--font-mono);
 }
 
 .dock-search:focus {
     width: 280px;
-    border-color: #555;
-    background: #222;
+    border-color: var(--primary-color);
+    background: #000;
+    box-shadow: 0 0 10px rgba(204, 255, 0, 0.1);
 }
 
 .user-profile-icon img {
@@ -4781,6 +4837,12 @@ html {
     background: #000;
 }
 
+@media (max-width: 1024px) {
+    .members-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .directory-header {
         flex-direction: column;
@@ -4794,7 +4856,13 @@ html {
     }
 
     .members-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 slots per line on mobile */
+        gap: 1rem;
+    }
+
+    .member-card {
+        padding: 1.5rem 0.5rem;
     }
 
     .dock-search {
