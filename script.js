@@ -364,14 +364,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- Mobile Magic Navigation Logic ---
-document.addEventListener('DOMContentLoaded', () => {
-    const list = document.querySelectorAll('.list');
-    function activeLink() {
-        list.forEach((item) =>
-            item.classList.remove('active'));
-        this.classList.add('active');
+list.forEach((item) =>
+    item.addEventListener('click', activeLink));
+});
+
+// --- Scroll Parallax Effect ---
+window.addEventListener('scroll', () => {
+    const parallaxElements = document.querySelectorAll('.parallax');
+    const scrollY = window.pageYOffset;
+
+    parallaxElements.forEach(el => {
+        const speed = el.dataset.speed;
+        el.style.transform = `translateY(${scrollY * speed}px)`;
+    });
+});
+
+// --- Mouse Move Parallax (Hero Section) ---
+document.addEventListener('mousemove', (e) => {
+    const heroContent = document.querySelector('.hero-content');
+    const heroOverlay = document.querySelector('.hero-overlay');
+
+    if (heroContent && heroOverlay) {
+        const x = (window.innerWidth - e.pageX * 2) / 100;
+        const y = (window.innerHeight - e.pageY * 2) / 100;
+
+        heroContent.style.transform = `translate(${x * 2}px, ${y * 2}px)`;
+        heroOverlay.style.transform = `translate(${x}px, ${y}px)`;
     }
-    list.forEach((item) =>
-        item.addEventListener('click', activeLink));
 });

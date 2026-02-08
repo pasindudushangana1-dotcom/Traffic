@@ -735,6 +735,8 @@ body::after {
         linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(5, 5, 5, 1) 100%),
         repeating-linear-gradient(90deg, transparent 0, transparent 49px, rgba(255, 255, 255, 0.03) 50px);
     z-index: 1;
+    transition: transform 0.1s ease-out;
+    /* Smooth mouse movement */
 }
 
 .hero-content {
@@ -743,6 +745,8 @@ body::after {
     max-width: 800px;
     padding: 0 1rem;
     will-change: transform;
+    transition: transform 0.1s ease-out;
+    /* Smooth mouse movement */
 }
 
 .status-badge {
@@ -5408,26 +5412,26 @@ html {
         width: 100%;
         height: 70px;
         background: #050505;
+        /* Keep solid for cutout trick */
         justify-content: center;
         align-items: center;
-        border-top: 1px solid #333;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.8);
         z-index: 10000;
         padding-left: 20px;
-        /* Slight offset adjustment */
         padding-right: 20px;
     }
 
     .mobile-nav ul {
         display: flex;
         width: 100%;
-        /* Full width distribution */
-        justify-content: space-around;
-        /* Even spacing */
+        justify-content: center;
+        align-items: center;
+        gap: 0;
         padding: 0;
         margin: 0;
         list-style: none;
         position: relative;
-        /* Context for indicator */
     }
 
     .mobile-nav ul li {
@@ -5456,45 +5460,50 @@ html {
         font-size: 1.5em;
         text-align: center;
         transition: 0.5s;
-        color: #fff;
+        color: rgba(255, 255, 255, 0.5);
+        /* Dimmed default */
     }
 
     .mobile-nav ul li.active a .icon {
         transform: translateY(-32px);
-        color: #000;
-        /* Contrast against green indicator */
+        color: #050505;
+        /* Dark icon on bright indicator */
         z-index: 10;
+        text-shadow: none;
     }
 
     .mobile-nav ul li a .text {
         position: absolute;
-        color: #fff;
-        font-weight: 400;
+        color: var(--primary-color);
+        font-weight: 600;
         font-size: 0.75em;
         letter-spacing: 0.05em;
         transition: 0.5s;
         opacity: 0;
         transform: translateY(20px);
+        text-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
     }
 
     .mobile-nav ul li.active a .text {
         opacity: 1;
         transform: translateY(10px);
-        color: var(--primary-color);
     }
 
-    /* The Magic Indicator */
+    /* The Magic Indicator - Premium Glow */
     .indicator {
         position: absolute;
         top: -35px;
-        /* Half of 70px height */
         width: 70px;
         height: 70px;
-        background: var(--primary-color);
+        background: linear-gradient(135deg, var(--primary-color), #b3e600);
         border-radius: 50%;
         border: 6px solid #050505;
         /* Matches nav bg */
-        transition: 0.5s;
+        transition: 0.5s cubic-bezier(0.5, 1.5, 0.5, 1);
+        /* Bouncy transition */
+        box-shadow:
+            0 0 15px var(--primary-color),
+            inset 0 0 10px rgba(255, 255, 255, 0.5);
     }
 
     /* Cutout Effect using Box Shadow */
