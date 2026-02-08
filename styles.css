@@ -4785,7 +4785,8 @@ html {
 /* Watermark Number */
 .card-watermark {
     position: absolute;
-    top: 50%;
+    top: 70%;
+    /* Moved lower as requested */
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 6rem;
