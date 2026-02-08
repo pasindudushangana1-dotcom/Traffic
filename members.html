@@ -65,8 +65,16 @@
                 <p>Active traffic wardens by grade level.</p>
             </div>
             <div class="header-actions">
-                <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filter</button>
-                <button class="btn-add-student"><i class="fa-solid fa-plus"></i> Add Student</button>
+                <div class="filter-group">
+                    <button class="btn-filter active">All Ranks</button>
+                    <button class="btn-filter">Presidents</button>
+                    <button class="btn-filter">Coordinators</button>
+                    <button class="btn-filter">Field Units</button>
+                </div>
+                <div class="view-controls">
+                    <button class="btn-view active"><i class="fa-solid fa-border-all"></i></button>
+                    <button class="btn-view"><i class="fa-solid fa-list"></i></button>
+                </div>
             </div>
         </header>
 
@@ -82,20 +90,26 @@
             <div class="members-grid">
                 <!-- Card 1 -->
                 <div class="member-card">
-                    <div class="card-avatar">
+                    <div class="card-watermark">#001</div>
+                    <div class="card-avatar-container">
                         <img src="https://ui-avatars.com/api/?name=Alice+Smith&background=00bcd4&color=fff"
-                            alt="Alice Smith">
+                            alt="Alice Smith" class="card-avatar">
+                        <div class="card-badge"><i class="fa-solid fa-shield-halved"></i></div>
                     </div>
                     <h3>Alice Smith</h3>
+                    <div class="role-separator"></div>
                     <p class="member-role">CLASS REPRESENTATIVE</p>
                 </div>
                 <!-- Card 2 -->
                 <div class="member-card">
-                    <div class="card-avatar">
+                    <div class="card-watermark">#002</div>
+                    <div class="card-avatar-container">
                         <img src="https://ui-avatars.com/api/?name=Ben+Johnson&background=00bcd4&color=fff"
-                            alt="Ben Johnson">
+                            alt="Ben Johnson" class="card-avatar">
+                        <div class="card-badge"><i class="fa-solid fa-user-shield"></i></div>
                     </div>
                     <h3>Ben Johnson</h3>
+                    <div class="role-separator"></div>
                     <p class="member-role">DEBATE CLUB</p>
                 </div>
                 <!-- Card 3 -->

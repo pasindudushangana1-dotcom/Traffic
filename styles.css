@@ -722,7 +722,6 @@ body::after {
     background-color: var(--bg-black);
     background: url(hero_bg.png) no-repeat center center/cover;
     overflow: hidden;
-    will-change: transform;
 }
 
 .hero-overlay {
@@ -735,8 +734,6 @@ body::after {
         linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(5, 5, 5, 1) 100%),
         repeating-linear-gradient(90deg, transparent 0, transparent 49px, rgba(255, 255, 255, 0.03) 50px);
     z-index: 1;
-    transition: transform 0.1s ease-out;
-    /* Smooth mouse movement */
 }
 
 .hero-content {
@@ -744,9 +741,6 @@ body::after {
     z-index: 2;
     max-width: 800px;
     padding: 0 1rem;
-    will-change: transform;
-    transition: transform 0.1s ease-out;
-    /* Smooth mouse movement */
 }
 
 .status-badge {
@@ -4723,94 +4717,226 @@ html {
     text-shadow: 0 0 10px var(--grade-color);
 }
 
-/* Members Grid */
+/* --- Member Card Redesign (Reference Match) --- */
+
+/* Grid Layout */
 .members-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* 4 slots per line desktop */
     gap: 1.5rem;
 }
 
-/* Member Card - Tactical DOSSIER Style */
+/* Card Base */
 .member-card {
-    background: linear-gradient(145deg, rgba(15, 15, 15, 0.9) 0%, rgba(5, 5, 5, 0.95) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 0;
-    /* Reset padding for layout */
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: #121212;
+    /* Dark background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     overflow: hidden;
-    /* Clip for scanning effect */
-    min-height: 280px;
+    transition: all 0.3s ease;
+    min-height: 320px;
 }
 
-/* Internal Layout */
-.member-card-content {
-    padding: 2rem 1.5rem;
-    width: 100%;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.member-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Background Mesh/Grid */
-.member-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
-    opacity: 0.3;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Tactical Top Bar */
+/* Gold Corners (Pseudo-elements) */
+.member-card::before,
 .member-card::after {
     content: '';
     position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.member-card::before {
     top: 0;
     left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--grade-color);
-    box-shadow: 0 0 15px var(--grade-color);
-    z-index: 3;
-    opacity: 0.7;
-    transition: all 0.3s;
+    border-top-color: rgba(255, 215, 0, 0.3);
+    border-left-color: rgba(255, 215, 0, 0.3);
+    border-top-left-radius: 12px;
 }
 
-/* Hover Effect: Card Lift & Glow */
-.member-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(var(--grade-color-rgb), 0.2);
+.member-card::after {
+    bottom: 0;
+    right: 0;
+    border-bottom-color: rgba(255, 215, 0, 0.3);
+    border-right-color: rgba(255, 215, 0, 0.3);
+    border-bottom-right-radius: 12px;
 }
 
+.member-card:hover::before,
 .member-card:hover::after {
-    height: 6px;
-    opacity: 1;
+    width: 100%;
+    height: 100%;
+    border-color: var(--primary-color);
 }
 
-/* Avatar - Hex-like Container */
-.card-avatar {
+/* Watermark Number */
+.card-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.03);
+    z-index: 0;
+    pointer-events: none;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+/* Avatar Container */
+.card-avatar-container {
+    position: relative;
     width: 100px;
     height: 100px;
     margin-bottom: 1.5rem;
-    position: relative;
+    z-index: 1;
+}
+
+.card-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 215, 0, 0.2);
+    /* Faint gold ring */
+    padding: 3px;
+    transition: border-color 0.3s ease;
+    filter: grayscale(100%);
+    /* Tactical look */
+}
+
+.member-card:hover .card-avatar {
+    border-color: var(--primary-color);
+    filter: grayscale(0%);
+}
+
+/* Status Badge (Small Icon) */
+.card-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    background: #000;
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 0.7rem;
     z-index: 2;
-    padding: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    transition: all 0.4s ease;
+}
+
+/* Typography */
+.member-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
+    z-index: 1;
+    font-family: 'Inter', sans-serif;
+}
+
+.role-separator {
+    width: 40px;
+    height: 2px;
+    background: var(--primary-color);
+    margin: 0.5rem 0;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.member-role {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+/* Join Card Special Styles */
+.join-card {
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    background: transparent;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.join-card:hover {
+    border-color: var(--primary-color);
+    border-style: solid;
+    background: rgba(204, 255, 0, 0.05);
+    /* Slight tint */
+}
+
+.join-icon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.join-card:hover .join-icon-container {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: rotate(90deg);
+}
+
+/* Filter Buttons */
+.filter-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn-filter {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-filter:hover,
+.btn-filter.active {
+    background: var(--primary-color);
+    color: #000;
+    border-color: var(--primary-color);
+    font-weight: 700;
+}
+
+margin-bottom: 1.5rem;
+position: relative;
+z-index: 2;
+padding: 4px;
+background: rgba(255, 255, 255, 0.05);
+clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+transition: all 0.4s ease;
 }
 
 .card-avatar img {

@@ -389,27 +389,4 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', activeLink));
 });
 
-// --- Scroll Parallax Effect ---
-window.addEventListener('scroll', () => {
-    const parallaxElements = document.querySelectorAll('.parallax');
-    const scrollY = window.pageYOffset;
-
-    parallaxElements.forEach(el => {
-        const speed = el.dataset.speed;
-        el.style.transform = `translateY(${scrollY * speed}px)`;
-    });
-});
-
-// --- Mouse Move Parallax (Hero Section) ---
-document.addEventListener('mousemove', (e) => {
-    const heroContent = document.querySelector('.hero-content');
-    const heroOverlay = document.querySelector('.hero-overlay');
-
-    if (heroContent && heroOverlay) {
-        const x = (window.innerWidth - e.pageX * 2) / 100;
-        const y = (window.innerHeight - e.pageY * 2) / 100;
-
-        heroContent.style.transform = `translate(${x * 2}px, ${y * 2}px)`;
-        heroOverlay.style.transform = `translate(${x}px, ${y}px)`;
-    }
-});
+// --- Parallax Removed ---
