@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Traffic Warden Unit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="contact-page">
+
+    <!-- Navigation -->
+    <nav class="command-dock">
+        <div class="dock-capsule glass-panel">
+            <div class="dock-brand">
+                <span class="brand-text">TRAFFIC UNIT</span>
+            </div>
+            <div class="dock-links">
+                <a href="index.html" class="dock-item">Home</a>
+                <a href="members.html" class="dock-item">Members</a>
+                <a href="contact.html" class="dock-item active">Contact</a>
+            </div>
+            <div class="dock-actions">
+                <!-- Search Removed -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="contact-container">
+        <div class="contact-grid">
+
+            <!-- Left Panel: Info -->
+            <div class="contact-info">
+                <div class="info-badge">
+                    <span class="status-dot orange"></span> WE ARE HERE TO HELP
+                </div>
+
+                <h1 class="contact-title">
+                    GET IN <br> <span class="text-highlight">TOUCH</span>
+                </h1>
+
+                <p class="contact-desc">
+                    Have questions about traffic safety, patrol schedules, or joining our team? Reach out to us anytime.
+                </p>
+
+                <div class="contact-methods">
+                    <div class="method-item">
+                        <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="method-text">
+                            <span class="label">EMAIL US</span>
+                            <a href="mailto:traffic@schoolname.edu">traffic@schoolname.edu</a>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="method-text">
+                            <span class="label">CALL US</span>
+                            <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="method-text">
+                            <span class="label">VISIT US</span>
+                            <p>123 Education Lane,<br>Science Block, Room 101.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links-row">
+                    <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+
+                <!-- Map Placeholder -->
+                <div class="map-card">
+                    <div class="map-overlay"></div>
+                    <div class="map-badge"><span class="status-dot gold"></span> HQ LOCATION</div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Form -->
+            <div class="contact-form-wrapper glass-panel">
+                <h2>Send a Message</h2>
+
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/xeelqdvy" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-at"></i>
+                                <input type="email" id="email" name="email" placeholder="student@school.edu" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-folder"></i>
+                            <select id="subject" name="subject">
+                                <option value="general">General Inquiry</option>
+                                <option value="join">Joining the Unit</option>
+                                <option value="report">Report Incident</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="How can we help you?" rows="5"
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                    <p id="form-status"></p>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">BCG</div>
+                <h4>TRAFFIC WARDEN UNIT</h4>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BCG Traffic Warden Unit. All rights reserved.</p>
+                <div class="footer-links-row">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

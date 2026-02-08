@@ -263,3 +263,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     typewriterElements.forEach(el => typewriterObserver.observe(el));
 });
+
+// --- Contact Form Logic (Formspree + AJAX) ---
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    if (form) {
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+
+            try {
+                const response = await fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    status.innerHTML = "✅ TRANSMISSION SECURE. MESSAGE SENT.";
+                    status.style.color = "#00ff00"; // Neon Green
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    if (Object.hasOwn(data, 'errors')) {
+                        status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                    } else {
+                        status.innerHTML = "❌ TRANSMISSION FAILED.";
+                        status.style.color = "#ff0000"; // Red
+                    }
+                }
+            } catch (error) {
+                status.innerHTML = "❌ TRANSMISSION FAILED.";
+                status.style.color = "#ff0000"; // Red
+            }
+        });
+    }
+});

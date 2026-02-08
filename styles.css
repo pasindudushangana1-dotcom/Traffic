@@ -4888,3 +4888,311 @@ html {
         gap: 1rem;
     }
 }
+
+/* --- Contact Page Styles --- */
+
+.contact-page {
+    background-color: var(--bg-black);
+    background-image: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+    min-height: 100vh;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 120px auto 80px;
+    padding: 0 2rem;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+/* Left Panel */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.info-badge {
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    width: fit-content;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.contact-title {
+    font-size: 4rem;
+    line-height: 1;
+    color: #fff;
+    margin: 0;
+}
+
+.contact-title .text-highlight {
+    color: var(--primary-color);
+}
+
+.contact-desc {
+    color: var(--text-grey);
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.method-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.method-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    /* Tactical square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.method-item:hover .method-icon {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.method-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.method-text .label {
+    font-size: 0.7rem;
+    color: var(--text-grey);
+    letter-spacing: 1px;
+    margin-bottom: 0.2rem;
+}
+
+.method-text a,
+.method-text p {
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    text-decoration: none;
+    margin: 0;
+}
+
+.social-links-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    background: var(--primary-color);
+    color: #000;
+    border-color: var(--primary-color);
+}
+
+.map-card {
+    height: 200px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/2000px-World_map_blank_without_borders.svg.png') center/cover;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0.6;
+}
+
+.map-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #000, transparent);
+}
+
+.map-badge {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Right Panel: Form */
+.contact-form-wrapper {
+    background: rgba(20, 20, 20, 0.6);
+    padding: 3rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+}
+
+.contact-form-wrapper h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-grey);
+    font-size: 0.9rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 1rem;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.contact-form .input-wrapper input,
+.contact-form .input-wrapper select {
+    padding-left: 2.8rem;
+    /* Space for icon */
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: #111;
+    box-shadow: 0 0 10px rgba(204, 255, 0, 0.1);
+}
+
+.btn-submit {
+    width: 100%;
+    background: var(--primary-color);
+    color: #000;
+    font-weight: 700;
+    padding: 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+    background: #E6FF66;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+}
+
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .contact-title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form-wrapper {
+        padding: 1.5rem;
+    }
+}
+
+/* Form Status Message */
+#form-status {
+    margin-top: 15px;
+    font-family: 'Courier New', monospace;
+    /* Monospace font */
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+    min-height: 1.2em;
+    /* Prevent layout shift */
+}
