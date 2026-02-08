@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Members - Traffic Warden Unit</title>
+    <title>Student Directory - Willow Creek High</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -12,187 +12,270 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .members-hero {
-            padding: 8rem 0 4rem;
-            text-align: center;
-            background-color: var(--bg-black);
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
-        .members-title {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            color: var(--text-white);
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-    </style>
 </head>
 
-<body>
-    <!-- Navigation (Duplicated for consistency) -->
+<body class="members-page">
+
+    <!-- Navigation -->
     <nav class="command-dock">
         <div class="dock-capsule glass-panel">
             <div class="dock-brand">
-                <span class="brand-text">TRAFFIC UNIT</span>
+                <i class="fa-solid fa-graduation-cap dock-logo-icon"></i>
+                <span class="brand-text">Willow Creek High</span>
             </div>
             <div class="dock-links">
                 <a href="index.html" class="dock-item">Home</a>
-                <a href="index.html#about" class="dock-item">Duties</a>
-                <a href="members.html" class="dock-item active">Members</a>
-                <a href="index.html#gallery" class="dock-item">Gallery</a>
+                <a href="members.html" class="dock-item active">Directory</a>
+                <a href="#" class="dock-item">Teachers</a>
+                <a href="#" class="dock-item">Clubs</a>
             </div>
             <div class="dock-actions">
-                <div class="status-indicator"><span class="status-dot"></span></div>
-                <a href="https://tally.so/r/lb6orB" class="btn-enlist-dock">JOIN US</a>
+                <div class="search-container">
+                    <i class="fa-solid fa-search search-icon"></i>
+                    <input type="text" class="dock-search" placeholder="Search students...">
+                </div>
+                <div class="user-profile-icon">
+                    <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User">
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="members-hero">
-        <div class="container">
-            <h1 class="members-title">Active Duty Roster</h1>
-            <p style="color: var(--text-grey);">2026 Command Structure</p>
-        </div>
-    </header>
+    <!-- Main Content -->
+    <main class="directory-container">
 
-    <!-- Command Staff (Gold Tier) -->
-    <section class="roster-section">
-        <div class="container">
-            <h2 class="tier-heading gold-tier">COMMAND STAFF <span class="tier-line"></span></h2>
-            <div class="roster-grid">
-                <!-- Commander -->
-                <div class="member-card command-card">
-                    <div class="member-img-wrapper">
-                        <img src="https://ui-avatars.com/api/?name=Pasindu+D&background=FFD700&color=000&size=200"
-                            alt="Commander">
-                        <div class="rank-badge gold"><i class="fa-solid fa-star"></i></div>
-                    </div>
-                    <div class="member-info">
-                        <h3>Pasindu Dshangana</h3>
-                        <p class="rank">UNIT COMMANDER</p>
-                        <div class="status-pill active">ONLINE</div>
-                    </div>
+        <!-- Header Section -->
+        <header class="directory-header">
+            <div class="header-text">
+                <h1>Student Directory</h1>
+                <p>Browse active student members by grade level.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filter</button>
+                <button class="btn-add-student"><i class="fa-solid fa-plus"></i> Add Student</button>
+            </div>
+        </header>
+
+        <!-- Grade 9 -->
+        <section class="grade-section grade-9">
+            <div class="grade-header">
+                <div class="grade-title">
+                    <h2>Grade 9</h2>
+                    <span class="grade-badge">FRESHMEN</span>
                 </div>
-                <!-- Deputy 1 -->
-                <div class="member-card command-card">
-                    <div class="member-img-wrapper">
-                        <img src="https://ui-avatars.com/api/?name=Deputy+Cmdr&background=333&color=FFD700&size=200"
-                            alt="Deputy">
-                        <div class="rank-badge gold"><i class="fa-solid fa-shield"></i></div>
+                <a href="#" class="view-all">View all <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="members-grid">
+                <!-- Card 1 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Alice+Smith&background=00bcd4&color=fff"
+                            alt="Alice Smith">
                     </div>
-                    <div class="member-info">
-                        <h3>Deputy Name</h3>
-                        <p class="rank">DEPUTY COMMANDER</p>
-                        <div class="status-pill active">ONLINE</div>
+                    <h3>Alice Smith</h3>
+                    <p class="member-role">CLASS REPRESENTATIVE</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Ben+Johnson&background=00bcd4&color=fff"
+                            alt="Ben Johnson">
                     </div>
+                    <h3>Ben Johnson</h3>
+                    <p class="member-role">DEBATE CLUB</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Clara+Davis&background=00bcd4&color=fff"
+                            alt="Clara Davis">
+                    </div>
+                    <h3>Clara Davis</h3>
+                    <p class="member-role">SCIENCE TEAM</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Senior Officers (Silver Tier) -->
-    <section class="roster-section">
-        <div class="container">
-            <h2 class="tier-heading silver-tier">SENIOR OFFICERS <span class="tier-line"></span></h2>
-            <div class="roster-grid compact-grid">
-                <!-- Officer 1 -->
-                <div class="member-card officer-card">
-                    <div class="member-header">
-                        <span class="code">OFF-001</span>
-                        <div class="rank-badge silver"><i class="fa-solid fa-medal"></i></div>
-                    </div>
-                    <h3>Senior Officer 1</h3>
-                    <p class="role">FIELD OPERATIONS</p>
+        <!-- Grade 10 -->
+        <section class="grade-section grade-10">
+            <div class="grade-header">
+                <div class="grade-title">
+                    <h2>Grade 10</h2>
+                    <span class="grade-badge">SOPHOMORES</span>
                 </div>
-                <!-- Officer 2 -->
-                <div class="member-card officer-card">
-                    <div class="member-header">
-                        <span class="code">OFF-002</span>
-                        <div class="rank-badge silver"><i class="fa-solid fa-medal"></i></div>
+                <a href="#" class="view-all">View all <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="members-grid">
+                <!-- Card 1 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=David+Lee&background=9c27b0&color=fff"
+                            alt="David Lee">
                     </div>
-                    <h3>Senior Officer 2</h3>
-                    <p class="role">LOGISTICS HEAD</p>
+                    <h3>David Lee</h3>
+                    <p class="member-role">MATH CLUB</p>
                 </div>
-                <!-- Officer 3 -->
-                <div class="member-card officer-card">
-                    <div class="member-header">
-                        <span class="code">OFF-003</span>
-                        <div class="rank-badge silver"><i class="fa-solid fa-medal"></i></div>
+                <!-- Card 2 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Eva+Martinez&background=9c27b0&color=fff"
+                            alt="Eva Martinez">
                     </div>
-                    <h3>Senior Officer 3</h3>
-                    <p class="role">TRAINING INSTRUCTOR</p>
+                    <h3>Eva Martinez</h3>
+                    <p class="member-role">ART CLUB PRESIDENT</p>
                 </div>
-                <!-- Officer 4 -->
-                <div class="member-card officer-card">
-                    <div class="member-header">
-                        <span class="code">OFF-004</span>
-                        <div class="rank-badge silver"><i class="fa-solid fa-medal"></i></div>
+                <!-- Card 3 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Frank+Wilson&background=9c27b0&color=fff"
+                            alt="Frank Wilson">
                     </div>
-                    <h3>Senior Officer 4</h3>
-                    <p class="role">PATROL LEAD</p>
+                    <h3>Frank Wilson</h3>
+                    <p class="member-role">ROBOTICS TEAM</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Junior Cadets (Green Tier) -->
-    <section class="roster-section">
-        <div class="container">
-            <h2 class="tier-heading green-tier">JUNIOR SQUADRON <span class="tier-line"></span></h2>
-            <div class="table-container glass-panel">
-                <table class="roster-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NAME</th>
-                            <th>GRADE</th>
-                            <th>STATUS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="code">CDT-104</td>
-                            <td>Cadet Name 1</td>
-                            <td>Grade 10</td>
-                            <td><span class="status-dot green"></span> Active</td>
-                        </tr>
-                        <tr>
-                            <td class="code">CDT-105</td>
-                            <td>Cadet Name 2</td>
-                            <td>Grade 10</td>
-                            <td><span class="status-dot green"></span> Active</td>
-                        </tr>
-                        <tr>
-                            <td class="code">CDT-106</td>
-                            <td>Cadet Name 3</td>
-                            <td>Grade 09</td>
-                            <td><span class="status-dot orange"></span> Training</td>
-                        </tr>
-                        <tr>
-                            <td class="code">CDT-107</td>
-                            <td>Cadet Name 4</td>
-                            <td>Grade 09</td>
-                            <td><span class="status-dot green"></span> Active</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- Grade 11 -->
+        <section class="grade-section grade-11">
+            <div class="grade-header">
+                <div class="grade-title">
+                    <h2>Grade 11</h2>
+                    <span class="grade-badge">JUNIORS</span>
+                </div>
+                <a href="#" class="view-all">View all <i class="fa-solid fa-arrow-right"></i></a>
             </div>
-        </div>
-    </section>
+            <div class="members-grid">
+                <!-- Card 1 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Grace+Kim&background=ff9800&color=fff"
+                            alt="Grace Kim">
+                    </div>
+                    <h3>Grace Kim</h3>
+                    <p class="member-role">VARSITY SOCCER</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Henry+Chen&background=ff9800&color=fff"
+                            alt="Henry Chen">
+                    </div>
+                    <h3>Henry Chen</h3>
+                    <p class="member-role">MUSIC BAND</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Ivy+Thomas&background=ff9800&color=fff"
+                            alt="Ivy Thomas">
+                    </div>
+                    <h3>Ivy Thomas</h3>
+                    <p class="member-role">DRAMA CLUB</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- Grade 12 -->
+        <section class="grade-section grade-12">
+            <div class="grade-header">
+                <div class="grade-title">
+                    <h2>Grade 12</h2>
+                    <span class="grade-badge">SENIORS</span>
+                </div>
+                <a href="#" class="view-all">View all <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="members-grid">
+                <!-- Card 1 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Jack+Brown&background=f44336&color=fff"
+                            alt="Jack Brown">
+                    </div>
+                    <h3>Jack Brown</h3>
+                    <p class="member-role">STUDENT COUNCIL</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Kelly+Green&background=f44336&color=fff"
+                            alt="Kelly Green">
+                    </div>
+                    <h3>Kelly Green</h3>
+                    <p class="member-role">YEARBOOK EDITOR</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Leo+Clark&background=f44336&color=fff"
+                            alt="Leo Clark">
+                    </div>
+                    <h3>Leo Clark</h3>
+                    <p class="member-role">CHESS CLUB</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grade 13 -->
+        <section class="grade-section grade-13">
+            <div class="grade-header">
+                <div class="grade-title">
+                    <h2>Grade 13</h2>
+                    <span class="grade-badge">POST-GRAD / AP</span>
+                </div>
+                <a href="#" class="view-all">View all <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="members-grid">
+                <!-- Card 1 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Mia+Robinson&background=4caf50&color=fff"
+                            alt="Mia Robinson">
+                    </div>
+                    <h3>Mia Robinson</h3>
+                    <p class="member-role">VALEDICTORIAN</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Noah+Walker&background=4caf50&color=fff"
+                            alt="Noah Walker">
+                    </div>
+                    <h3>Noah Walker</h3>
+                    <p class="member-role">INTERNATIONAL EXCHANGE</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="member-card">
+                    <div class="card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Olivia+Lewis&background=4caf50&color=fff"
+                            alt="Olivia Lewis">
+                    </div>
+                    <h3>Olivia Lewis</h3>
+                    <p class="member-role">COMMUNITY LEADER</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
     <footer class="site-footer">
-        <div class="container footer-content glass-panel">
+        <div class="container footer-content">
             <div class="footer-brand">
-                <div class="logo">BCG</div>
-                <h4>TRAFFIC WARDEN UNIT</h4>
+                <div class="logo"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h4>Willow Creek High</h4>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Willow Creek High. All rights reserved.</p>
+                <div class="footer-links-row">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Support</a>
+                </div>
             </div>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 

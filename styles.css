@@ -4429,3 +4429,394 @@ html {
     background: #ffaa00;
     box-shadow: 0 0 5px #ffaa00;
 }
+
+/* --- Members Page / Student Directory Styles --- */
+
+.members-page {
+    background-color: #050505;
+    /* Deep black background */
+    background-image: none;
+    /* Remove the grid from main site if desired, or keep it */
+}
+
+.directory-container {
+    max-width: 1200px;
+    margin: 100px auto 50px;
+    /* Space for fixed nav */
+    padding: 0 2rem;
+}
+
+/* Directory Header */
+.directory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.header-text p {
+    color: var(--text-grey);
+    font-size: 1rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-filter,
+.btn-add-student {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    /* SLightly rounded, not pill */
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-filter {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.btn-filter:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-add-student {
+    background: #fff;
+    color: #000;
+    border: none;
+}
+
+.btn-add-student:hover {
+    background: #e0e0e0;
+}
+
+/* Grade Colors */
+.grade-9 {
+    --grade-color: #00bcd4;
+    --grade-bg: rgba(0, 188, 212, 0.1);
+}
+
+/* Recruits/Cyan */
+.grade-10 {
+    --grade-color: #9c27b0;
+    --grade-bg: rgba(156, 39, 176, 0.1);
+}
+
+/* Sophomores/Purple */
+.grade-11 {
+    --grade-color: #ff9800;
+    --grade-bg: rgba(255, 152, 0, 0.1);
+}
+
+/* Juniors/Orange */
+.grade-12 {
+    --grade-color: #f44336;
+    --grade-bg: rgba(244, 67, 54, 0.1);
+}
+
+/* Seniors/Red */
+.grade-13 {
+    --grade-color: #4caf50;
+    --grade-bg: rgba(76, 175, 80, 0.1);
+}
+
+/* Post-Grad/Green */
+
+/* Grade Sections */
+.grade-section {
+    margin-bottom: 4rem;
+}
+
+.grade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+/* Colored accent line */
+.grade-section .grade-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 100%;
+    background-color: var(--grade-color);
+    box-shadow: 0 0 10px var(--grade-color);
+}
+
+.grade-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.grade-title h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 0;
+}
+
+.grade-badge {
+    background: var(--grade-bg);
+    color: var(--grade-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    /* Pill shape in design? Looks like small rounded rect */
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid var(--grade-color);
+    box-shadow: 0 0 5px var(--grade-bg);
+}
+
+.view-all {
+    color: var(--grade-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 10px var(--grade-color);
+}
+
+/* Members Grid */
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.member-card {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--grade-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--grade-color) inset;
+    background: rgba(30, 30, 30, 0.8);
+}
+
+.card-avatar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+    padding: 4px;
+    border: 2px solid var(--grade-color);
+    /* Theme color border */
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.card-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.member-card h3 {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+}
+
+.member-role {
+    color: var(--grade-color);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Search Bar in Nav */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.dock-search {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 0.6rem 0.6rem 0.6rem 2.2rem;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 0.9rem;
+    width: 240px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.dock-search:focus {
+    width: 280px;
+    border-color: #555;
+    background: #222;
+}
+
+.user-profile-icon img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #444;
+}
+
+/* Adjust dock brand for members page */
+.dock-logo-icon {
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+/* Footer Overrides for Members Page if needed (to match image style more closely) */
+.members-page .site-footer {
+    border-top: 1px solid #111;
+    margin-top: 4rem;
+}
+
+.members-page .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    flex-direction: row;
+    /* Horizontal layout */
+}
+
+.members-page .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+
+.members-page .footer-brand h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.members-page .footer-brand p {
+    display: none;
+    /* Hide description for cleaner footer in directory */
+}
+
+.members-page .footer-bottom {
+    display: flex;
+    gap: 2rem;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    flex-direction: row-reverse;
+    /* Links on right */
+    width: auto;
+}
+
+.members-page .footer-links-row {
+    display: flex;
+    gap: 2rem;
+}
+
+.members-page .footer-links-row a {
+    color: #666;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.members-page .footer-links-row a:hover {
+    color: #fff;
+}
+
+/* Custom Scrollbar for Directory Page to be darker */
+.members-page::-webkit-scrollbar-thumb {
+    background: #333;
+}
+
+.members-page::-webkit-scrollbar-track {
+    background: #000;
+}
+
+@media (max-width: 768px) {
+    .directory-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .members-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dock-search {
+        display: none;
+        /* Hide search on mobile for now or use icon trigger */
+    }
+
+    .members-page .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+
+    .members-page .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .members-page .footer-links-row {
+        flex-direction: column;
+        /* Stack links on mobile */
+        gap: 1rem;
+    }
+}
