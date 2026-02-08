@@ -111,6 +111,19 @@ window.addEventListener('load', () => {
     }, 30); // 30ms Interval
 });
 
+// --- Failsafe: Force Loader Dismiss after 5 seconds ---
+setTimeout(() => {
+    const loader = document.getElementById('loader-screen');
+    if (loader && loader.style.display !== 'none') {
+        loader.style.opacity = '0';
+        loader.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => {
+            loader.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 500);
+    }
+}, 5000);
+
 // Decryption Effect Helper (Kept for other uses if needed, or remove if unused)
 function scrambleText(element, finalText) {
     element.isScrambling = true;
