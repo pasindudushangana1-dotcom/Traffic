@@ -261,3 +261,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     typewriterElements.forEach(el => typewriterObserver.observe(el));
 });
+
+// --- Members Page Search Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('memberSearch');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const memberCards = document.querySelectorAll('.member-card');
+            const gradeSections = document.querySelectorAll('.grade-section');
+
+            memberCards.forEach(card => {
+                const name = card.querySelector('h3').textContent.toLowerCase();
+                const role = card.querySelector('.member-role').textContent.toLowerCase();
+
+                if (name.includes(searchTerm) || role.includes(searchTerm)) {
+                    card.style.display = 'flex'; // Restore display
+                    // Re-trigger animation if needed or just show
+                    card.style.opacity = '1';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Optional: Hide empty sections
+            gradeSections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.member-card[style="display: flex;"]');
+                // Note: The selector above might fail if style is set exactly, 
+                // safer to check :not([style*="display: none"])
+
+                let hasVisible = false;
+                section.querySelectorAll('.member-card').forEach(c => {
+                    if (c.style.display !== 'none') hasVisible = true;
+                });
+
+                if (!hasVisible) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                }
+            });
+        });
+    }
+});
