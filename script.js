@@ -48,10 +48,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- Tactical Cyberpunk OS Loader Logic ---
+// --- BCTWU Tactical Loader Logic ---
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader-screen');
+    const percentEl = document.getElementById('loader-percent');
+    const barEl = document.getElementById('loader-bar');
+    const stepEl = document.getElementById('loader-step');
+    const statusEl = document.getElementById('loader-status-text');
+    const actionEl = document.getElementById('loader-action');
 
+    if (!loader || !percentEl || !barEl) return;
 
-// Decryption Effect Helper
+    document.body.style.overflow = 'hidden'; // Lock scroll
+
+    let progress = 0;
+    const interval = setInterval(() => {
+        // Increment logic: Fast then slows down
+        if (progress < 30) progress += Math.random() * 2;
+        else if (progress < 70) progress += Math.random() * 1.5;
+        else if (progress < 90) progress += Math.random() * 0.5;
+        else progress += Math.random() * 0.2;
+
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+
+            // Finish
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 500);
+            }, 500);
+        }
+
+        // Update UI
+        const currentP = Math.floor(progress);
+        percentEl.innerText = currentP;
+        barEl.style.width = `${progress}%`;
+
+        // Update Text Steps
+        if (progress < 30) {
+            stepEl.innerText = "STEP 1/4";
+            statusEl.innerText = "INITIALIZING CORE";
+            actionEl.innerText = "Establishing secure connection...";
+        } else if (progress < 60) {
+            stepEl.innerText = "STEP 2/4";
+            statusEl.innerText = "LOADING MODULES";
+            actionEl.innerText = "Decrypting assets and styles...";
+        } else if (progress < 90) {
+            stepEl.innerText = "STEP 3/4";
+            statusEl.innerText = "SYNCING DATA";
+            actionEl.innerText = "Synchronizing orbital arrays...";
+        } else {
+            stepEl.innerText = "STEP 4/4";
+            statusEl.innerText = "FINALIZING";
+            actionEl.innerText = "Launch sequence ready.";
+        }
+
+    }, 30); // 30ms Interval
+});
+
+// Decryption Effect Helper (Kept for other uses if needed, or remove if unused)
 function scrambleText(element, finalText) {
     element.isScrambling = true;
     let iteration = 0;
