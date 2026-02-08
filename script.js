@@ -59,6 +59,12 @@ window.addEventListener('load', () => {
 
     if (!loader || !percentEl || !barEl) return;
 
+    // session storage check
+    if (sessionStorage.getItem('loader_shown')) {
+        loader.style.display = 'none';
+        return;
+    }
+
     document.body.style.overflow = 'hidden'; // Lock scroll
 
     let progress = 0;
@@ -80,6 +86,7 @@ window.addEventListener('load', () => {
                 setTimeout(() => {
                     loader.style.display = 'none';
                     document.body.style.overflow = '';
+                    sessionStorage.setItem('loader_shown', 'true'); // Set flag
                 }, 500);
             }, 500);
         }
@@ -114,12 +121,19 @@ window.addEventListener('load', () => {
 // --- Failsafe: Force Loader Dismiss after 5 seconds ---
 setTimeout(() => {
     const loader = document.getElementById('loader-screen');
+    // Also check session storage here
+    if (sessionStorage.getItem('loader_shown')) {
+        if (loader) loader.style.display = 'none';
+        return;
+    }
+
     if (loader && loader.style.display !== 'none') {
         loader.style.opacity = '0';
         loader.style.transition = 'opacity 0.5s ease';
         setTimeout(() => {
             loader.style.display = 'none';
             document.body.style.overflow = '';
+            sessionStorage.setItem('loader_shown', 'true');
         }, 500);
     }
 }, 5000);
