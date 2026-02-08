@@ -4725,78 +4725,155 @@ html {
     gap: 1.5rem;
 }
 
+/* Member Card - Tactical DOSSIER Style */
 .member-card {
-    background: rgba(10, 10, 10, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
-    /* Tactical squared look */
-    padding: 2rem 1rem;
+    background: linear-gradient(145deg, rgba(15, 15, 15, 0.9) 0%, rgba(5, 5, 5, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 0;
+    /* Reset padding for layout */
     text-align: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(10px);
+    /* Clip for scanning effect */
+    min-height: 280px;
 }
 
-/* Tactical Corner Markers */
+/* Internal Layout */
+.member-card-content {
+    padding: 2rem 1.5rem;
+    width: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Background Mesh/Grid */
 .member-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Tactical Top Bar */
+.member-card::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
-    border-top: 2px solid var(--grade-color);
-    border-left: 2px solid var(--grade-color);
-    opacity: 0.5;
-    transition: all 0.3s;
-}
-
-.member-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
-    border-bottom: 2px solid var(--grade-color);
-    border-right: 2px solid var(--grade-color);
-    opacity: 0.5;
-    transition: all 0.3s;
-}
-
-.member-card:hover {
-    transform: translateY(-5px);
-    background: rgba(20, 20, 20, 0.95);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-    border-color: var(--grade-color);
-}
-
-.member-card:hover::before,
-.member-card:hover::after {
     width: 100%;
-    height: 100%;
+    height: 4px;
+    background: var(--grade-color);
+    box-shadow: 0 0 15px var(--grade-color);
+    z-index: 3;
+    opacity: 0.7;
+    transition: all 0.3s;
+}
+
+/* Hover Effect: Card Lift & Glow */
+.member-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(var(--grade-color-rgb), 0.2);
+}
+
+.member-card:hover::after {
+    height: 6px;
     opacity: 1;
 }
 
+/* Avatar - Hex-like Container */
 .card-avatar {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 1.2rem;
-    border-radius: 50%;
-    padding: 3px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
     position: relative;
-    background: rgba(0, 0, 0, 0.5);
-    transition: border-color 0.3s;
+    z-index: 2;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transition: all 0.4s ease;
 }
 
+.card-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    filter: grayscale(100%) contrast(1.2);
+    transition: all 0.4s ease;
+}
+
+/* Avatar Hover: Colorize & Bloom */
 .member-card:hover .card-avatar {
-    border-color: var(--grade-color);
-    box-shadow: 0 0 15px var(--grade-color);
+    background: var(--grade-color);
+    box-shadow: 0 0 30px var(--grade-color);
+    transform: scale(1.05);
+}
+
+.member-card:hover .card-avatar img {
+    filter: grayscale(0%);
+}
+
+/* Typography */
+.member-card h3 {
+    color: #fff;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.4rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.member-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: var(--grade-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Scanning Line Effect on Hover */
+.scan-line {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: linear-gradient(to bottom, transparent, var(--grade-color), transparent);
+    opacity: 0.1;
+    z-index: 10;
+    animation: none;
+}
+
+.member-card:hover .scan-line {
+    animation: scan 2s infinite linear;
+}
+
+@keyframes scan {
+    0% {
+        top: -20%;
+    }
+
+    100% {
+        top: 120%;
+    }
 }
 
 .card-avatar img {
