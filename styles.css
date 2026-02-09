@@ -106,55 +106,49 @@ body.lang-sinhala h4 {
 }
 
 /* Language Toggle Button */
-/* Language Toggle Button */
 .btn-lang-toggle {
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid var(--border-color);
-    color: var(--text-grey);
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ccc;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
     cursor: pointer;
     font-family: 'Chakra Petch', sans-serif;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    transition: all 0.3s ease;
+    gap: 0.6rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin-left: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-lang-toggle:hover {
-    background: var(--surface-dark);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    border-color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .btn-lang-toggle.active-si {
-    background: rgba(var(--primary-rgb), 0.1);
+    background: rgba(204, 255, 0, 0.15);
     color: var(--primary-color);
     border-color: var(--primary-color);
-    box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.2);
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.3), inset 0 0 10px rgba(204, 255, 0, 0.05);
 }
 
 .btn-lang-toggle i {
-    font-size: 0.9em;
+    font-size: 1rem;
+    transition: transform 0.4s ease;
 }
 
-display: flex;
-align-items: center;
-gap: 0.5rem;
-transition: all 0.3s ease;
-margin-left: 1rem;
-}
-
-.btn-lang-toggle:hover {
-    background: var(--primary-color);
-    color: #000;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5);
+.btn-lang-toggle:hover i {
+    transform: rotate(180deg);
 }
 
 /* Utility Animations */
@@ -5917,4 +5911,51 @@ body.members-page {
     /* Prevent layout shift */
 }
 
-/* --- Mobile Magic Navigation Removed --- */
+/* --- Compact Navigation Overrides --- */
+.command-dock {
+    width: 85%;
+    max-width: 700px;
+    bottom: 1.5rem;
+}
+
+.command-dock.scrolled {
+    bottom: 1rem;
+    width: 90%;
+    max-width: 650px;
+}
+
+.dock-capsule {
+    padding: 0.3rem 1.2rem;
+    height: 50px;
+    /* Smaller height */
+    background: rgba(8, 8, 8, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    /* Pill shape */
+}
+
+.brand-text {
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.dock-item {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.btn-enlist-dock {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
+}
+
+/* Ensure Language Toggle Fits */
+.btn-lang-toggle {
+    padding: 0.25rem 0.8rem;
+    font-size: 0.7rem;
+    height: 32px;
+}
+
+.dock-actions {
+    gap: 0.5rem;
+}
