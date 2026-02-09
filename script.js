@@ -394,3 +394,154 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Mobile Magic Navigation Logic Removed ---
 
 // --- Parallax Removed ---
+
+// --- Language Toggle Logic ---
+const translations = {
+    en: {
+        nav_home: "Home",
+        nav_members: "Members",
+        nav_contact: "Contact",
+        nav_join: "JOIN US",
+        hero_title: "TRAFFIC WARDEN UNIT",
+        hero_subtitle: "BANDARANAYAKE COLLEGE GAMPAHA",
+        hero_mission: "To maintain discipline, ensure safety, and lead with honor on the roads and within the college premises.",
+        hero_cta: "EXPLORE UNIT",
+        about_title: "ABOUT THE UNIT",
+        about_guardians: "Guardians of Bandaranayake College.",
+        about_desc: "The Bandaranayake College Traffic Warden Unit is a premier student disciplinarian body, dedicated to controlling traffic flow, ensuring student safety, and upholding the prestige of the college.",
+        stats_active: "Active Wardens",
+        stats_incidents: "Incidents 2025",
+        stats_hours: "Service Hours",
+        gallery_title: "LATEST LOGS",
+        members_title: "Unit Directory",
+        members_subtitle: "Active traffic wardens by grade level.",
+        contact_badge: "WE ARE HERE TO HELP",
+        contact_title: "GET IN TOUCH",
+        contact_desc: "Have questions about traffic safety, patrol schedules, or joining our team? Reach out to us anytime.",
+        footer_rights: "© 2026 Traffic Warden Unit. All rights reserved.",
+        footer_privacy: "Privacy Protocol",
+        footer_terms: "Terms of Engagement",
+        footer_report: "Report Incident",
+
+        // Join Page
+        join_badge: "MEMBERSHIP APPLICATION OPEN",
+        join_title_1: "JOIN THE",
+        join_title_2: "ELITE",
+        join_desc: "Secure the flow. Lead the way. Become a guardian of BCTWU traffic safety and unlock exclusive campus privileges reserved only for the committed few.",
+        feat_leadership_title: "Exclusive Leadership Training",
+        feat_leadership_desc: "Gain real-world management skills directly from industry leaders.",
+        feat_access_title: "Priority Campus Access",
+        feat_access_desc: "Skip the lines with elite status and designated zones.",
+        feat_gear_title: "Official Society Gear",
+        feat_gear_desc: "Wear the badge of honor. Premium uniform kit included.",
+        form_title: "Apply Now",
+        form_step: "Step 1 of 2: Candidate Details",
+        form_name: "FULL NAME",
+        form_name_ph: "Enter your full name",
+        form_id: "STUDENT ID",
+        form_id_ph: "8-digit ID",
+        form_grade: "GRADE / YEAR",
+        form_grade_ph: "Select Grade",
+        form_motivation: "WHY DO YOU WANT TO JOIN?",
+        form_motivation_ph: "Describe your motivation...",
+        form_submit: "SUBMIT APPLICATION",
+        form_legal: "By submitting, you agree to the Honor Code."
+    },
+    si: {
+        nav_home: "මුල් පිටුව",
+        nav_members: "සාමාජිකයන්",
+        nav_contact: "සම්බන්ධ වන්න",
+        nav_join: "අප හා එක්වන්න",
+        hero_title: "රථවාහන පාලක ඒකකය",
+        hero_subtitle: "බණ්ඩාරනායක විද්‍යාලය ගම්පහ",
+        hero_mission: "විනය පවත්වා ගැනීම, ආරක්ෂාව තහවුරු කිරීම සහ විද්‍යාලය තුළ ගෞරවයෙන් පෙරමුණ ගැනීම.",
+        hero_cta: "ඒකකය ගවේෂණය",
+        about_title: "අප ගැන",
+        about_guardians: "බණ්ඩාරනායක විද්‍යාලයේ රැකවල්කරුවන්.",
+        about_desc: "බණ්ඩාරනායක විද්‍යාලීය රථවාහන පාලක ඒකකය යනු රථවාහන පාලනය, ශිෂ්‍ය ආරක්ෂාව සහ විද්‍යාලයේ කීර්තිය සුරැකීම සඳහා කැපවූ ප්‍රමුඛ ශිෂ්‍ය විනය බලකායකි.",
+        stats_active: "ක්‍රියාකාරී සාමාජිකයන්",
+        stats_incidents: "සිදුවීම් 2025",
+        stats_hours: "සේවා පැය",
+        gallery_title: "නවතම සටහන්",
+        members_title: "ඒකක නාමාවලිය",
+        members_subtitle: "ශ්‍රේණි මට්ටම අනුව සක්‍රීය රථවාහන පාලකයන්.",
+        contact_badge: "අපි උදව් කිරීමට මෙහි සිටිමු",
+        contact_title: "සම්බන්ධ වන්න",
+        contact_desc: "රථවාහන ආරක්ෂාව, මුර සංචාර කාලසටහන් හෝ අපගේ කණ්ඩායමට සම්බන්ධ වීම ගැන ප්‍රශ්න තිබේද? ඕනෑම වේලාවක අප අමතන්න.",
+        footer_rights: "© 2026 රථවාහන පාලක ඒකකය. සියලු හිමිකම් ඇවිරිණි.",
+        footer_privacy: "පෞද්ගලිකත්ව ප්‍රතිපත්තිය",
+        footer_terms: "සේවා කොන්දේසි",
+        footer_report: "සිදුවීම් වාර්තා කරන්න",
+
+        // Join Page
+        join_badge: "සාමාජිකත්ව අයදුම්පත් විවෘතයි",
+        join_title_1: "එක්වන්න",
+        join_title_2: "විශිෂ්ටයන් හා",
+        join_desc: "රථවාහන ආරක්ෂාවේ මුරකරුවෙකු වී කැපවූ අයට පමණක් වෙන් කර ඇති සුවිශේෂී වරප්‍රසාද අගුළු හරින්න.",
+        feat_leadership_title: "නායකත්ව පුහුණුව",
+        feat_leadership_desc: "කර්මාන්තයේ ප්‍රමුඛයින්ගෙන් සෘජුවම කළමනාකරණ කුසලතා ලබා ගන්න.",
+        feat_access_title: "ප්‍රමුඛතා ප්‍රවේශය",
+        feat_access_desc: "විශේෂිත කලාප සහ ප්‍රභූ තත්ත්වය සමඟ පෝලිම් මග හරින්න.",
+        feat_gear_title: "නිල නිල ඇඳුම්",
+        feat_gear_desc: "ගෞරවයේ ලාංඡනය පළඳින්න. උසස් තත්ත්වයේ නිල ඇඳුම් කට්ටලය ඇතුළත්.",
+        form_title: "දැන් අයදුම් කරන්න",
+        form_step: "පියවර 1/2 : අපේක්ෂක විස්තර",
+        form_name: "සම්පූර්ණ නම",
+        form_name_ph: "ඔබගේ නම ඇතුලත් කරන්න",
+        form_id: "ශිෂ්‍ය අංකය",
+        form_id_ph: "ඉලක්කම් 8 අංකය",
+        form_grade: "ශ්‍රේණිය / වසර",
+        form_grade_ph: "ශ්‍රේණිය තෝරන්න",
+        form_motivation: "ඔබ බැඳීමට හේතුව?",
+        form_motivation_ph: "ඔබේ අරමුණ විස්තර කරන්න...",
+        form_submit: "අයදුම්පත යොමු කරන්න",
+        form_legal: "ඉදිරිපත් කිරීමෙන්, ඔබ ඒකකයේ ගෞරව නීතිවලට එකඟ වේ."
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const langToggleBtn = document.getElementById('lang-toggle');
+    const langText = langToggleBtn ? langToggleBtn.querySelector('.lang-text') : null;
+
+    // Check local storage or default to 'en'
+    let currentLang = localStorage.getItem('traffic_lang') || 'en';
+
+    // Initial Render
+    updateLanguage(currentLang);
+
+    if (langToggleBtn) {
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'si' : 'en';
+            updateLanguage(currentLang);
+        });
+    }
+
+    function updateLanguage(lang) {
+        // Update Lang Attribute
+        document.documentElement.lang = lang;
+        localStorage.setItem('traffic_lang', lang);
+
+        // Toggle Font Class
+        if (lang === 'si') {
+            document.body.classList.add('lang-sinhala');
+            if (langText) langText.innerText = "EN";
+        } else {
+            document.body.classList.remove('lang-sinhala');
+            if (langText) langText.innerText = "SI";
+        }
+
+        // Apply Translations
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                // Handle inputs/placeholders if needed
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = translations[lang][key];
+                } else {
+                    el.innerText = translations[lang][key];
+                }
+            }
+        });
+    }
+});

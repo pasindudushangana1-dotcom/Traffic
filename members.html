@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;600&family=Noto+Sans+Sinhala:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -23,12 +23,16 @@
                 <span class="brand-text">TRAFFIC UNIT</span>
             </div>
             <div class="dock-links">
-                <a href="index.html" class="dock-item">Home</a>
-                <a href="members.html" class="dock-item active">Members</a>
-                <a href="contact.html" class="dock-item">Contact</a>
+                <a href="index.html" class="dock-item" data-i18n="nav_home">Home</a>
+                <a href="members.html" class="dock-item active" data-i18n="nav_members">Members</a>
+                <a href="contact.html" class="dock-item" data-i18n="nav_contact">Contact</a>
             </div>
             <div class="dock-actions">
-                <a href="https://tally.so/r/lb6orB" class="btn-enlist-dock">JOIN US</a>
+                <a href="join.html" class="btn-enlist-dock" data-i18n="nav_join">JOIN US</a>
+                <button id="lang-toggle" class="btn-lang-toggle">
+                    <span class="lang-text">SI</span>
+                    <i class="fa-solid fa-globe"></i>
+                </button>
                 <button class="mobile-menu-btn" aria-label="Menu">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -48,9 +52,9 @@
                 </svg>
             </button>
             <div class="mobile-links">
-                <a href="index.html" class="mobile-link">Home</a>
-                <a href="members.html" class="mobile-link active">Members</a>
-                <a href="contact.html" class="mobile-link">Contact</a>
+                <a href="index.html" class="mobile-link" data-i18n="nav_home">Home</a>
+                <a href="members.html" class="mobile-link active" data-i18n="nav_members">Members</a>
+                <a href="contact.html" class="mobile-link" data-i18n="nav_contact">Contact</a>
             </div>
         </div>
     </nav>
@@ -61,8 +65,8 @@
         <!-- Header Section -->
         <header class="directory-header">
             <div class="header-text">
-                <h1>Unit Directory</h1>
-                <p>Active traffic wardens by grade level.</p>
+                <h1 data-i18n="members_title">Unit Directory</h1>
+                <p data-i18n="members_subtitle">Active traffic wardens by grade level.</p>
             </div>
             <div class="header-actions">
                 <div class="filter-group">
