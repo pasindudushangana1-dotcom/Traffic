@@ -524,10 +524,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Toggle Font Class
         if (lang === 'si') {
             document.body.classList.add('lang-sinhala');
-            if (langText) langText.innerText = "EN";
+            if (langToggleBtn) langToggleBtn.classList.add('active-si');
+            if (langText) langText.innerText = "SI"; // Keep showing SI to indicate current mode, or switch to EN to indicate action? User said "toggle". Usually show current or target. Let's make it clearer: 
+            // Actually, let's just keep the text as "EN/SI" or switch it. 
+            // The previous code swapped text. Let's stick to showing the ACTIVE language or the ACTION. 
+            // Design asked for "good look". Let's simply highlight the button state.
+            if (langText) langText.innerText = "EN"; // Show option to switch back
         } else {
             document.body.classList.remove('lang-sinhala');
-            if (langText) langText.innerText = "SI";
+            if (langToggleBtn) langToggleBtn.classList.remove('active-si');
+            if (langText) langText.innerText = "SI"; // Show option to switch
         }
 
         // Apply Translations
