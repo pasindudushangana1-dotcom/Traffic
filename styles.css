@@ -27,6 +27,14 @@
 /* Default English Font */
 body {
     font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* --- Visual Polish: Custom Scrollbar --- */
@@ -95,14 +103,44 @@ body {
 /* Utility Animations */
 /* --- Language Support --- */
 body.lang-sinhala {
-    font-family: 'Noto Sans Sinhala', 'Inter', sans-serif;
+    font-family: '4u-Gemunu x', 'Gemunu Libre', 'Noto Sans Sinhala', 'Inter', sans-serif;
+    font-size: 1.2rem;
+    /* Normal readable size */
+    line-height: 1.6;
 }
 
+/* Reset Nav Bar Font Size for Sinhala */
+body.lang-sinhala .command-dock {
+    font-size: 1rem;
+    /* Keep nav bar standard */
+}
+
+/* Standardized Headings for Sinhala */
+
 body.lang-sinhala h1,
-body.lang-sinhala h2,
-body.lang-sinhala h3,
+body.lang-sinhala [data-i18n="hero_title"] {
+    font-family: '4u-Gemunu x', 'Gemunu Libre', 'Noto Sans Sinhala', 'Chakra Petch', sans-serif;
+    line-height: 1.1;
+    font-size: 300% !important;
+    /* Specific request for 300% relative to parent or base */
+}
+
+body.lang-sinhala h2 {
+    font-family: '4u-Gemunu x', 'Gemunu Libre', 'Noto Sans Sinhala', 'Chakra Petch', sans-serif;
+    line-height: 1.3;
+    font-size: 2rem;
+}
+
+body.lang-sinhala h3 {
+    font-family: '4u-Gemunu x', 'Gemunu Libre', 'Noto Sans Sinhala', 'Chakra Petch', sans-serif;
+    line-height: 1.3;
+    font-size: 1.75rem;
+}
+
 body.lang-sinhala h4 {
-    font-family: 'Noto Sans Sinhala', 'Chakra Petch', sans-serif;
+    font-family: '4u-Gemunu x', 'Gemunu Libre', 'Noto Sans Sinhala', 'Chakra Petch', sans-serif;
+    line-height: 1.3;
+    font-size: 1.5rem;
 }
 
 /* Language Toggle Button */
@@ -125,6 +163,41 @@ body.lang-sinhala h4 {
     letter-spacing: 1px;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Sinhala Specific Overrides for Interactive Elements --- */
+body.lang-sinhala .btn-primary,
+body.lang-sinhala .btn-secondary,
+body.lang-sinhala .btn-sm,
+body.lang-sinhala .btn-enlist-dock,
+body.lang-sinhala .dock-item,
+body.lang-sinhala .mobile-link,
+body.lang-sinhala button,
+body.lang-sinhala input,
+body.lang-sinhala textarea,
+body.lang-sinhala select {
+    font-family: '4u-Gemunu x', 'Gemunu Libre', 'Noto Sans Sinhala', sans-serif !important;
+    font-size: 1.1em;
+    /* Slight increase for readability */
+    letter-spacing: 0;
+    /* Sinhala doesn't need wide spacing */
+}
+
+/* Boost specific button sizes in Sinhala */
+body.lang-sinhala .btn-primary,
+body.lang-sinhala .btn-secondary {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+body.lang-sinhala .dock-item {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+body.lang-sinhala .mobile-link {
+    font-weight: 600;
+    /* Bold looks better for Gemunu */
 }
 
 .btn-lang-toggle:hover {
@@ -985,13 +1058,17 @@ body::after {
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .dock-capsule {
-        padding: 0.8rem 1.2rem;
-        width: 92%;
+        padding: 0.5rem 1rem;
+        width: 90%;
         max-width: 400px;
         justify-content: space-between;
-        background: rgba(15, 15, 15, 0.9);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        background: rgba(10, 10, 12, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        border-radius: 50px;
     }
 
     .dock-links,
@@ -1000,36 +1077,140 @@ body::after {
         display: none;
     }
 
+    /* Tactical Mobile Menu Button */
     .mobile-menu-btn {
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        transition: all 0.3s ease;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 10001;
+        /* Above overlay if we want to morph, but overlay covers it currently */
     }
 
-    .mobile-menu-btn:active {
-        background: rgba(204, 255, 0, 0.2);
-        border-color: var(--primary-color);
-        transform: scale(0.95);
+    .mobile-menu-btn .bar {
+        width: 24px;
+        height: 2px;
+        background-color: #fff;
+        border-radius: 2px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+    .mobile-menu-btn .bar.mid {
+        width: 16px;
+        /* Staggered look */
+        align-self: flex-end;
+    }
+
+    .mobile-menu-btn:hover .bar.mid {
+        width: 24px;
+    }
+
+    .mobile-menu-btn:hover .bar {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
     }
 
     /* Enhanced Overlay */
+    .mobile-overlay {
+        background: rgba(5, 5, 5, 0.96);
+        background-image:
+            linear-gradient(rgba(204, 255, 0, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(204, 255, 0, 0.03) 1px, transparent 1px);
+        background-size: 30px 30px;
+    }
+
+    /* Close Button positioned to match Dock */
+    .close-menu-btn {
+        top: 25px;
+        right: 25px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-links {
+        gap: 3rem;
+        width: 100%;
+        padding: 0 2rem;
+        align-items: flex-start;
+        /* Left align for tactical feel */
+    }
+
     .mobile-link {
-        font-size: 2.5rem;
-        font-weight: 800;
+        font-family: var(--font-heading);
+        font-size: 3rem;
+        font-weight: 700;
         letter-spacing: -1px;
-        margin-bottom: 0.5rem;
-        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        color: rgba(255, 255, 255, 0.3);
+        text-transform: uppercase;
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        transition: color 0.3s;
+    }
+
+    /* Tactical Numbering */
+    .mobile-link::before {
+        content: attr(data-i18n);
+        /* Fallback or use a counter if strictly CSS */
+        content: '0' counter(link-counter) ' ';
+        counter-increment: link-counter;
+        font-size: 1rem;
+        color: var(--primary-color);
+        font-family: var(--font-mono);
+        margin-right: 1.5rem;
+        opacity: 0.5;
+        letter-spacing: 2px;
+        font-weight: 400;
+        position: absolute;
+        left: -40px;
+        /* Pull counter out */
+    }
+
+    /* Reset counter on parent */
+    .mobile-links {
+        counter-reset: link-counter;
+    }
+
+    .mobile-link:hover,
+    .mobile-link.highlight {
+        color: #fff;
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        padding-left: 20px;
+        /* Slide effect */
     }
 
     .mobile-link.highlight {
         color: var(--primary-color);
-        text-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+        text-shadow: 0 0 30px rgba(204, 255, 0, 0.3);
+    }
+
+    .mobile-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+    }
+
+    .mobile-link:hover::after {
+        transform: scaleX(1);
     }
 }
 
@@ -6089,4 +6270,61 @@ body.members-page {
         padding: 0.4rem 1rem;
         font-size: 0.75rem;
     }
+}
+
+
+/* --- NAVBAR CENTERING REPAIR --- */
+/* Reset wrapper to be a layout container only */
+.command-dock {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    padding-top: 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    pointer-events: none !important;
+    z-index: 9999 !important;
+    background: transparent !important;
+    /* Remove any bg from wrapper */
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    /* Kill any side-shifts */
+    margin: 0 !important;
+}
+
+/* Apply the look to the inner capsule */
+.dock-capsule {
+    pointer-events: auto !important;
+    width: 95% !important;
+    max-width: 1200px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: rgba(18, 18, 18, 0.6) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 20px !important;
+    padding: 0.8rem 1.5rem !important;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5) !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Scroll state behaves on the capsule */
+.command-dock.scrolled .dock-capsule {
+    width: 98% !important;
+    background: rgba(10, 10, 10, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.7) !important;
+    transform: translateY(-5px) !important;
+}
+
+/* Ensure wrapper doesn't move */
+.command-dock.scrolled {
+    transform: none !important;
+    top: 0 !important;
+    width: 100% !important;
 }
