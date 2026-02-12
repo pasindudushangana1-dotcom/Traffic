@@ -6440,25 +6440,33 @@ body.members-page {
 }
 
 /* 4. Menu Links */
+/* 4. Menu Links */
 .mobile-links {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem;
     text-align: center;
+    width: 100%;
+    align-items: center;
 }
 
 .mobile-link {
     font-family: 'Chakra Petch', sans-serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.3s ease;
     position: relative;
     display: flex;
+    flex-direction: column;
+    /* Stack number and text */
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    gap: 0.2rem;
+    width: 100%;
+    letter-spacing: 2px;
 }
 
 /* Counter for decoration (01, 02, 03) */
@@ -6469,25 +6477,32 @@ body.members-page {
 .mobile-link::before {
     counter-increment: nav-counter;
     content: "0" counter(nav-counter);
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--primary-color);
     font-family: 'Orbitron', sans-serif;
-    opacity: 0;
-    transform: translateX(-10px);
+    opacity: 0.5;
+    transform: none;
+    /* Reset position */
     transition: all 0.3s ease;
+    letter-spacing: 3px;
+    margin-bottom: 5px;
 }
 
 .mobile-link:hover,
 .mobile-link.highlight {
     color: #fff;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    padding-left: 10px;
+    padding: 0;
+    /* Reset padding shift */
+    transform: scale(1.1);
+    /* Subtle zoom instead */
 }
 
 .mobile-link:hover::before,
 .mobile-link.highlight::before {
     opacity: 1;
-    transform: translateX(0);
+    transform: none;
+    text-shadow: 0 0 10px var(--primary-color);
 }
 
 .mobile-link.highlight {
@@ -6495,6 +6510,21 @@ body.members-page {
     text-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
 }
 
+/* Sinhala Mobile Menu Overrides */
+body.lang-sinhala .mobile-link {
+    font-family: '4u-Gemunu x', 'Gemunu Libre', 'Noto Sans Sinhala', sans-serif !important;
+    font-size: 2.2rem;
+    /* Initial increase */
+    line-height: 1.2;
+    letter-spacing: 0;
+    font-weight: 600;
+}
+
+/* Specific increase for Join Us in Sinhala if needed */
+body.lang-sinhala .mobile-link[data-i18n="nav_join"] {
+    font-size: 2.4rem;
+    color: var(--primary-color);
+}
 
 /* --- MOBILE OVERRIDES (Correcting Layout) --- */
 @media (max-width: 768px) {
