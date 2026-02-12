@@ -118,11 +118,16 @@ body.lang-sinhala .command-dock {
 /* Standardized Headings for Sinhala */
 
 body.lang-sinhala h1,
-body.lang-sinhala [data-i18n="hero_title"] {
+body.lang-sinhala .hero-section [data-i18n="hero_title"] {
     font-family: '4u-Gemunu x', 'Gemunu Libre', 'Noto Sans Sinhala', 'Chakra Petch', sans-serif;
     line-height: 1.1;
-    font-size: 300% !important;
-    /* Specific request for 300% relative to parent or base */
+    font-size: 400% !important;
+    /* Specific request for 400% relative to parent or base */
+}
+
+body.lang-sinhala .hero-subtext {
+    font-size: 200% !important;
+    line-height: 1.4;
 }
 
 body.lang-sinhala h2 {
@@ -191,8 +196,10 @@ body.lang-sinhala .btn-secondary {
 }
 
 body.lang-sinhala .dock-item {
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 500;
+    padding: 0.5rem 0.9rem;
+    letter-spacing: 0;
 }
 
 body.lang-sinhala .mobile-link {
@@ -6326,5 +6333,206 @@ body.members-page {
 .command-dock.scrolled {
     transform: none !important;
     top: 0 !important;
-    width: 100% !important;
+}
+
+/* --- MOBILE MENU & NAVIGATION UPGRADE --- */
+
+/* 1. Hamburger Button (Tactical Trigger) */
+.mobile-menu-btn {
+    display: none;
+    /* Hidden on Desktop */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    padding: 0;
+    z-index: 10001;
+    /* Above overlay */
+}
+
+.mobile-menu-btn .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.mobile-menu-btn .bar.mid {
+    width: 70%;
+    /* Staggered look */
+    margin-left: auto;
+}
+
+.mobile-menu-btn:hover .bar {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.mobile-menu-btn:hover .bar.mid {
+    width: 100%;
+}
+
+/* 2. Full Screen Overlay (Grid Interface) */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Tactical Grid Background */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 3. Close Button */
+.close-menu-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-menu-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: rotate(90deg);
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
+}
+
+.close-menu-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* 4. Menu Links */
+.mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+}
+
+.mobile-link {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Counter for decoration (01, 02, 03) */
+.mobile-links {
+    counter-reset: nav-counter;
+}
+
+.mobile-link::before {
+    counter-increment: nav-counter;
+    content: "0" counter(nav-counter);
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-family: 'Orbitron', sans-serif;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.mobile-link:hover,
+.mobile-link.highlight {
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    padding-left: 10px;
+}
+
+.mobile-link:hover::before,
+.mobile-link.highlight::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-link.highlight {
+    color: var(--primary-color);
+    text-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+}
+
+
+/* --- MOBILE OVERRIDES (Correcting Layout) --- */
+@media (max-width: 768px) {
+
+    /* Show Hamburger, Hide Desktop Nav Items */
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    /* Hide standard nav items in the capsule */
+    .dock-item,
+    .btn-enlist-dock {
+        display: none !important;
+    }
+
+    /* Keep Language Toggle, Brand and Hamburger */
+    .dock-capsule {
+        justify-content: space-between !important;
+        padding: 0.8rem 1.5rem !important;
+        width: 90% !important;
+        /* Ensure good width on mobile */
+        margin: 0 auto;
+        /* Center the capsule */
+    }
+
+    /* Ensure Brand Text is visible on mobile if desired, or keep hidden */
+    .brand-text {
+        display: block !important;
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    /* Force Command Dock to be full width and centered */
+    .command-dock {
+        width: 100% !important;
+        left: 0 !important;
+        transform: none !important;
+        justify-content: center !important;
+        padding-top: 15px !important;
+    }
 }
