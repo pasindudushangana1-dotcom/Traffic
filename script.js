@@ -360,43 +360,55 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- Contact Form Logic (Formspree + AJAX) ---
+// --- Contact Form Logic (Formspree + AJAX) ---
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contact-form');
-    const status = document.getElementById('form-status');
 
-    if (form) {
-        form.addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const data = new FormData(event.target);
+    // Helper Function for Form Submission
+    async function handleFormSubmission(formId, statusId) {
+        const form = document.getElementById(formId);
+        const status = document.getElementById(statusId);
 
-            try {
-                const response = await fetch(event.target.action, {
-                    method: form.method,
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+        if (form && status) {
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const data = new FormData(event.target);
 
-                if (response.ok) {
-                    status.innerHTML = "✅ TRANSMISSION SECURE. MESSAGE SENT.";
-                    status.style.color = "#00ff00"; // Neon Green
-                    form.reset();
-                } else {
-                    const data = await response.json();
-                    if (Object.hasOwn(data, 'errors')) {
-                        status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                status.innerHTML = "⏳ TRANSMITTING DATA...";
+                status.style.color = "#ffff00"; // Yellow
+
+                try {
+                    const response = await fetch(event.target.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        status.innerHTML = "✅ TRANSMISSION SECURE. MESSAGE SENT.";
+                        status.style.color = "#00ff00"; // Neon Green
+                        form.reset();
                     } else {
-                        status.innerHTML = "❌ TRANSMISSION FAILED.";
-                        status.style.color = "#ff0000"; // Red
+                        const data = await response.json();
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.innerHTML = "❌ TRANSMISSION FAILED.";
+                            status.style.color = "#ff0000"; // Red
+                        }
                     }
+                } catch (error) {
+                    status.innerHTML = "❌ TRANSMISSION FAILED. CHECK NETWORK.";
+                    status.style.color = "#ff0000"; // Red
                 }
-            } catch (error) {
-                status.innerHTML = "❌ TRANSMISSION FAILED.";
-                status.style.color = "#ff0000"; // Red
-            }
-        });
+            });
+        }
     }
+
+    // Initialize Forms
+    handleFormSubmission('contact-form', 'form-status');
+    handleFormSubmission('application-form', 'application-status');
 });
 
 // --- Mobile Magic Navigation Logic Removed ---

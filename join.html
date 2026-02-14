@@ -29,6 +29,8 @@
                         class="fa-solid fa-users-viewfinder"></i> <span>Members</span></a>
                 <a href="contact.html" class="dock-item" data-i18n="nav_contact"><i
                         class="fa-solid fa-tower-broadcast"></i> <span>Contact</span></a>
+                <a href="join.html" class="dock-item mobile-only active" data-i18n="nav_join"><i
+                        class="fa-solid fa-user-plus"></i> <span>Join</span></a>
             </div>
             <div class="dock-actions">
                 <div class="status-indicator">
@@ -152,9 +154,6 @@
                                     <select id="grade" name="grade" required>
                                         <option value="" disabled selected data-i18n="form_grade_ph">Select Grade
                                         </option>
-                                        <option value="6">Grade 6</option>
-                                        <option value="7">Grade 7</option>
-                                        <option value="8">Grade 8</option>
                                         <option value="9">Grade 9</option>
                                         <option value="10">Grade 10</option>
                                         <option value="11">Grade 11</option>
@@ -175,6 +174,9 @@
                             <span data-i18n="form_submit">SUBMIT APPLICATION</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
+
+                        <div id="application-status" class="form-status text-center mt-3"
+                            style="font-family: 'Chakra Petch'; font-weight: 700;"></div>
 
                         <p class="form-footer" data-i18n="form_legal">By submitting, you agree to the Honor Code.</p>
                     </form>
