@@ -198,14 +198,22 @@ document.addEventListener('DOMContentLoaded', () => {
     initAutoScroll('.tier-3-scroll-wrapper');
 });
 
-// Command Dock Scroll Effect
+// Command Dock Scroll Effect - Optimized
 const commandDock = document.querySelector('.command-dock');
 if (commandDock) {
+    let ticking = false;
+
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            commandDock.classList.add('scrolled');
-        } else {
-            commandDock.classList.remove('scrolled');
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                if (window.scrollY > 30) { // Lower threshold for faster response
+                    commandDock.classList.add('scrolled');
+                } else {
+                    commandDock.classList.remove('scrolled');
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
     });
 }
